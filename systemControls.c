@@ -41,7 +41,7 @@ char* getPorts(){
 
   char* returnValue = malloc(5+6+1); //define string space in memory
 
-  sprintf(returnValue,"%d:%d:%d:%d:%d-0:0:0:0:0;",digitalRead(D0),
+  sprintf(returnValue,"%d:%d:%d:%d:%d-0:0:0:0:0",digitalRead(D0),
                                          digitalRead(D1),
                                          digitalRead(D2),
                                          digitalRead(D3),

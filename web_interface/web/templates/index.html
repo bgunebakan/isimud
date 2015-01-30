@@ -39,7 +39,7 @@
         <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a class="navbar-brand" href="">Modem Admin Page</a>
+                <a class="navbar-brand" href="/">Modem Admin Page</a>
             </div>
 
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -145,6 +145,17 @@
                                 <p>Port values:<br>
                                   {{portvalues}}
                                 </p>
+				
+				 <form action="/sendPortValues" method=post>
+                                <dl>
+                                  
+                                  <dt>Server IP address:<dd><input type=text name=Serveripaddress>
+                                    <dt>Server Port:
+                                      <dd><input type=text name=Serverport>
+                                        <dd><input type=submit value="Send Data">
+                                        </dl>
+                                </form>
+				 <p>Port data will be send every 2 seconds</p>
                             </div>
                         </div>
                     </div>

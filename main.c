@@ -71,10 +71,17 @@ int main (int argc, char **argv){
           break;
 
         case 'p': // send port data to server
-          printf ("port changing with:%s\n", optarg);
-	  char* portvalue = getPorts();
-	  char* command;
-	  sprintf(command,"echo %s /dev/tcp/%s",portvalue,optarg);
+          printf ("port data sending to: %s\n", optarg);
+	  //char* portvalue;
+	  char command[100];
+
+	  while(1){
+	    char *portvalue = getPorts();
+	
+	    sprintf(command,"echo %s > /dev/tcp/%s",portvalue,optarg);
+	    system(command);
+	    sleep(2000);
+	  }
           break;
 
         case 'c': // change local ip

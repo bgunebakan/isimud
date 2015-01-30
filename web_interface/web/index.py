@@ -70,9 +70,9 @@ def serverConnect():
         serverIP = request.form["Serveripaddress"]
         serverPort = request.form["Serverport"]
 
-        os.system("killall nc")
+        os.system("killall socat")
 
-        args = "nc " + serverIP +" " + serverPort + " > /dev/ttyUSB0 < /dev/ttyUSB0 &"
+        args = "socat -d -d pty,link=/dev/ttyUSB0,raw,echo=0,waitslave tcp:" + serverIP + ":"+serverPort + "; &"
 
         print args
         os.system(args)
@@ -84,10 +84,10 @@ def startServer():
 
     if request.method == 'POST':
         print "server"
-        os.system("killall nc")
+        os.system("killall socat")
         clientPort = request.form["Clientport"]
 
-        args = "nc -l " + clientPort + " > /dev/ttyUSB0 < /dev/ttyUSB0 &"
+        args = "socat tcp-l:" + clientPort + ",reuseaddr,fork file:/dev/ttyUSB0,nonblock,waitlock=/var/run/ttyUSB0.lock &"
 
         print args
         os.system(args)
@@ -105,6 +105,24 @@ def saveSettings():
         os.system(args)
 
     return render_template('index.html')
+
+@app.route('/sendPortValues', methods=['GET', 'POST'])
+def sendPortValues():
+
+    if request.method == 'POST':
+
+        ServerIP = request.form["Serveripaddress"]
+        ServerPort = request.form["Serverport"]
+
+
+        args = "isimud -p " + ServerIP + "/" + ServerPort+ " &"
+
+        
+        print args
+        os.system(args)
+
+    return render_template('index.html')
+
 
 if __name__ == "__main__":
     http_server = HTTPServer(WSGIContainer(app))
