@@ -11,7 +11,7 @@ import os
 
 #localip = "192.168.128.100"
 
-networkInterface = "lo"
+networkInterface = "ppp0"
 localNetworkInterface = "eth0"
 #satipaddress = "85.115.12.57"
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
@@ -117,9 +117,21 @@ def sendPortValues():
 
         args = "isimud -p " + ServerIP + "/" + ServerPort+ " &"
 
-        
+
         print args
         os.system(args)
+
+    return render_template('index.html')
+
+@app.route('/updateSoftware', methods=['GET', 'POST'])
+def updateSoftware():
+
+    if request.method == 'POST':
+        #clone from git repo and update software
+        os.system("cd /root/isimud")
+        os.system("git pull")
+        os.system("./build.sh")
+        os.system("sudo reboot")
 
     return render_template('index.html')
 
