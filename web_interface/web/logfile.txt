@@ -1,0 +1,12 @@
+WARNING:tornado.access:404 GET /static/admin_files/morris.css%29 (127.0.0.1) 9.38ms
+WARNING:tornado.access:404 GET /static/admin_files/font-awesome.css%29 (127.0.0.1) 1.11ms
+WARNING:tornado.access:404 GET /static/admin_files/sb-admin.css%29 (127.0.0.1) 0.88ms
+WARNING:tornado.access:404 GET /static/admin_files/font-awesome.css%29 (127.0.0.1) 0.73ms
+WARNING:tornado.access:404 GET /static/admin_files/sb-admin.css%29 (127.0.0.1) 0.96ms
+WARNING:tornado.access:404 GET /static/admin_files/morris.css%29 (127.0.0.1) 1.79ms
+WARNING:tornado.access:404 GET /widgets.js (::1) 1.18ms
+WARNING:tornado.access:404 GET /widgets.js?ver=4.0.1 (::1) 1.11ms
+WARNING:tornado.access:404 GET /widgets.js (::1) 0.75ms
+WARNING:tornado.access:404 GET /widgets.js?ver=4.0.1 (::1) 0.83ms
+WARNING:tornado.access:404 GET /widgets.js (::1) 1.27ms
+WARNING:tornado.access:404 GET /widgets.js (::1) 0.79ms

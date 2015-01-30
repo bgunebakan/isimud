@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>SB Admin - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ url_for('static',filename="admin_files/bootstrap.css")}}" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="{{ url_for('static',filename="admin_files/sb-admin.css)")}}" rel="stylesheet">
+
+    <!-- Morris Charts CSS -->
+    <link href="{{ url_for('static',filename="admin_files/morris.css)")}}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="{{ url_for('static',filename="admin_files/font-awesome.css)")}}" rel="stylesheet" type="text/css">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <!-- Navigation -->
+        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/index.html">SB Admin</a>
+            </div>
+            <!-- Top Menu Items -->
+            <ul class="nav navbar-right top-nav">
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu message-dropdown">
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="{{ url_for('static',filename="admin_files/50x50.gif)")}}" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="{{ url_for('static',filename="admin_files/50x50.gif)")}}" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-preview">
+                            <a href="#">
+                                <div class="media">
+                                    <span class="pull-left">
+                                        <img class="media-object" src="{{ url_for('static',filename="admin_files/50x50.gif)")}}" alt="">
+                                    </span>
+                                    <div class="media-body">
+                                        <h5 class="media-heading"><strong>John Smith</strong>
+                                        </h5>
+                                        <p class="small text-muted"><i class="fa fa-clock-o"></i> Yesterday at 4:32 PM</p>
+                                        <p>Lorem ipsum dolor sit amet, consectetur...</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li class="message-footer">
+                            <a href="#">Read All New Messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bell"></i> <b class="caret"></b></a>
+                    <ul class="dropdown-menu alert-dropdown">
+                        <li>
+                            <a href="#">Alert Name <span class="label label-default">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-primary">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-success">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-info">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-warning">Alert Badge</span></a>
+                        </li>
+                        <li>
+                            <a href="#">Alert Name <span class="label label-danger">Alert Badge</span></a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#">View All</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a aria-expanded="false" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> John Smith <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-envelope"></i> Inbox</a>
+                        </li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
+                            <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav side-nav">
+                    <li class="active">
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
+                    </li>
+                    <li>
+                        <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
+                        <ul id="demo" class="collapse">
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                            <li>
+                                <a href="#">Dropdown Item</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+                    </li>
+                    <li>
+                        <a href="http://ironsummitmedia.github.io/startbootstrap-sb-admin/index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+
+        <div id="page-wrapper">
+
+            <div class="container-fluid">
+
+                <!-- Page Heading -->
+                <div class="row">
+                    <div class="col-lg-12">
+                        <h1 class="page-header">
+                            Dashboard <small>Statistics Overview</small>
+                        </h1>
+                        <ol class="breadcrumb">
+                            <li class="active">
+                                <i class="fa fa-dashboard"></i> Dashboard
+                            </li>
+                        </ol>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="alert alert-info alert-dismissable">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                            <i class="fa fa-info-circle"></i>  <strong>Like SB Admin?</strong> Try out <a href="http://startbootstrap.com/template-overviews/sb-admin-2" class="alert-link">SB Admin 2</a> for additional features!
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-primary">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-comments fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">26</div>
+                                        <div>New Comments!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-green">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-tasks fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">12</div>
+                                        <div>New Tasks!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-yellow">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-shopping-cart fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">124</div>
+                                        <div>New Orders!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-6">
+                        <div class="panel panel-red">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-3">
+                                        <i class="fa fa-support fa-5x"></i>
+                                    </div>
+                                    <div class="col-xs-9 text-right">
+                                        <div class="huge">13</div>
+                                        <div>Support Tickets!</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#">
+                                <div class="panel-footer">
+                                    <span class="pull-left">View Details</span>
+                                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i> Area Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div style="position: relative;" id="morris-area-chart"><svg style="overflow: hidden; position: relative; top: -0.700012px;" xmlns="http://www.w3.org/2000/svg" width="960" version="1.1" height="342"><desc>Created with RaphaÃ«l 2.1.2</desc><defs></defs><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="307" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">0</tspan></text><path stroke-width="0.5" d="M69,307H935" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="236.5" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">7,500</tspan></text><path stroke-width="0.5" d="M69,236.5H935" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="166" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">15,000</tspan></text><path stroke-width="0.5" d="M69,166H935" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="95.5" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">22,500</tspan></text><path stroke-width="0.5" d="M69,95.5H935" stroke="#aaaaaa" fill="none" style=""></path><text font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="end" y="25" x="56.5" style="text-anchor: end; font: 12px sans-serif;"><tspan dy="4">30,000</tspan></text><path stroke-width="0.5" d="M69,25H935" stroke="#aaaaaa" fill="none" style=""></path><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="902.3786643714242" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2012-05</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="807.7154068148448" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2012-02</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="710.9037010784264" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2011-11</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="614.0481494607868" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2011-08</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="517.2364437243684" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2011-05</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="423.62548731709785" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2011-02</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="326.81378158067946" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2010-11</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="229.95822996303986" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2010-08</tspan></text><text transform="matrix(1,0,0,1,0,7.5)" font-weight="normal" font-family="sans-serif" font-size="12px" fill="#888888" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="319.5" x="133.14652422662144" style="text-anchor: middle; font: 12px sans-serif;"><tspan dy="4">2010-05</tspan></text><path fill-opacity="1" d="M69,257.0578C93.19196496379931,251.88779999999997,141.5758948913979,241.1577920838052,165.7678598551972,236.37779999999998C189.9707862893018,231.5956420838052,238.37663915751102,225.35278115183243,262.5795655916156,218.80919999999998C286.53037820869827,212.33378115183245,334.4320034428637,186.23397865362486,358.3828160599463,184.30180000000001C382.0595919193965,182.39172865362488,429.4131436382968,202.03491399129837,453.08991949774696,203.4402C477.28188446154627,204.87606399129837,525.6658143891449,194.7101666364666,549.8577793529441,195.6664C574.0607057870487,196.6230666364666,622.4665586552579,228.06613298429318,646.6694850893625,211.09179999999998C670.6202977064452,194.29428298429318,718.5219229406106,68.77297505149917,742.4727355576932,60.57899999999998C766.4125867044706,52.38877505149918,814.2922889980254,133.540438487816,838.2321401448028,145.555C862.4241051086021,157.69608848781598,910.8080350362006,154.28994999999998,935,157.20159999999998L935,307L69,307Z" stroke="none" fill="#7cb47c" style="fill-opacity: 1;"></path><path stroke-width="3" d="M69,257.0578C93.19196496379931,251.88779999999997,141.5758948913979,241.1577920838052,165.7678598551972,236.37779999999998C189.9707862893018,231.5956420838052,238.37663915751102,225.35278115183243,262.5795655916156,218.80919999999998C286.53037820869827,212.33378115183245,334.4320034428637,186.23397865362486,358.3828160599463,184.30180000000001C382.0595919193965,182.39172865362488,429.4131436382968,202.03491399129837,453.08991949774696,203.4402C477.28188446154627,204.87606399129837,525.6658143891449,194.7101666364666,549.8577793529441,195.6664C574.0607057870487,196.6230666364666,622.4665586552579,228.06613298429318,646.6694850893625,211.09179999999998C670.6202977064452,194.29428298429318,718.5219229406106,68.77297505149917,742.4727355576932,60.57899999999998C766.4125867044706,52.38877505149918,814.2922889980254,133.540438487816,838.2321401448028,145.555C862.4241051086021,157.69608848781598,910.8080350362006,154.28994999999998,935,157.20159999999998" stroke="#4da74d" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="257.0578" cx="69"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="236.37779999999998" cx="165.7678598551972"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="218.80919999999998" cx="262.5795655916156"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="184.30180000000001" cx="358.3828160599463"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="203.4402" cx="453.08991949774696"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="195.6664" cx="549.8577793529441"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="211.09179999999998" cx="646.6694850893625"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="60.57899999999998" cx="742.4727355576932"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="145.555" cx="838.2321401448028"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#4da74d" r="2" cy="157.20159999999998" cx="935"></circle><path fill-opacity="1" d="M69,281.9396C93.19196496379931,276.28549999999996,141.5758948913979,264.27470322763304,165.7678598551972,259.3232C189.9707862893018,254.36945322763304,238.37663915751102,245.0258,262.5795655916156,242.3186C286.53037820869827,239.6396,334.4320034428637,239.95638486766396,358.3828160599463,237.77839999999998C382.0595919193965,235.62533486766395,429.4131436382968,228.0153580948019,453.08991949774696,224.99439999999998C477.28188446154627,221.9077080948019,525.6658143891449,213.21975400906004,549.8577793529441,213.3478C574.0607057870487,213.47590400906003,622.4665586552579,239.10261884816754,646.6694850893625,226.019C670.6202977064452,213.07166884816755,718.5219229406106,116.90085671778438,742.4727355576932,109.22399999999999C766.4125867044706,101.55065671778438,814.2922889980254,156.55901120473698,838.2321401448028,164.6182C862.4241051086021,172.76226120473697,910.8080350362006,171.6823,935,174.037L935,307L69,307Z" stroke="none" fill="#a7b3bc" style="fill-opacity: 1;"></path><path stroke-width="3" d="M69,281.9396C93.19196496379931,276.28549999999996,141.5758948913979,264.27470322763304,165.7678598551972,259.3232C189.9707862893018,254.36945322763304,238.37663915751102,245.0258,262.5795655916156,242.3186C286.53037820869827,239.6396,334.4320034428637,239.95638486766396,358.3828160599463,237.77839999999998C382.0595919193965,235.62533486766395,429.4131436382968,228.0153580948019,453.08991949774696,224.99439999999998C477.28188446154627,221.9077080948019,525.6658143891449,213.21975400906004,549.8577793529441,213.3478C574.0607057870487,213.47590400906003,622.4665586552579,239.10261884816754,646.6694850893625,226.019C670.6202977064452,213.07166884816755,718.5219229406106,116.90085671778438,742.4727355576932,109.22399999999999C766.4125867044706,101.55065671778438,814.2922889980254,156.55901120473698,838.2321401448028,164.6182C862.4241051086021,172.76226120473697,910.8080350362006,171.6823,935,174.037" stroke="#7a92a3" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="281.9396" cx="69"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="259.3232" cx="165.7678598551972"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="242.3186" cx="262.5795655916156"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="237.77839999999998" cx="358.3828160599463"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="224.99439999999998" cx="453.08991949774696"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="213.3478" cx="549.8577793529441"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="226.019" cx="646.6694850893625"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="109.22399999999999" cx="742.4727355576932"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="164.6182" cx="838.2321401448028"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#7a92a3" r="2" cy="174.037" cx="935"></circle><path fill-opacity="1" d="M69,281.9396C93.19196496379931,281.6764,141.5758948913979,283.5252522536806,165.7678598551972,280.8868C189.9707862893018,278.2471522536806,238.37663915751102,261.99535916230366,262.5795655916156,260.8272C286.53037820869827,259.6712091623037,334.4320034428637,273.833181703107,358.3828160599463,271.5902C382.0595919193965,269.372881703107,429.4131436382968,245.19795969773298,453.08991949774696,242.986C477.28188446154627,240.725909697733,525.6658143891449,251.36427961494903,549.8577793529441,253.702C574.0607057870487,256.04077961494903,622.4665586552579,272.7983706806283,646.6694850893625,261.692C670.6202977064452,250.70132068062827,718.5219229406106,172.20910287251087,742.4727355576932,165.3138C766.4125867044706,158.42165287251086,814.2922889980254,198.77989792757913,838.2321401448028,206.54219999999998C862.4241051086021,214.38624792757912,910.8080350362006,222.43994999999998,935,227.73919999999998L935,307L69,307Z" stroke="none" fill="#2577b5" style="fill-opacity: 1;"></path><path stroke-width="3" d="M69,281.9396C93.19196496379931,281.6764,141.5758948913979,283.5252522536806,165.7678598551972,280.8868C189.9707862893018,278.2471522536806,238.37663915751102,261.99535916230366,262.5795655916156,260.8272C286.53037820869827,259.6712091623037,334.4320034428637,273.833181703107,358.3828160599463,271.5902C382.0595919193965,269.372881703107,429.4131436382968,245.19795969773298,453.08991949774696,242.986C477.28188446154627,240.725909697733,525.6658143891449,251.36427961494903,549.8577793529441,253.702C574.0607057870487,256.04077961494903,622.4665586552579,272.7983706806283,646.6694850893625,261.692C670.6202977064452,250.70132068062827,718.5219229406106,172.20910287251087,742.4727355576932,165.3138C766.4125867044706,158.42165287251086,814.2922889980254,198.77989792757913,838.2321401448028,206.54219999999998C862.4241051086021,214.38624792757912,910.8080350362006,222.43994999999998,935,227.73919999999998" stroke="#0b62a4" fill="none" style=""></path><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="281.9396" cx="69"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="280.8868" cx="165.7678598551972"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="260.8272" cx="262.5795655916156"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="271.5902" cx="358.3828160599463"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="242.986" cx="453.08991949774696"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="253.702" cx="549.8577793529441"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="261.692" cx="646.6694850893625"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="165.3138" cx="742.4727355576932"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="206.54219999999998" cx="838.2321401448028"></circle><circle stroke-width="1" style="" stroke="#ffffff" fill="#0b62a4" r="2" cy="227.73919999999998" cx="935"></circle></svg><div style="display: none;" class="morris-hover morris-default-style"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i> Donut Chart</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div id="morris-donut-chart"><svg style="overflow: hidden; position: relative; top: -0.299988px;" xmlns="http://www.w3.org/2000/svg" width="279" version="1.1" height="342"><desc>Created with RaphaÃ«l 2.1.2</desc><defs></defs><path opacity="0" stroke-width="2" d="M139.5,259.8333333333333A86.33333333333333,86.33333333333333,0,0,0,221.16183726754036,201.51408178995342" stroke="#0b62a4" fill="none" style="opacity: 0;"></path><path stroke-width="3" d="M139.5,262.8333333333333A89.33333333333333,89.33333333333333,0,0,0,223.99950728842015,202.4875440915348L257.2633058665109,213.8986855156278A124.5,124.5,0,0,1,139.5,298Z" stroke="#ffffff" fill="#0b62a4" style=""></path><path opacity="1" stroke-width="2" d="M221.16183726754036,201.51408178995342A86.33333333333333,86.33333333333333,0,0,0,62.06883198565602,135.3180845899675" stroke="#3980b5" fill="none" style="opacity: 1;"></path><path stroke-width="3" d="M223.99950728842015,202.4875440915348A89.33333333333333,89.33333333333333,0,0,0,59.37817363766723,133.99129988459956L23.353247978484035,116.22712688495123A129.5,129.5,0,0,1,261.99275590131055,215.5211226849301Z" stroke="#ffffff" fill="#3980b5" style=""></path><path opacity="0" stroke-width="2" d="M62.06883198565602,135.3180845899675A86.33333333333333,86.33333333333333,0,0,0,139.47287758387017,259.83332907295414" stroke="#679dc6" fill="none" style="opacity: 0;"></path><path stroke-width="3" d="M59.37817363766723,133.99129988459956A89.33333333333333,89.33333333333333,0,0,0,139.4719351060896,262.83332892491006L139.4608871721062,297.99999385617133A124.5,124.5,0,0,1,27.837678558465342,118.43843472723111Z" stroke="#ffffff" fill="#679dc6" style=""></path><text stroke-width="0.6306306306306306" transform="matrix(1.5857,0,0,1.5857,-81.7071,-101.0357)" font-weight="800" font-size="15px" fill="#000000" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="163.5" x="139.5" style="text-anchor: middle; font: 800 15px &quot;Arial&quot;;"><tspan dy="5">In-Store Sales</tspan></text><text stroke-width="0.555984555984556" transform="matrix(1.7986,0,0,1.7986,-111.4062,-140.1562)" font-size="14px" fill="#000000" stroke="none" font="10px &quot;Arial&quot;" text-anchor="middle" y="183.5" x="139.5" style="text-anchor: middle; font: 14px &quot;Arial&quot;;"><tspan dy="5">30</tspan></text></svg></div>
+                                <div class="text-right">
+                                    <a href="#">View Details <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i> Tasks Panel</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="list-group">
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">just now</span>
+                                        <i class="fa fa-fw fa-calendar"></i> Calendar updated
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">4 minutes ago</span>
+                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">23 minutes ago</span>
+                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">46 minutes ago</span>
+                                        <i class="fa fa-fw fa-money"></i> Invoice 653 has been paid
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">1 hour ago</span>
+                                        <i class="fa fa-fw fa-user"></i> A new user has been added
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">2 hours ago</span>
+                                        <i class="fa fa-fw fa-check"></i> Completed task: "pick up dry cleaning"
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">yesterday</span>
+                                        <i class="fa fa-fw fa-globe"></i> Saved the world
+                                    </a>
+                                    <a href="#" class="list-group-item">
+                                        <span class="badge">two days ago</span>
+                                        <i class="fa fa-fw fa-check"></i> Completed task: "fix error on sales page"
+                                    </a>
+                                </div>
+                                <div class="text-right">
+                                    <a href="#">View All Activity <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title"><i class="fa fa-money fa-fw"></i> Transactions Panel</h3>
+                            </div>
+                            <div class="panel-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Order #</th>
+                                                <th>Order Date</th>
+                                                <th>Order Time</th>
+                                                <th>Amount (USD)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>3326</td>
+                                                <td>10/21/2013</td>
+                                                <td>3:29 PM</td>
+                                                <td>$321.33</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3325</td>
+                                                <td>10/21/2013</td>
+                                                <td>3:20 PM</td>
+                                                <td>$234.34</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3324</td>
+                                                <td>10/21/2013</td>
+                                                <td>3:03 PM</td>
+                                                <td>$724.17</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3323</td>
+                                                <td>10/21/2013</td>
+                                                <td>3:00 PM</td>
+                                                <td>$23.71</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3322</td>
+                                                <td>10/21/2013</td>
+                                                <td>2:49 PM</td>
+                                                <td>$8345.23</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3321</td>
+                                                <td>10/21/2013</td>
+                                                <td>2:23 PM</td>
+                                                <td>$245.12</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3320</td>
+                                                <td>10/21/2013</td>
+                                                <td>2:15 PM</td>
+                                                <td>$5663.54</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3319</td>
+                                                <td>10/21/2013</td>
+                                                <td>2:13 PM</td>
+                                                <td>$943.45</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="text-right">
+                                    <a href="#">View All Transactions <i class="fa fa-arrow-circle-right"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- /#page-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="{{ url_for('static',filename="admin_files/jquery.js)")}}"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="{{ url_for('static',filename="admin_files/bootstrap.js)")}}"></script>
+
+    <!-- Morris Charts JavaScript -->
+    <script src="{{ url_for('static',filename="admin_files/raphael.js)")}}"></script>
+    <script src="{{ url_for('static',filename="admin_files/morris.js)")}}"></script>
+    <script src="{{ url_for('static',filename="admin_files/morris-data.js)")}}"></script>
+
+
+
+
+</body></html>
