@@ -27,3 +27,6 @@
 *.i*86
 *.x86_64
 *.hex
+/isimud_v2/Isimud/nbproject/private/
+/isimud_v2/Isimud/build/
+/isimud_v2/Isimud/dist/
