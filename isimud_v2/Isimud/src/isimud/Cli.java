@@ -1,3 +1,20 @@
+/*
+ * Copyright (C) 2015 Bilal Tonga
+ *
+ * This program is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU General Public License
+ * as published by the Free Software Foundation; either version 2
+ * of the License, or (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
+ */
 package isimud;
 
 import com.pi4j.io.gpio.GpioController;
@@ -22,10 +39,10 @@ public class Cli {
     private String[] args = null;
     private Options options = new Options();
 
-    public final GpioController gpio = GpioFactory.getInstance();
+    //public final GpioController gpio = GpioFactory.getInstance();
 
     //GpioPinDigitalOutput satReset = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18,"satReset",PinState.LOW);
-    public GpioPinDigitalOutput satOn = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17,"satOn",PinState.LOW);
+    //public GpioPinDigitalOutput satOn = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17,"satOn",PinState.LOW);
     
  
     public Cli(String[] args) {
@@ -54,9 +71,10 @@ public class Cli {
             if (cmd.hasOption("s")){
         
                 System.out.println("starting Modem...");
-                satOn.high();
+      //          satOn.high();
      
                 Process p = Runtime.getRuntime().exec("pppd call Thuraya &");
+                System.out.println(p);
     
             }else if (cmd.hasOption("k")){
     
@@ -66,6 +84,7 @@ public class Cli {
             }else if (cmd.hasOption("c")){
         
                 System.out.println("IP changing with " + cmd.getOptionValue("c"));
+                
         
             }else if (cmd.hasOption("p")){
     
