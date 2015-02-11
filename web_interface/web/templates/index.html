@@ -97,24 +97,19 @@
                                 <h3 class="panel-title"><i class="fa fa-long-arrow-right fa-fw"></i>Client-Server mode</h3>
                             </div>
                             <div class="panel-body">
-                              <form action="/serverConnect" method=post>
-                                <dl>
-                                  <dt>- Client mode -
-                                  <dt>Server IP address:<dd><input type=text name=Serveripaddress>
-                                    <dt>Server Port:
-                                      <dd><input type=text name=Serverport>
-                                        <dd><input type=submit value="Server Connect">
-                                        </dl>
-                                </form>
+                              	<dt>- Working Mode -
 
-                                <form action="/startServer" method=post>
-                                  <dl>
-                                    <dt>- Server mode -
-                                      <dt>TCP Port:
-                                        <dd><input type=text name=Clientport>
-                                          <dd><input type=submit value="Client Connect">
-                                          </dl>
-                                  </form>
+				<form action="/serverConnect" method=post>
+                                  
+                  		  <input type="radio" name="workingmode" value="Server">Server<br>
+                                  <input type="radio" name="workingmode" value="Client">Client<br>
+			          
+				  <dl>
+                                    <dt>IP address:<dd><input type=text name=Serveripaddress>
+                                    <dt>Port:<dd><input type=text name=Serverport>
+                                    <dd><input type=submit value="Server Connect">
+                                  </dl>
+                                </form>
 
                             </div>
                         </div>
@@ -125,12 +120,12 @@
                                 <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i>Settings</h3>
                             </div>
                             <div class="panel-body">
-                              <form action="/modbusMode">
+                              <form action="/modbusMode" method=post>
                                 <input type="radio" name="modbus" value="On">On modbus mode<br>
                                 <input type="radio" name="modbus" value="Off">Off modbus mode
                                 <input type=submit value="Change mode">
                               </form>
-
+			      <br>
                               <form action="/saveSettings" method=post>
                                 <dl>
                                     <dt>Local IP address:
@@ -153,15 +148,13 @@
                                 </p>
 
 				 <form action="/sendPortValues" method=post>
-                                <dl>
+                                   <dl>
 
-                                  <dt>Server IP address:<dd><input type=text name=Serveripaddress>
-                                    <dt>Server Port:
-                                      <dd><input type=text name=Serverport>
-                                        <dd><input type=submit value="Send Data">
-                                        </dl>
-                                </form>
-				                            <p>Port data will be send every 2 seconds</p>
+                                  	<dt>Server Address:<dd><input type=text name=Serveripaddress>
+                                        	<dd><input type=submit value="Send Data">
+                                   </dl>
+                                 </form>
+				 <p>Port data will be send every 2 seconds</p>
                             </div>
                         </div>
                     </div>

@@ -11,7 +11,7 @@ import os
 
 #localip = "192.168.128.100"
 
-networkInterface = "ppp0"
+networkInterface = "lo"
 localNetworkInterface = "eth0"
 #satipaddress = "85.115.12.57"
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
@@ -67,33 +67,29 @@ def restart():
 def serverConnect():
 
     if request.method == 'POST':
-        serverIP = request.form["Serveripaddress"]
-        serverPort = request.form["Serverport"]
+            
+	if request.form["workingmode"] == 'Client':
+	    print "client"
+	    serverIP = request.form["Serveripaddress"]
+            serverPort = request.form["Serverport"]
 
-        os.system("killall socat")
+            os.system("killall isimud.jar")
 
-        args = "socat -d -d pty,link=/dev/ttyUSB0,raw,echo=0,waitslave tcp:" + serverIP + ":"+serverPort + "; &"
+            args = "isimud.jar -T 0 -S "+serverIP+" -P " +serverPort + " &"
+            print args
+            os.system(args)
+	else:
+	    print "server"
+            os.system("killall isimud.jar")
+            clientPort = request.form["Serverport"]
 
-        print args
-        os.system(args)
+            args = "isimud.jar -T 1 -P " + clientPort + " &"
 
-    return render_template('index.html')
+            print args
+            os.system(args)
 
-@app.route('/startServer', methods=['GET', 'POST'])
-def startServer():
-
-    if request.method == 'POST':
-        print "server"
-        os.system("killall socat")
-        clientPort = request.form["Clientport"]
-
-        args = "socat tcp-l:" + clientPort + ",reuseaddr,fork file:/dev/ttyUSB0,nonblock,waitlock=/var/run/ttyUSB0.lock &"
-
-        print args
-        os.system(args)
 
     return render_template('index.html')
-
 
 @app.route('/saveSettings', methods=['GET','POST'])
 def saveSettings():
@@ -101,7 +97,7 @@ def saveSettings():
     if request.method == 'POST':
         Localip = request.form['Localipaddress']
         #print Localip
-        args = "isimud -c " + Localip
+        args = "isimud.jar -c " + Localip
         os.system(args)
 
     return render_template('index.html')
@@ -112,11 +108,13 @@ def modbusMode():
     if request.method == 'POST':
         ModbusMode = request.form['modbus']
         #print Localip
-        if ModbusMode == 'on'
-            args = "isimud -m 1"
+        if ModbusMode == 'On':
+            args = "isimud.jar -m 1"
+	    print args
             os.system(args)
-        elif
-            args = "isimud -m 0"
+        else:
+            args = "isimud.jar -m 0"
+	    print args
             os.system(args)
 
     return render_template('index.html')
@@ -127,29 +125,14 @@ def sendPortValues():
     if request.method == 'POST':
 
         ServerIP = request.form["Serveripaddress"]
-        ServerPort = request.form["Serverport"]
 
-
-        args = "isimud -p " + ServerIP + "/" + ServerPort+ " &"
+        args = "isimud.jar -p " + ServerIP + " &"
 
 
         print args
         os.system(args)
 
     return render_template('index.html')
-
-@app.route('/updateSoftware', methods=['GET', 'POST'])
-def updateSoftware():
-
-    if request.method == 'POST':
-        #clone from git repo and update software
-        os.system("cd /root/isimud")
-        os.system("git pull")
-        os.system("./build.sh")
-        os.system("sudo reboot")
-
-    return render_template('index.html')
-
 
 if __name__ == "__main__":
     http_server = HTTPServer(WSGIContainer(app))
