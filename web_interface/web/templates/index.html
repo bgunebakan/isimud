@@ -125,6 +125,11 @@
                                 <h3 class="panel-title"><i class="fa fa-clock-o fa-fw"></i>Settings</h3>
                             </div>
                             <div class="panel-body">
+                              <form action="/modbusMode">
+                                <input type="radio" name="on" value="On">On modbus mode<br>
+                                <input type="radio" name="off" value="Off">Off modbus mode
+                              </form>
+
                               <form action="/saveSettings" method=post>
                                 <dl>
                                     <dt>Local IP address:

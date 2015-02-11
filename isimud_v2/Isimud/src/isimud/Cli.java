@@ -38,7 +38,9 @@ public class Cli {
     private static final Logger log = Logger.getLogger(Cli.class.getName());
     private String[] args = null;
     private Options options = new Options();
-
+    
+    Config config = new Config();
+    
     //public final GpioController gpio = GpioFactory.getInstance();
 
     //GpioPinDigitalOutput satReset = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18,"satReset",PinState.LOW);
@@ -53,6 +55,7 @@ public class Cli {
         options.addOption("k", "kill", false, "stop communication");
         options.addOption("c", "change-ip", true, "<ip-address>  change local ip number with following");
         options.addOption("p", "send-port", true, "<ip-address/port>  set port with bit value");
+        options.addOption("m", "modbus", true, "<1/0> change serial mode");
         options.addOption("g", "get-ports", false, "get analog and digital ports");
         options.addOption("w", "web", false, "start web server");
         options.addOption("h", "help", false, "show help.");
@@ -84,7 +87,7 @@ public class Cli {
             }else if (cmd.hasOption("c")){
         
                 System.out.println("IP changing with " + cmd.getOptionValue("c"));
-                
+                config.changeIp(cmd.getOptionValue("c"));
         
             }else if (cmd.hasOption("p")){
     
@@ -105,6 +108,18 @@ public class Cli {
                     Process p = Runtime.getRuntime().exec("nohup python /root/isimud/web_interface/web/index.py > /root/web_interface.log 2>&1 </dev/null &");
                 }else{
                     Process p = Runtime.getRuntime().exec("killall python");
+                }
+            }else if (cmd.hasOption("m")){
+    
+                System.out.println("changing modbus mode..");
+        
+     
+                if(cmd.getOptionValue("m").equals("1")){
+                    config.modbus_mode = true;
+                    config.Update();
+                }else{
+                    config.modbus_mode = false;
+                    config.Update();
                 }
             }else if (cmd.hasOption("h")){
     

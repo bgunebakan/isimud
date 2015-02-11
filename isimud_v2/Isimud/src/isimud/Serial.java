@@ -34,8 +34,10 @@ public class Serial {
     static SerialPort serialPort;
     String readSerialData;
     
+    Config config = new Config();
+    
     public Serial(){
-        serialPort = new SerialPort("/dev/ttyUSB0");
+        serialPort = new SerialPort(config.serial_port);
         
         try {
             System.out.println("Port opened: " + serialPort.openPort());

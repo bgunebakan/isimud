@@ -29,8 +29,10 @@ public class Main {
     public static void main(String[] args) {
         //new Cli(args).parse();
         Serial serial = new Serial();
-        serial.writeSerial("bilgi");
-        serial.readSerial();
+        //serial.writeSerial("bilgi");
+        //serial.readSerial();
+        Config config = new Config();
+        config.getIp();
     }
     
 }

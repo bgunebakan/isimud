@@ -106,6 +106,21 @@ def saveSettings():
 
     return render_template('index.html')
 
+@app.route('/modbusMode', methods=['GET','POST'])
+def modbusMode():
+
+    if request.method == 'POST':
+        ModbusMode = request.form['modbus']
+        #print Localip
+        if ModbusMode == 'on'
+            args = "isimud -m 1"
+            os.system(args)
+        elif
+            args = "isimud -m 0"
+            os.system(args)
+
+    return render_template('index.html')
+
 @app.route('/sendPortValues', methods=['GET', 'POST'])
 def sendPortValues():
 
