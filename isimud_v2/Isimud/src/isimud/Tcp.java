@@ -61,6 +61,7 @@ int repeat = 1; //a loop for repeating the transaction
 
 
 Config config = new Config();
+Serial serial = new Serial();
 
 private final String USER_AGENT = "Mozilla/5.0";
 
@@ -193,6 +194,28 @@ public void initModbus(String[] args){
    }
    public void connectServer(){
        
+       String data = "";
+       try {
+        Socket skt = new Socket(config.server_add, Integer.valueOf(config.serial_port));
+        BufferedReader in = new BufferedReader(new
+            
+        InputStreamReader(skt.getInputStream()));
+        System.out.print("Received string: '");
+
+        while (!in.ready()) {}
+        System.out.println(in.readLine()); // Read one line and output it
+         
+        data = data + in.readLine();
+         
+        serial.writeSerial(data);
+         
+        System.out.print("'\n");
+        in.close();
+         
+      }
+      catch(NumberFormatException | IOException e) {
+         System.out.print("Whoops! It didn't work!\n");
+      }
        
    }
 
