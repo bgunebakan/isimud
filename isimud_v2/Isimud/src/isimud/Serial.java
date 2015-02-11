@@ -35,6 +35,7 @@ public class Serial {
     String readSerialData;
     
     Config config = new Config();
+    Tcp tcp = new Tcp();
     
     public Serial(){
         serialPort = new SerialPort(config.serial_port);
@@ -65,7 +66,7 @@ public class Serial {
     
     public void readSerial(){
         
-        int mask = SerialPort.MASK_RXCHAR + SerialPort.MASK_CTS + SerialPort.MASK_DSR;//Prepare mask
+        int mask = SerialPort.MASK_RXCHAR;// + SerialPort.MASK_CTS + SerialPort.MASK_DSR;//Prepare mask
         
         try {
             
@@ -75,11 +76,7 @@ public class Serial {
         } catch (jssc.SerialPortException ex) {
             Logger.getLogger(Serial.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        
-
-        
-        
+    
     }
     public void closePort(){
         
@@ -121,6 +118,12 @@ public class Serial {
                 }
                 if(!data.equals("")){
                     System.out.println(readSerialData);
+                    if(config.transmit_mode == true){
+                        tcp.startServer(readSerialData); // send data to tcp
+                    }else{
+                        
+                    }
+                    
                 }
             }
             else if(event.isCTS()){//If CTS line has changed state

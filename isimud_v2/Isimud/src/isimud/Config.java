@@ -20,15 +20,14 @@ package isimud;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
-import java.net.UnknownHostException;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,6 +36,10 @@ import javax.swing.JOptionPane;
 public class Config {
     String serial_port = "";
     
+    String server_add = "";
+    String server_port = "";
+    
+    boolean transmit_mode;
     
     boolean modbus_mode;
 
@@ -52,6 +55,9 @@ public class Config {
         
         serial_port = prop.getProperty("serial_port");
         
+        server_add = prop.getProperty("server_add");
+        server_port = prop.getProperty("server_port");
+        transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
         
         
         modbus_mode = Boolean.valueOf(prop.getProperty("modbus_mode"));
@@ -64,6 +70,10 @@ public class Config {
     		
                 //set the properties value  
                 prop.setProperty("serial_port",serial_port);
+                
+                prop.setProperty("server_add",server_add);
+                prop.setProperty("server_port",server_port);
+                prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
                 
                 prop.setProperty("modbus_mode",String.valueOf(modbus_mode));
              
@@ -79,8 +89,32 @@ public class Config {
     
     public String getIp(){
         
-        
-        return "";
+        String ip;
+        try {
+            Enumeration<NetworkInterface> interfaces = NetworkInterface.getNetworkInterfaces();
+            while (interfaces.hasMoreElements()) {
+                NetworkInterface iface = interfaces.nextElement();
+                // filters out 127.0.0.1 and inactive interfaces
+                if (iface.isLoopback() || !iface.isUp())
+                    continue;
+
+                Enumeration<InetAddress> addresses = iface.getInetAddresses();
+                while(addresses.hasMoreElements()) {
+                
+                    InetAddress addr = addresses.nextElement();
+                    if(addr instanceof Inet4Address){
+                        ip = addr.getHostAddress();
+                        System.out.println( ip);
+                        return ip;
+                    }
+                
+                }
+            }
+        } catch (SocketException e) {
+            throw new RuntimeException(e);
+        }
+
+    return null; 
     }
     
     

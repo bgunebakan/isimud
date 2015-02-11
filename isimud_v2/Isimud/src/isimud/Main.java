@@ -26,13 +26,11 @@ public class Main {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        //new Cli(args).parse();
-        Serial serial = new Serial();
-        //serial.writeSerial("bilgi");
-        //serial.readSerial();
-        Config config = new Config();
-        config.getIp();
+    public static void main(String[] args) throws Exception {
+        new Cli(args).parse();
+        //Tcp tcp = new Tcp();
+        //tcp.sendPost("http://ufakisler.net","lang=eng");
+        
     }
     
 }

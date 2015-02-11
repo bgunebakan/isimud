@@ -17,11 +17,20 @@
  */
 package isimud;
 
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.HttpURLConnection;
 import java.net.InetAddress;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.net.URL;
 import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import static javax.management.Query.gt;
+import javax.net.ssl.HttpsURLConnection;
 import net.wimpi.modbus.Modbus;
 import net.wimpi.modbus.ModbusException;
 import net.wimpi.modbus.ModbusSlaveException;
@@ -50,7 +59,12 @@ int ref = 0; //the reference; offset where to start reading from
 int count = 0; //the number of DI's to read
 int repeat = 1; //a loop for repeating the transaction
 
-public void initConnection(String[] args){
+
+Config config = new Config();
+
+private final String USER_AGENT = "Mozilla/5.0";
+
+public void initModbus(String[] args){
     //1. Setup the parameters
     if (args.length < 3) {
         System.exit(1);
@@ -116,6 +130,70 @@ public void initConnection(String[] args){
     con.close();
     
 }
-    
-    
+   
+	public void sendPost(String url,String urlParameters) throws Exception {
+ 
+		
+		URL obj = new URL(url);
+		HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+ 
+		//add reuqest header
+		con.setRequestMethod("POST");
+   
+		con.setRequestProperty("User-Agent", USER_AGENT);
+		con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+ 
+		//String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+ 
+		// Send post request
+		con.setDoOutput(true);
+		DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+		wr.writeBytes(urlParameters);
+		wr.flush();
+		wr.close();
+ 
+		int responseCode = con.getResponseCode();
+		System.out.println("\nSending 'POST' request to URL : " + url);
+		System.out.println("Post parameters : " + urlParameters);
+		System.out.println("Response Code : " + responseCode);
+ 
+		BufferedReader in = new BufferedReader(
+		        new InputStreamReader(con.getInputStream()));
+		String inputLine;
+		StringBuffer response = new StringBuffer();
+ 
+		while ((inputLine = in.readLine()) != null) {
+			response.append(inputLine);
+		}
+		in.close();
+ 
+		//print result
+		System.out.println(response.toString());
+ 
+	}
+   public void startServer(String data) {
+       
+      
+      try {
+         ServerSocket srvr = new ServerSocket(Integer.valueOf(config.server_port));
+         Socket skt = srvr.accept();
+         System.out.print("Server has connected!\n");
+         
+         PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
+         
+         out.print(data);
+         
+         out.close();
+         skt.close();
+         srvr.close();
+      }
+      catch(NumberFormatException | IOException e) {
+         System.out.print("Whoops! It didn't work!\n");
+      }
+   }
+   public void connectServer(){
+       
+       
+   }
+
 }

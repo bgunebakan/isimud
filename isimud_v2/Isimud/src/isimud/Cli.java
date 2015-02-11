@@ -17,11 +17,6 @@
  */
 package isimud;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
-import com.pi4j.io.gpio.PinState;
-import com.pi4j.io.gpio.RaspiPin;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -40,6 +35,9 @@ public class Cli {
     private Options options = new Options();
     
     Config config = new Config();
+    Gpio gpio = new Gpio();
+    Tcp tcp = new Tcp();
+    Serial serial = new Serial();
     
     //public final GpioController gpio = GpioFactory.getInstance();
 
@@ -54,10 +52,15 @@ public class Cli {
         options.addOption("s", "start", false, "start communication");
         options.addOption("k", "kill", false, "stop communication");
         options.addOption("c", "change-ip", true, "<ip-address>  change local ip number with following");
-        options.addOption("p", "send-port", true, "<ip-address/port>  set port with bit value");
+        options.addOption("p", "send-port", true, "<ip-address>  send port with bit value");
         options.addOption("m", "modbus", true, "<1/0> change serial mode");
         options.addOption("g", "get-ports", false, "get analog and digital ports");
         options.addOption("w", "web", false, "start web server");
+        
+        options.addOption("T", "transmit-mode", true, "<1 Server/0 Client> transmitter mode Server or Client");
+        options.addOption("S", "server-ip", true, "Server Address");
+        options.addOption("P", "server-port", true, "Server port");
+        
         options.addOption("h", "help", false, "show help.");
 
     }
@@ -74,8 +77,12 @@ public class Cli {
             if (cmd.hasOption("s")){
         
                 System.out.println("starting Modem...");
+                gpio.initGpio();
+                Process saton = Runtime.getRuntime().exec("echo '1' > /sys/class/gpio/gpio0/value");
+                Process satreset = Runtime.getRuntime().exec("echo '0' > /sys/class/gpio/gpio2/value");
+                Process satled = Runtime.getRuntime().exec("echo '1' > /sys/class/gpio/gpio15/value");
       //          satOn.high();
-     
+                
                 Process p = Runtime.getRuntime().exec("pppd call Thuraya &");
                 System.out.println(p);
     
@@ -93,11 +100,12 @@ public class Cli {
     
                 System.out.println("port sending...");
                 //Gpio.portSending(cmd.getOptionValue("p"));
+                tcp.sendPost(cmd.getOptionValue("c"), gpio.getPorts());
         
             }else if (cmd.hasOption("g")){
         
-                //Gpio.getPorts();
-                System.out.println("get ports.");
+                
+                System.out.println(gpio.getPorts());
     
             }else if (cmd.hasOption("w")){
     
@@ -121,6 +129,32 @@ public class Cli {
                     config.modbus_mode = false;
                     config.Update();
                 }
+            }else if (cmd.hasOption("T")){
+    
+                String serverAdd;
+                String serverPort;
+                
+                if(cmd.getOptionValue("T").equals("1")){
+                    System.out.println("server mode...");
+                    serverPort = cmd.getOptionValue("P");
+                    
+                    config.serial_port = serverPort;
+                    config.Update();
+                    serial.readSerial();
+                    
+                }else{
+                    System.out.println("client mode...");
+                    serverAdd = cmd.getOptionValue("S");
+                    serverPort = cmd.getOptionValue("P");
+                    
+                    config.server_add = serverAdd;
+                    config.serial_port = serverPort;
+                    config.Update();
+                    
+                    serial.readSerial();
+                    
+                }
+    
             }else if (cmd.hasOption("h")){
     
                 help();
@@ -137,6 +171,8 @@ public class Cli {
             help();
         }  catch (IOException ex) {
              
+            Logger.getLogger(Cli.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (Exception ex) {
             Logger.getLogger(Cli.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
