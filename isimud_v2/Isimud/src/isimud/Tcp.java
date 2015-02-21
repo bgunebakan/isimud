@@ -21,6 +21,9 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
@@ -59,6 +62,8 @@ int ref = 0; //the reference; offset where to start reading from
 int count = 0; //the number of DI's to read
 int repeat = 1; //a loop for repeating the transaction
 
+Socket socket; 
+OutputStream out;
 
 Config config = new Config();
 Serial serial = new Serial();
@@ -131,6 +136,22 @@ public void initModbus(String[] args){
     con.close();
     
 }
+
+    public void initTcp(){
+        
+    try {
+        //get the localhost IP address, if server is running on some other IP, you need to use that
+        //InetAddress host = InetAddress.getByAddress(17862254151);
+        socket = new Socket(config.server_add,config.server_port);
+        out = socket.getOutputStream();
+        System.out.println("Server details:" + config.server_add + "  " + config.server_port);
+    } catch (IOException ex) {
+        Logger.getLogger(Tcp.class.getName()).log(Level.SEVERE, null, ex);
+    }
+        
+        
+        
+    }
    
 	public void sendPost(String url,String urlParameters) throws Exception {
  
@@ -178,7 +199,7 @@ public void initModbus(String[] args){
       try {
          ServerSocket srvr = new ServerSocket(Integer.valueOf(config.server_port));
          Socket skt = srvr.accept();
-         System.out.print("Server has connected!\n");
+         System.out.println("Server has connected @ "+ config.serial_port);
          
          PrintWriter out = new PrintWriter(skt.getOutputStream(), true);
          
@@ -189,7 +210,7 @@ public void initModbus(String[] args){
          srvr.close();
       }
       catch(NumberFormatException | IOException e) {
-         System.out.print("Whoops! It didn't work!\n");
+         System.out.print("cant started server\n");
       }
    }
    public void connectServer(){
@@ -217,6 +238,119 @@ public void initModbus(String[] args){
          System.out.print("Whoops! It didn't work!\n");
       }
        
+   }
+    public void sendtcp(String data){
+       
+        try {
+            //write to socket using OutputStream
+            //System.out.println("Sending request to Socket Server");
+            
+            out.write(data.getBytes());
+            //out.flush();
+            //out.close();
+            //Thread.sleep(100);
+            
+           
+            
+        } catch (IOException ex) {
+                Logger.getLogger(Tcp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+       
+   }
+   
+   public void starttcpServer(){
+       
+         ServerSocket server;
+        //socket server port on which it will listen
+         //int port = 9876;
+    
+        try {
+            //create the socket server object
+            server = new ServerSocket(config.server_port);
+    
+    
+            //keep listens indefinitely until receives 'exit' call or program terminates
+            while(true){
+                System.out.println("Waiting for client request");
+                //creating socket and waiting for client connection
+                Socket socket = server.accept();
+                //read from socket to ObjectInputStream object
+                ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
+                //convert ObjectInputStream object to String
+                String message = (String) ois.readObject();
+                System.out.println("Message Received: " + message);
+                //create ObjectOutputStream object
+                ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
+                //write object to Socket
+            
+                while(!serial.bufferFull){
+                
+                }
+                
+                oos.writeObject("Hi Client "+serial.readSerialData);
+                //close resources
+                ois.close();
+                oos.close();
+                socket.close();
+                
+                //terminate the server if client sends exit request
+                if(message.equalsIgnoreCase("exit")) break;
+        
+            }
+            System.out.println("Shutting down Socket server!!");
+            //close the ServerSocket object
+            server.close();
+    
+        } catch (IOException ex) {
+            Logger.getLogger(Tcp.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Tcp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+   }
+
+}
+
+class tcpThread implements Runnable {
+   private Thread t;
+   
+   Serial serial = new Serial();
+   Tcp tcp = new Tcp();
+   
+   tcpThread(){
+       
+       System.out.println("tcp connection thread starting...");
+       tcp.initTcp();
+       serial.initSerial();
+       serial.readSerial();
+   }
+   
+   
+   @Override
+   public void run() {
+      System.out.println("tcp connection running..");
+      try {
+          while(true){
+            if(serial.bufferFull){
+                //tcp.sendtcp(serial.readSerialData);
+            }
+            Thread.sleep(500);
+          }
+     } catch (InterruptedException e) {
+         System.out.println("tcp connection thread interrupted.");
+     }
+     System.out.println("tcp thread exiting...");
+   }
+   
+   public void start ()
+   {
+      System.out.println("Starting tcp connection.");
+      if (t == null)
+      {
+         t = new Thread (this);
+         t.start ();
+      }
    }
 
 }

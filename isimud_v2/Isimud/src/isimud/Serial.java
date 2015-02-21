@@ -33,11 +33,12 @@ public class Serial {
     
     static SerialPort serialPort;
     String readSerialData;
+    boolean bufferFull = false;
     
     Config config = new Config();
-    Tcp tcp = new Tcp();
+  // Tcp tcp = new Tcp();
     
-    public Serial(){
+    public void initSerial(){
         serialPort = new SerialPort(config.serial_port);
         
         try {
@@ -56,7 +57,7 @@ public class Serial {
         
         try {
             System.out.println(data);
-            serialPort.writeBytes(data.getBytes());
+            serialPort.writeString(data);
             
         } catch (jssc.SerialPortException ex) {
             Logger.getLogger(Serial.class.getName()).log(Level.SEVERE, null, ex);
@@ -88,7 +89,16 @@ public class Serial {
         
     }
     
-    
+    public String readData(){
+        String Data = "";
+        try {
+            Data = serialPort.readString();
+        } catch (jssc.SerialPortException ex) {
+            Logger.getLogger(Serial.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.print(Data);
+        return Data;
+    }
     
     /*
      * In this class must implement the method serialEvent, through it we learn about 
@@ -97,51 +107,44 @@ public class Serial {
      * status lines CTS and DSR
      */
     class SerialPortReader implements SerialPortEventListener {
-
+        String data = "";
+        int i =0;
         @Override
         public void serialEvent(SerialPortEvent event) {
             
-            String data = "";
+            
             
             if(event.isRXCHAR()){//If data is available
-                if(event.getEventValue() == 10){//Check bytes count in the input buffer
+                if(true){//Check bytes count in the input buffer
                     //Read data, if 10 bytes available 
                     try {
-                        byte buffer[] = serialPort.readBytes(10);
-                        readSerialData = Arrays.toString(buffer);
+                        
+                        data = serialPort.readString(1);
+                        readSerialData += data;
+                        
+                        if(!data.equals("\n")){
+                            bufferFull = false;
+                        }else{
+                            if(config.modbus_mode){
+                                
+                            }
+                            bufferFull = true;
+                            Thread.sleep(500);
+                            readSerialData = "";
+                        }
+                        
+                        
                     }
                     catch (SerialPortException ex) {
                         System.out.println(ex);
                     } catch (jssc.SerialPortException ex) {
                         Logger.getLogger(Serial.class.getName()).log(Level.SEVERE, null, ex);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Serial.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
-                if(!data.equals("")){
-                    System.out.println(readSerialData);
-                    if(config.transmit_mode == true){
-                        tcp.startServer(readSerialData); // send data to tcp
-                    }else{
-                        
-                    }
-                    
-                }
             }
-            else if(event.isCTS()){//If CTS line has changed state
-                if(event.getEventValue() == 1){//If line is ON
-                    System.out.println("CTS - ON");
-                }
-                else {
-                    System.out.println("CTS - OFF");
-                }
-            }
-            else if(event.isDSR()){///If DSR line has changed state
-                if(event.getEventValue() == 1){//If line is ON
-                    System.out.println("DSR - ON");
-                }
-                else {
-                    System.out.println("DSR - OFF");
-                }
-            }
+          
         }
     }
 

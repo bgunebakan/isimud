@@ -17,6 +17,14 @@
  */
 package isimud;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+
 /**
  *
  * @author gunebakan
@@ -26,11 +34,25 @@ public class Main {
     /**
      * @param args the command line arguments
      */
+    
+    Config config = new Config();
+    
+    
+    
+    
+    
     public static void main(String[] args) throws Exception {
         new Cli(args).parse();
-        //Tcp tcp = new Tcp();
+        
+        //tcp.startServer("123");
         //tcp.sendPost("http://ufakisler.net","lang=eng");
+        
+        
+        
         
     }
     
 }
+
+
+

@@ -37,10 +37,9 @@ public class Config {
     String serial_port = "";
     
     String server_add = "";
-    String server_port = "";
+    int server_port;
     
     boolean transmit_mode;
-    
     boolean modbus_mode;
 
     Properties prop = new Properties();
@@ -48,6 +47,7 @@ public class Config {
     public Config(){
         try {
             prop.load(new FileInputStream("system.conf"));
+            
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
             
@@ -56,7 +56,7 @@ public class Config {
         serial_port = prop.getProperty("serial_port");
         
         server_add = prop.getProperty("server_add");
-        server_port = prop.getProperty("server_port");
+        server_port = Integer.valueOf(prop.getProperty("server_port"));
         transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
         
         
@@ -72,13 +72,13 @@ public class Config {
                 prop.setProperty("serial_port",serial_port);
                 
                 prop.setProperty("server_add",server_add);
-                prop.setProperty("server_port",server_port);
+                prop.setProperty("server_port",String.valueOf(server_port));
                 prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
                 
                 prop.setProperty("modbus_mode",String.valueOf(modbus_mode));
              
     		//save properties to project root folder
-    		prop.store(new FileOutputStream("config.properties"), null);
+    		prop.store(new FileOutputStream("system.conf"), null);
  
             } catch (IOException ex) {
                 System.out.println(ex);

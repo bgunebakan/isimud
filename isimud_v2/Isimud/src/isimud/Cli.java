@@ -132,26 +132,28 @@ public class Cli {
             }else if (cmd.hasOption("T")){
     
                 String serverAdd;
-                String serverPort;
+                int serverPort;
                 
                 if(cmd.getOptionValue("T").equals("1")){
                     System.out.println("server mode...");
-                    serverPort = cmd.getOptionValue("P");
+                    serverPort = Integer.valueOf(cmd.getOptionValue("P"));
                     
-                    config.serial_port = serverPort;
+                    config.server_port = serverPort;
                     config.Update();
                     serial.readSerial();
                     
                 }else{
                     System.out.println("client mode...");
                     serverAdd = cmd.getOptionValue("S");
-                    serverPort = cmd.getOptionValue("P");
+                    serverPort = Integer.valueOf(cmd.getOptionValue("P"));
                     
                     config.server_add = serverAdd;
-                    config.serial_port = serverPort;
+                    config.server_port = serverPort;
                     config.Update();
                     
-                    serial.readSerial();
+                    
+                    tcpThread clientThread = new tcpThread();
+                    clientThread.start();
                     
                 }
     
