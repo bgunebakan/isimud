@@ -219,7 +219,7 @@ public void initModbus(String[] args){
        try {
         Socket skt = new Socket(config.server_add, Integer.valueOf(config.serial_port));
         BufferedReader in = new BufferedReader(new
-            
+        
         InputStreamReader(skt.getInputStream()));
         System.out.print("Received string: '");
 
@@ -308,49 +308,6 @@ public void initModbus(String[] args){
             Logger.getLogger(Tcp.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-   }
-
-}
-
-class tcpThread implements Runnable {
-   private Thread t;
-   
-   Serial serial = new Serial();
-   Tcp tcp = new Tcp();
-   
-   tcpThread(){
-       
-       System.out.println("tcp connection thread starting...");
-       tcp.initTcp();
-       serial.initSerial();
-       serial.readSerial();
-   }
-   
-   
-   @Override
-   public void run() {
-      System.out.println("tcp connection running..");
-      try {
-          while(true){
-            if(serial.bufferFull){
-                //tcp.sendtcp(serial.readSerialData);
-            }
-            Thread.sleep(500);
-          }
-     } catch (InterruptedException e) {
-         System.out.println("tcp connection thread interrupted.");
-     }
-     System.out.println("tcp thread exiting...");
-   }
-   
-   public void start ()
-   {
-      System.out.println("Starting tcp connection.");
-      if (t == null)
-      {
-         t = new Thread (this);
-         t.start ();
-      }
    }
 
 }

@@ -140,7 +140,9 @@ public class Cli {
                     
                     config.server_port = serverPort;
                     config.Update();
-                    serial.readSerial();
+                    
+                    tcpThread clientThread = new tcpThread();
+                    clientThread.start();
                     
                 }else{
                     System.out.println("client mode...");
@@ -154,6 +156,7 @@ public class Cli {
                     
                     tcpThread clientThread = new tcpThread();
                     clientThread.start();
+                    
                     
                 }
     

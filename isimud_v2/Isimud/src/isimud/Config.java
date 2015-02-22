@@ -35,12 +35,15 @@ import java.util.logging.Logger;
  */
 public class Config {
     String serial_port = "";
+    int serial_baud;
     
     String server_add = "";
     int server_port;
     
+    
     boolean transmit_mode;
     boolean modbus_mode;
+    boolean server_mode;
 
     Properties prop = new Properties();
     
@@ -54,14 +57,14 @@ public class Config {
         }
         
         serial_port = prop.getProperty("serial_port");
+        serial_baud = Integer.valueOf(prop.getProperty("serial_baud"));
         
         server_add = prop.getProperty("server_add");
         server_port = Integer.valueOf(prop.getProperty("server_port"));
-        transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
-        
         
         modbus_mode = Boolean.valueOf(prop.getProperty("modbus_mode"));
-        
+        server_mode = Boolean.valueOf(prop.getProperty("server_mode"));
+        transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
     }
     public void Update(){
         
@@ -70,14 +73,15 @@ public class Config {
     		
                 //set the properties value  
                 prop.setProperty("serial_port",serial_port);
+                prop.setProperty("serial_baud",String.valueOf(serial_baud));
                 
                 prop.setProperty("server_add",server_add);
                 prop.setProperty("server_port",String.valueOf(server_port));
-                prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
                 
                 prop.setProperty("modbus_mode",String.valueOf(modbus_mode));
-             
-    		//save properties to project root folder
+                prop.setProperty("server_mode",String.valueOf(server_mode));
+    		prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
+                //save properties to project root folder
     		prop.store(new FileOutputStream("system.conf"), null);
  
             } catch (IOException ex) {
