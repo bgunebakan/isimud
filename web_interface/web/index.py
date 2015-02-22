@@ -12,7 +12,7 @@ import os
 #localip = "192.168.128.100"
 
 networkInterface = "lo"
-localNetworkInterface = "eth0"
+localNetworkInterface = "wlan0"
 #satipaddress = "85.115.12.57"
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
 
@@ -67,7 +67,7 @@ def restart():
 def serverConnect():
 
     if request.method == 'POST':
-            
+
 	if request.form["workingmode"] == 'Client':
 	    print "client"
 	    serverIP = request.form["Serveripaddress"]

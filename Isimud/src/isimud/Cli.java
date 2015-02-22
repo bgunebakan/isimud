@@ -50,10 +50,10 @@ public class Cli {
         options.addOption("s", "start", false, "start communication");
         options.addOption("k", "kill", false, "stop communication");
         options.addOption("c", "change-ip", true, "<ip-address>  change local ip number with following");
-        options.addOption("p", "send-port", true, "<ip-address>  send port with bit value");
+        options.addOption("p", "send-port", false, "<-S ip-address>  send port with bit value");
         options.addOption("m", "modbus", true, "<1/0> change serial mode");
         options.addOption("g", "get-ports", false, "get analog and digital ports");
-        options.addOption("w", "web", false, "start web server");
+        options.addOption("w", "web", true, "start(1)/stop(0) web server");
         
         options.addOption("T", "transmit-mode", true, "<1 Server/0 Client> transmitter mode Server or Client");
         options.addOption("S", "server-ip", true, "Server Address");
@@ -98,7 +98,7 @@ public class Cli {
     
                 System.out.println("port sending...");
                 //Gpio.portSending(cmd.getOptionValue("p"));
-                comm.sendPost(cmd.getOptionValue("c"), gpio.getPorts());
+                comm.sendPost(cmd.getOptionValue("S"), gpio.getPorts());
         
             }else if (cmd.hasOption("g")){
         
@@ -107,12 +107,14 @@ public class Cli {
     
             }else if (cmd.hasOption("w")){
     
-                System.out.println("start web interface");
+                
         
      
                 if(cmd.getOptionValue("w").equals("1")){
+                    System.out.println("start web interface");
                     Process p = Runtime.getRuntime().exec("nohup python /root/isimud/web_interface/web/index.py > /root/web_interface.log 2>&1 </dev/null &");
                 }else{
+                    System.out.println("stop web interface");
                     Process p = Runtime.getRuntime().exec("killall python");
                 }
             }else if (cmd.hasOption("m")){
@@ -137,6 +139,7 @@ public class Cli {
                     serverPort = Integer.valueOf(cmd.getOptionValue("P"));
                     
                     config.server_port = serverPort;
+                    config.server_mode = true;
                     config.Update();
                     
                     tcpThread clientThread = new tcpThread();
@@ -149,6 +152,7 @@ public class Cli {
                     
                     config.server_add = serverAdd;
                     config.server_port = serverPort;
+                    config.server_mode = false;
                     config.Update();
                     
                     
@@ -164,7 +168,7 @@ public class Cli {
     
             }else {
     
-                //log.log(Level.SEVERE, "MIssing v option");
+                log.log(Level.SEVERE, "MIssing v option");
                 help();
     
             }

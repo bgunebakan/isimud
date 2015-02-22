@@ -17,6 +17,7 @@
  */
 package isimud;
 
+import static isimud.Comm.serialPort;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -62,10 +63,9 @@ public class Comm {
     OutputStream outToServer;
     
     /////////////////////////////////////TCP/////////////////////////////////
-     public void initTcp(){
+     
+    public void initTcp(){
         
-    
-         
         if(server_mode){
             
             try {
@@ -123,28 +123,29 @@ public class Comm {
     
     }
     
-     public void closeTcp(){
-         if (client != null) {
-        try {
+    public void closeTcp(){
+         
+        if (client != null) {
+        
+            try {
             
-            out.flush();
+                out.flush();
             
-            out.close();
-            in.close();
-            client.close();
+                out.close();
+                in.close();
+                client.close();
             
-        } catch (IOException e) {
-            Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, e);
+            } catch (IOException e) {
+                Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, e);
+            }
         }
+         
     }
-         
-         
-         
-     }
     
     
     /////////////////////////////////////SERIAL///////////////////////////////
     public void initSerial(){
+    
         serialPort = new SerialPort(serial_port);
         
         try {
@@ -157,11 +158,14 @@ public class Comm {
         }
 
     }
-        public void writeSerial(byte[] data){
         
+    public void writeSerial(byte[] data){
+        
+    
         try {
-            System.out.println(Arrays.toString(data));
+            System.out.println("w"+Arrays.toString(data));
             serialPort.writeBytes(data);
+            data = null;
             
             
         } catch (jssc.SerialPortException ex) {
@@ -170,7 +174,8 @@ public class Comm {
         
     }
         
-     public void readSerial(){
+        
+    public void readSerial(){
         
         int mask = SerialPort.MASK_RXCHAR;// + SerialPort.MASK_CTS + SerialPort.MASK_DSR;//Prepare mask
         
@@ -185,7 +190,9 @@ public class Comm {
     
     }
     
-        class SerialPortReader implements SerialPortEventListener {
+        
+    class SerialPortReader implements SerialPortEventListener {
+    
         String data = "";
         int i =0;
         
@@ -198,30 +205,18 @@ public class Comm {
                     try {
                         readSerialData = null;
                         readSerialData = serialPort.readBytes(32);
-                        //readSerialData += data;
-                        
-                        //if(!data.equals("\n")){
-                        //    bufferFull = false;
-                        //}else{
+                       
                             if(modbus_mode){
                                 
+                            }else{
+                                System.out.println("s"+Arrays.toString(readSerialData));
+                                out.write(readSerialData);
+                                
                             }
-                            System.out.print(Arrays.toString(readSerialData));
-                            out.write(readSerialData);
-                            out.write(readSerialData, 0, readSerialData.length);
-                            //bufferFull = true;
-                            //Thread.sleep(500);
-                            //readSerialData = null;
-                        //}
-                        
-                        
+                          
                     }
-                    catch (SerialPortException ex) {
+                    catch (SerialPortException | IOException ex) {
                         Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, ex);
-                    } catch (IOException ex) {
-                        
-                        Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, ex);
-                        
                     }
                 
             }
@@ -234,115 +229,120 @@ public class Comm {
     
 /////////////extra methods
 
-        public void sendPost(String url,String urlParameters) throws Exception {
-
-            URL obj = new URL(url);
-            
-            String USER_AGENT = "Mozilla/5.0";
-            
-            HttpURLConnection con = (HttpURLConnection) obj.openConnection();
-            //add reuqest header
-            con.setRequestMethod("POST");
-            con.setRequestProperty("User-Agent", USER_AGENT);
-            con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-            //String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
-            // Send post request
-            con.setDoOutput(true);
-            DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-            wr.writeBytes(urlParameters);
-            wr.flush();
-            wr.close();
-            int responseCode = con.getResponseCode();
-            
-            System.out.println("\nSending 'POST' request to URL : " + url);
-            System.out.println("Post parameters : " + urlParameters);
-            System.out.println("Response Code : " + responseCode);
-            BufferedReader in = new BufferedReader(
-            new InputStreamReader(con.getInputStream()));
-            String inputLine;
-            StringBuffer response = new StringBuffer();
-            
-            while ((inputLine = in.readLine()) != null) {
-                response.append(inputLine);
-            }
         
-            in.close();
-            //print result
-            System.out.println(response.toString());
+    public void sendPost(String url,String urlParameters) throws Exception {
 
+            
+        URL obj = new URL(url);
+            
+        String USER_AGENT = "Mozilla/5.0";
+            
+        HttpURLConnection con = (HttpURLConnection) obj.openConnection();
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+        //String urlParameters = "sn=C02G8416DRJM&cn=&locale=&caller=&num=12345";
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+        int responseCode = con.getResponseCode();
+            
+        System.out.println("\nSending 'POST' request to URL : " + url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+        BufferedReader in = new BufferedReader(
+        new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+            
+        
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);    
         }
+        
+            
+        in.close();
+        //print result
+        System.out.println(response.toString());
+    
+    }
+
+    public void cleanBuff(byte[] buff){
+       
+       for(int i=0;i<buff.length;i++){
+           buff[i] = 0;
+       }
+       
+    }
 
 }//end Comm class
 
 
 class tcpThread implements Runnable {
-   private Thread t;
    
-   Comm comm = new Comm();
-   byte[] buff = new byte[32];
+    private Thread t;
    
-   tcpThread(){
+    Comm comm = new Comm();
+    byte[] buff = new byte[32];
+   
+    tcpThread(){
        
-       System.out.println("tcp connection thread starting...");
-       comm.initTcp();
-       comm.initSerial();
-       comm.readSerial();
-   }
+        System.out.println("tcp connection thread starting...");
+        comm.initTcp();
+        comm.initSerial();
+        comm.readSerial();
+    } 
    
    
-   @Override
-   public void run() {
-      System.out.println("tcp connection running..");
+   
+    @Override
+    public void run() {
+    
+        System.out.println("tcp connection running..");
       
+        while(true){
+        
+            try {
+             
+                while ((comm.in.read(buff)) > 0) {
+                  
+                    try {
+                  
+                        serialPort.writeBytes(buff);
+                        System.out.println("w"+Arrays.toString(buff));
+                        comm.cleanBuff(buff);
+                    } catch (SerialPortException ex) {              
+                        Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);                  
+                    }
+              
+                }
+            
+            } catch (IOException ex) {
+              
+                Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
       
-      while(true){
-          
-          
-          //int read = -1;
-          //long totalRead = 0;
-          //buff = null;
-          
-          try {
-              //if(!comm.readSerialData.equals("")){
-              // comm.out.writeUTF(comm.readSerialData);
-              //}
-              
-              while ((comm.in.read(buff)) > 0) {
-                  
-                  //comm.out.write(buff, 0, read);
-                  comm.writeSerial(buff);
-                  
-                  
-                  
-                  
-                  //System.out.println("readed Byte " + new String(buff));
-                  
-                  //totalRead += read;
-                  
-                  //if (totalRead % 100 * 1024 == 0) {
-                  
-                  //System.out.printf("%d bytes read\n", totalRead);
-                  
-                  //}
-              }
-              buff = null;
-              
-          } catch (IOException ex) {
-              Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);
-          }
-      }
-     //System.out.println("tcp thread exiting...");
-   }
+        }
+     
    
-   public void start ()
-   {
-      System.out.println("Starting tcp connection.");
-      if (t == null)
-      {
-         t = new Thread (this);
-         t.start ();
-      }
-   }
+    }
+   
+   
+    public void start (){
+        
+      
+        System.out.println("Starting tcp connection.");
+      
+        if (t == null){
+            
+            t = new Thread (this);
+            t.start ();
+        }
+    }
 
 }
 
