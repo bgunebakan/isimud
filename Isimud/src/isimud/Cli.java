@@ -36,9 +36,7 @@ public class Cli {
     
     Config config = new Config();
     Gpio gpio = new Gpio();
-    Tcp tcp = new Tcp();
-    Serial serial = new Serial();
-    
+    Comm comm = new Comm();
     //public final GpioController gpio = GpioFactory.getInstance();
 
     //GpioPinDigitalOutput satReset = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18,"satReset",PinState.LOW);
@@ -100,7 +98,7 @@ public class Cli {
     
                 System.out.println("port sending...");
                 //Gpio.portSending(cmd.getOptionValue("p"));
-                tcp.sendPost(cmd.getOptionValue("c"), gpio.getPorts());
+                comm.sendPost(cmd.getOptionValue("c"), gpio.getPorts());
         
             }else if (cmd.hasOption("g")){
         
