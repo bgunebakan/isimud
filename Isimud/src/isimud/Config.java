@@ -122,9 +122,9 @@ public class Config {
     }
     
     
-    public void changeIp(String new_ip){
+    public void changeIp(String new_ip,String old_ip){
         
-        String old_ip = getIp();
+        //String old_ip = getIp();
         
         
         

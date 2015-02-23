@@ -59,6 +59,8 @@ public class Cli {
         options.addOption("S", "server-ip", true, "Server Address");
         options.addOption("P", "server-port", true, "Server port");
         
+        options.addOption("O", "old-ip", true, "<ip-address> Old ip address");
+        
         options.addOption("h", "help", false, "show help.");
 
     }
@@ -75,14 +77,10 @@ public class Cli {
             if (cmd.hasOption("s")){
         
                 System.out.println("starting Modem...");
-                gpio.initGpio();
-                Process saton = Runtime.getRuntime().exec("echo '1' > /sys/class/gpio/gpio0/value");
-                Process satreset = Runtime.getRuntime().exec("echo '0' > /sys/class/gpio/gpio2/value");
-                Process satled = Runtime.getRuntime().exec("echo '1' > /sys/class/gpio/gpio15/value");
-      //          satOn.high();
-                
-                Process p = Runtime.getRuntime().exec("pppd call Thuraya &");
-                System.out.println(p);
+               // gpio.initGpio();
+                // commandex = new SystemCommandExecutor("ls");
+                Process p = Runtime.getRuntime().exec("sudo pppd call Thuraya");
+                //System.out.println(p);
     
             }else if (cmd.hasOption("k")){
     
@@ -90,10 +88,14 @@ public class Cli {
                 Process p = Runtime.getRuntime().exec("killall pppd");
     
             }else if (cmd.hasOption("c")){
-        
-                System.out.println("IP changing with " + cmd.getOptionValue("c"));
-                config.changeIp(cmd.getOptionValue("c"));
-        
+                if(cmd.hasOption("O")){
+                    System.out.println("IP changing with " + cmd.getOptionValue("c") +"old:"+cmd.getOptionValue("O"));
+                    config.changeIp(cmd.getOptionValue("c"),cmd.getOptionValue("O"));
+            
+                }else{
+                    System.out.println("use -O option with old ip");
+                }
+                
             }else if (cmd.hasOption("p")){
     
                 System.out.println("port sending...");
