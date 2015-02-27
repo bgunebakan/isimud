@@ -1,0 +1,41 @@
+#/usr/local/bin/isumud
+
+#!/bin/bash -l
+#$ -S /bin/bash
+#$ -N $2
+cd /opt/isimud
+java -jar Isimud.jar $@
+
+
+#/usr/local/bin/startThuraya
+#!/bin/bash
+# Start Thuraya module
+#
+#
+echo "starting" > /root/Thuraya.log
+
+THURAYA_ON="/sys/class/gpio/gpio17/value"
+THURAYA_RESET="/sys/class/gpio/gpio27/value"
+
+echo "17" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio17/direction
+
+echo "27" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio27/direction
+
+echo "Thuraya module is starting..."
+
+echo "1" > $THURAYA_ON
+sleep 2
+echo "1" > $THURAYA_RESET
+sleep 120
+
+#echo "0" > $THURAYA_RESET
+#echo "1" > $THURAYA_ON
+
+#echo "run isimud -w" > /root/Thuraya.log
+sudo isimud -w 1 &
+
+sleep 2
+
+sudo pppd call Thuraya &
