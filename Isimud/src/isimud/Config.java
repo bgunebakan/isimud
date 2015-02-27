@@ -17,9 +17,14 @@
 
 package isimud;
 
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -40,16 +45,22 @@ public class Config {
     String server_add = "";
     int server_port;
     
+    String local_ip = "";
+    String sat_ip = "";
     
     boolean transmit_mode;
     boolean modbus_mode;
     boolean server_mode;
+    
+    PrintWriter log_file;
+    
 
     Properties prop = new Properties();
     
     public Config(){
         try {
             prop.load(new FileInputStream("system.conf"));
+            
             
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
@@ -61,6 +72,9 @@ public class Config {
         
         server_add = prop.getProperty("server_add");
         server_port = Integer.valueOf(prop.getProperty("server_port"));
+        
+        local_ip = prop.getProperty("local_ip");
+        sat_ip = prop.getProperty("sat_ip");
         
         modbus_mode = Boolean.valueOf(prop.getProperty("modbus_mode"));
         server_mode = Boolean.valueOf(prop.getProperty("server_mode"));
@@ -77,6 +91,9 @@ public class Config {
                 
                 prop.setProperty("server_add",server_add);
                 prop.setProperty("server_port",String.valueOf(server_port));
+                
+                prop.setProperty("local_ip",local_ip);
+                prop.setProperty("sat_ip",sat_ip);
                 
                 prop.setProperty("modbus_mode",String.valueOf(modbus_mode));
                 prop.setProperty("server_mode",String.valueOf(server_mode));
@@ -144,6 +161,29 @@ public class Config {
         }
         
         
+        
+    }
+    public void writeLog(String log){
+        
+        try {    
+            log_file = new PrintWriter(new BufferedWriter(new FileWriter("system.log", true)));
+        } catch (IOException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        log_file.println("- " + log);
+        log_file.close();
+        
+    }
+    public void cleanLog(){
+        try {
+            log_file = new PrintWriter("system.log","UTF-8");
+        } catch (FileNotFoundException | UnsupportedEncodingException ex) {
+            Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        log_file.println("");
+        log_file.close();
         
     }
 }

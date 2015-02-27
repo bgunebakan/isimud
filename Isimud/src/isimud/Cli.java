@@ -55,6 +55,8 @@ public class Cli {
         options.addOption("g", "get-ports", false, "get analog and digital ports");
         options.addOption("w", "web", true, "start(1)/stop(0) web server");
         
+        options.addOption("b", "serial-baud", true, "<baud> Baudrate of serial");
+        
         options.addOption("T", "transmit-mode", true, "<1 Server/0 Client> transmitter mode Server or Client");
         options.addOption("S", "server-ip", true, "Server Address");
         options.addOption("P", "server-port", true, "Server port");
@@ -109,9 +111,6 @@ public class Cli {
     
             }else if (cmd.hasOption("w")){
     
-                
-        
-     
                 if(cmd.getOptionValue("w").equals("1")){
                     System.out.println("start web interface");
                     Process p = Runtime.getRuntime().exec("nohup python /root/isimud/web_interface/web/index.py > /root/web_interface.log 2>&1 </dev/null &");
@@ -163,6 +162,14 @@ public class Cli {
                     
                     
                 }
+    
+            }else if (cmd.hasOption("b")){
+        
+                config.serial_baud = Integer.valueOf(cmd.getOptionValue("b"));
+                System.out.println("Serial baud changed with " + config.serial_baud);
+                config.writeLog("Serial baud changed with " + config.serial_baud);
+                
+                config.Update();
     
             }else if (cmd.hasOption("h")){
     
