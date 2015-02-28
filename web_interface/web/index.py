@@ -11,12 +11,18 @@ import os
 import ConfigParser
 import StringIO
 
-satInterface = "ppp0"
-localNetworkInterface = "wlan0"
+#satInterface = "ppp0"
+#localNetworkInterface = "wlan0"
 
 config_file = '/home/gunebakan/isimud/Isimud/system.conf'
 log_file = '/home/gunebakan/isimud/Isimud/system.log'
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
+logs = ""
+sat_ip = ""
+local_ip = ""
+serial_baud = ""
+port_values = ""
+
 
 app = Flask(__name__)
 
@@ -28,39 +34,7 @@ def index():
     if request.method == 'POST':
         return request.form['name']
     else:
-
-        #interfaceList = ni.interfaces() #create interface list
-
-        #if satInterface in interfaceList: #find interface in list
-        #    ni.ifaddresses(satInterface) #get ip
-        #    satip = ni.ifaddresses(satInterface)[2][0]['addr']
-        #else:
-        #    satip = 'no connection interface'
-
-        #localip = ni.ifaddresses(localNetworkInterface)[2][0]['addr']
-
-
-        #p1 = subprocess.Popen(['isimud', '-g'], stdout=subprocess.PIPE,
-        #                                                    stderr=subprocess.PIPE)
-        #portvalues, err = p1.communicate()
-        #print err
-        props = read_properties_file(config_file)
-
-        # and if you deal with optional settings, use:
-        sat_ip = props.get('sat_ip', None)
-        local_ip = props.get('local_ip', None)
-        serial_baud = props.get('serial_baud', None)
-        port_values = 'd0=1;d1=0'
-
-        logs = ""
-        fo = open(log_file,"r")
-        logs_raw = fo.read()
-
-
-        for line in logs_raw.split('\n'):
-            logs += flask.Markup.escape(line) + flask.Markup('<br />')
-
-
+        readData()
         return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
                                             portvalues=port_values,serialbaud=serial_baud,
                                             logs=logs)
@@ -69,64 +43,77 @@ def index():
 @app.route('/disconnect', methods=['GET', 'POST'])
 def disconnect():
 
-    args = "killall pppd &"
-    os.system(args)
+    if request.method == 'POST':
+        args = "killall pppd &"
+        print args
+        os.system(args)
 
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 @app.route('/connect', methods=['GET', 'POST'])
 def connect():
+    if request.method == 'POST':
+        args = "pppd call Thuraya &"
+        print args
+        os.system(args)
 
-    args = "pppd call Thuraya &"
-    os.system(args)
-
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 
 @app.route('/restart', methods=['GET', 'POST'])
 def restart():
-    p = subprocess.Popen(['sudo', 'reboot'], stdout=subprocess.PIPE,
+    if request.method == 'POST':
+        p = subprocess.Popen(['sudo', 'reboot'], stdout=subprocess.PIPE,
                                        stderr=subprocess.PIPE)
 
-    out, err = p.communicate()
+        out, err = p.communicate()
+
     return "System going to restart now.Please refresh your page after device has started."
 
 @app.route('/cutConnections', methods=['GET', 'POST'])
 def cutConnections():
+    if request.method == 'POST':
+        args = "killall java"
+        print args
+        os.system(args)
 
-    args = "killall java &"
-    os.system(args)
-
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 
 @app.route('/serverConnect', methods=['GET', 'POST'])
 def serverConnect():
 
-    if request.method == 'POST':
 
-	if request.form["workingmode"] == 'Client':
-	    print "client"
-	    serverIP = request.form["Serveripaddress"]
-            serverPort = request.form["Serverport"]
-
-            os.system("killall isimud.jar")
-
-            args = "isimud -T 0 -S "+serverIP+" -P " +serverPort + " &"
-            print args
-            os.system(args)
-	else:
-	    print "server"
-            os.system("killall isimud.jar")
-            clientPort = request.form["Serverport"]
-
-            args = "isimud -T 1 -P " + clientPort + " &"
-
-            print args
-            os.system(args)
+    if request.form["workingmode"] == 'Client':
+        print "client"
+        serverIP = request.form["Serveripaddress"]
+        serverPort = request.form["Serverport"]
+        os.system("killall isimud.jar")
+        args = "isimud -T 0 -S "+serverIP+" -P " +serverPort + " &"
+        print args
+        os.system(args)
+    else:
+        print "server"
+        os.system("killall isimud.jar")
+        clientPort = request.form["Serverport"]
+        args = "isimud -T 1 -P " + clientPort + " &"
+        print args
+        os.system(args)
 
 
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 @app.route('/saveSettings', methods=['GET','POST'])
 def saveSettings():
@@ -135,9 +122,13 @@ def saveSettings():
         Localip = request.form['Localipaddress']
         #print Localip
         args = "isimud -c " + Localip
+        print args
         os.system(args)
 
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 @app.route('/saveSerial', methods=['GET','POST'])
 def saveSerial():
@@ -146,9 +137,13 @@ def saveSerial():
         serialBaud = request.form['serialbaud']
         #print Localip
         args = "isimud -b " + serialBaud
+        print args
         os.system(args)
 
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 @app.route('/modbusMode', methods=['GET','POST'])
 def modbusMode():
@@ -158,14 +153,16 @@ def modbusMode():
         #print Localip
         if ModbusMode == 'On':
             args = "isimud -m 1"
-	    print args
-            os.system(args)
         else:
             args = "isimud -m 0"
-	    print args
-            os.system(args)
 
-    return render_template('index.html')
+	    print args
+        os.system(args)
+
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
 @app.route('/sendPortValues', methods=['GET', 'POST'])
 def sendPortValues():
@@ -180,8 +177,35 @@ def sendPortValues():
         print args
         os.system(args)
 
-    return render_template('index.html')
+    readData()
+    return render_template('index.html',localip=local_ip,satipaddress=sat_ip,
+                                        portvalues=port_values,serialbaud=serial_baud,
+                                        logs=logs)
 
+#read main page variables
+def readData():
+    global sat_ip
+    global local_ip
+    global serial_baud
+    global port_values
+
+    global logs
+
+    props = read_properties_file(config_file)
+
+    # and if you deal with optional settings, use:
+    sat_ip = props.get('sat_ip', None)
+    local_ip = props.get('local_ip', None)
+    serial_baud = props.get('serial_baud', None)
+    port_values = 'd0=1;d1=0'
+
+
+    fo = open(log_file,"r")
+    logs_raw = fo.read()
+
+
+    for line in logs_raw.split('\n'):
+        logs += flask.Markup.escape(line) + flask.Markup('<br />')
 
 ## read config file
 

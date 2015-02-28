@@ -287,7 +287,9 @@ class tcpThread implements Runnable {
     private Thread t;
    
     Comm comm = new Comm();
+    Config config = new Config();
     byte[] buff = new byte[32];
+    
    
     tcpThread(){
        
@@ -311,10 +313,14 @@ class tcpThread implements Runnable {
                 while ((comm.in.read(buff)) > 0) {
                   
                     try {
-                  
-                        serialPort.writeBytes(buff);
-                        System.out.println("w"+Arrays.toString(buff));
-                        comm.cleanBuff(buff);
+                        if(config.modbus_mode){
+                            
+                        }else{
+                            serialPort.writeBytes(buff);
+                            System.out.println("w"+Arrays.toString(buff));
+                            comm.cleanBuff(buff);
+                        }
+                        
                     } catch (SerialPortException ex) {              
                         Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);                  
                     }
