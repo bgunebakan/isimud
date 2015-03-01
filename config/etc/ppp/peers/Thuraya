@@ -1,0 +1,22 @@
+/dev/ttyAMA0 
+crtscts 38400
+
+connect 'chat -v -f /etc/chatscripts/Thuraya'
+
+disconnect 'chat -v ABORT "BUSY" "" "\K" "" "+++ATH0"'
+
+#logfile "/root/Thuraya.log"
+
+debug dump
+noipdefault
+ipcp-accept-remote
+ipcp-max-configure 600
+ipcp-max-failure 20
+usepeerdns
+maxfail 40
+persist
+holdoff 0
+noccp
+novjccomp
+noauth
+lcp-echo-interval 0

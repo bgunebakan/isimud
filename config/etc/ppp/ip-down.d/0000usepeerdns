@@ -1,0 +1,33 @@
+#!/bin/sh
+
+ACTUALCONF=/etc/resolv.conf
+
+PPPCONF=/etc/ppp/resolv.conf
+
+rm $PPPCONF.$1
+
+if [ ! -f $PPPCONF.ppp* ] ; then
+
+        if [ -f $ACTUALCONF.ppporig ] ; then
+
+                mv $ACTUALCONF.ppporig $ACTUALCONF
+
+        fi
+
+else
+
+        rm $ACTUALCONF
+
+        tail $PPPCONF.ppp* | grep nameserver > $ACTUALCONF
+
+        PPP_EXT="`ifconfig | grep 'ppp' | grep -v $1 |cut -d: -f1| awk '{ print $1}'`"
+
+        EXTIP="`ifconfig $PPP_EXT | awk /$PPP_EXT/'{next}//{split($0,a,":");split(a[2],a," ");print a[1];exit}'`"
+
+        echo "$EXTIP" >> /etc/ipexterne.log
+
+        ip route del default
+
+        ip route add default scope global nexthop via $EXTIP dev $PPP_EXT
+
+fi

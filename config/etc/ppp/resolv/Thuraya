@@ -1,0 +1,3 @@
+# resolv.conf created by pppconfig for Thuraya
+nameserver 85.115.64.64
+nameserver 85.115.64.65

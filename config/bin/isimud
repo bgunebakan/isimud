@@ -1,0 +1,5 @@
+#!/bin/bash -l
+#$ -S /bin/bash
+#$ -N $2
+cd /opt/isimud
+java -jar Isimud.jar $@

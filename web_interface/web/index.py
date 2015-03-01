@@ -14,8 +14,8 @@ import StringIO
 #satInterface = "ppp0"
 #localNetworkInterface = "wlan0"
 
-config_file = '/home/gunebakan/isimud/Isimud/system.conf'
-log_file = '/home/gunebakan/isimud/Isimud/system.log'
+config_file = '/opt/isimud/system.conf'
+log_file = '/opt/isimud/log/system.log'
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
 logs = ""
 sat_ip = ""
@@ -121,7 +121,7 @@ def saveSettings():
     if request.method == 'POST':
         Localip = request.form['Localipaddress']
         #print Localip
-        args = "isimud -c " + Localip
+        args = "isimud -c " + Localip + " -O " + local_ip
         print args
         os.system(args)
 
@@ -191,13 +191,20 @@ def readData():
 
     global logs
 
+    logs_raw = ""
+    logs = ""
+
     props = read_properties_file(config_file)
 
     # and if you deal with optional settings, use:
     sat_ip = props.get('sat_ip', None)
     local_ip = props.get('local_ip', None)
     serial_baud = props.get('serial_baud', None)
-    port_values = 'd0=1;d1=0'
+
+    args = "isimud -g"
+    os.system(args)
+
+    port_values = props.get('port_values', None)
 
 
     fo = open(log_file,"r")

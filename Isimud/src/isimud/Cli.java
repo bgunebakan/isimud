@@ -79,19 +79,20 @@ public class Cli {
             if (cmd.hasOption("s")){
         
                 System.out.println("starting Modem...");
-               // gpio.initGpio();
-                // commandex = new SystemCommandExecutor("ls");
+                config.writeLog("Sattellite connecting...");
                 Process p = Runtime.getRuntime().exec("sudo pppd call Thuraya");
-                //System.out.println(p);
+               
     
             }else if (cmd.hasOption("k")){
     
                 System.out.println("Modem has stopped.");
+                config.writeLog("Sattellite connection stopped.");
                 Process p = Runtime.getRuntime().exec("killall pppd");
     
             }else if (cmd.hasOption("c")){
                 if(cmd.hasOption("O")){
-                    System.out.println("IP changing with " + cmd.getOptionValue("c") +"old:"+cmd.getOptionValue("O"));
+                    System.out.println("IP changing with " + cmd.getOptionValue("c") +" old:"+cmd.getOptionValue("O"));
+                    config.writeLog("IP changing with " + cmd.getOptionValue("c") +"old:"+cmd.getOptionValue("O"));
                     config.changeIp(cmd.getOptionValue("c"),cmd.getOptionValue("O"));
             
                 }else{
@@ -101,9 +102,8 @@ public class Cli {
             }else if (cmd.hasOption("p")){
     
                 System.out.println("port sending...");
-                //Gpio.portSending(cmd.getOptionValue("p"));
                 comm.sendPost(cmd.getOptionValue("S"), gpio.getPorts());
-        
+                config.writeLog("Port values sending to" + cmd.getOptionValue("S"));
             }else if (cmd.hasOption("g")){
         
                 
@@ -113,7 +113,8 @@ public class Cli {
     
                 if(cmd.getOptionValue("w").equals("1")){
                     System.out.println("start web interface");
-                    Process p = Runtime.getRuntime().exec("nohup python /root/isimud/web_interface/web/index.py > /root/web_interface.log 2>&1 </dev/null &");
+                    config.cleanLog();
+                    Process p = Runtime.getRuntime().exec("nohup python /opt/isimud/web_interface/web/index.py > /opt/isimud/log/web_interface.log 2>&1 </dev/null &");
                 }else{
                     System.out.println("stop web interface");
                     Process p = Runtime.getRuntime().exec("killall python");
@@ -121,12 +122,13 @@ public class Cli {
             }else if (cmd.hasOption("m")){
     
                 System.out.println("changing modbus mode..");
-        
-     
+                
                 if(cmd.getOptionValue("m").equals("1")){
+                    config.writeLog("Modbus mode is on" );
                     config.modbus_mode = true;
                     config.Update();
                 }else{
+                    config.writeLog("Modbus mode is off" );
                     config.modbus_mode = false;
                     config.Update();
                 }
@@ -139,6 +141,7 @@ public class Cli {
                     System.out.println("server mode...");
                     serverPort = Integer.valueOf(cmd.getOptionValue("P"));
                     
+                    config.writeLog("Server mode @ port: "+ serverPort);
                     config.server_port = serverPort;
                     config.server_mode = true;
                     config.Update();
@@ -150,6 +153,8 @@ public class Cli {
                     System.out.println("client mode...");
                     serverAdd = cmd.getOptionValue("S");
                     serverPort = Integer.valueOf(cmd.getOptionValue("P"));
+                    
+                    config.writeLog("Client mode @ add: "+ serverAdd +":" +serverPort);
                     
                     config.server_add = serverAdd;
                     config.server_port = serverPort;

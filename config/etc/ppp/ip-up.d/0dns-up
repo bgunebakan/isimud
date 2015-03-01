@@ -1,0 +1,39 @@
+#!/bin/sh
+
+PPP_PEERNAME="$6"
+PPP_LOCAL="$4"
+PPP_EXT="`ifconfig | grep 'ppp' | grep -v $1 |cut -d: -f1| awk '{ print $1}'`"
+
+
+
+echo "`ifconfig | grep -c 'ppp'`"
+
+if [ "`ifconfig | grep -c 'ppp'`" = '1' ]; then
+
+        ip route add default scope global nexthop via $PPP_LOCAL dev $1
+
+else
+
+        ip route del default
+
+        EXTIP="`ifconfig $PPP_EXT | awk /$PPP_EXT/'{next}//{split($0,a,":");split(a[2],a," ");print a[1];exit}'`"
+
+
+
+        case $6 in
+
+        Thuraya)
+
+                ip route add default scope global nexthop via $PPP_LOCAL dev $1 weight 1 nexthop via $EXTIP dev $PPP_EXT weight 1;;
+
+        Iridium)
+
+                ip route add default scope global nexthop via $PPP_LOCAL dev $1 weight 1 nexthop via $EXTIP dev $PPP_EXT weight 2;;
+
+        esac
+
+fi
+
+
+
+/etc/userdefined.rules

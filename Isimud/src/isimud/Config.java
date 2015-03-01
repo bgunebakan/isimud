@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2014 gunebakan
+ * Copyright (C) 2014 Bilal Tonga
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -52,6 +52,8 @@ public class Config {
     boolean modbus_mode;
     boolean server_mode;
     
+    String port_values;
+    
     PrintWriter log_file;
     
 
@@ -76,6 +78,8 @@ public class Config {
         local_ip = prop.getProperty("local_ip");
         sat_ip = prop.getProperty("sat_ip");
         
+        port_values = prop.getProperty("port_values");
+        
         modbus_mode = Boolean.valueOf(prop.getProperty("modbus_mode"));
         server_mode = Boolean.valueOf(prop.getProperty("server_mode"));
         transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
@@ -94,6 +98,8 @@ public class Config {
                 
                 prop.setProperty("local_ip",local_ip);
                 prop.setProperty("sat_ip",sat_ip);
+                
+                prop.setProperty("port_values",port_values);
                 
                 prop.setProperty("modbus_mode",String.valueOf(modbus_mode));
                 prop.setProperty("server_mode",String.valueOf(server_mode));
@@ -153,9 +159,12 @@ public class Config {
 
         System.out.println(command);
         
+        local_ip = new_ip;
+        Update();
+        
         try {
             Process p = Runtime.getRuntime().exec(command);
-            Process p1 = Runtime.getRuntime().exec("reboot");
+            //Process p1 = Runtime.getRuntime().exec("reboot");
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -166,7 +175,7 @@ public class Config {
     public void writeLog(String log){
         
         try {    
-            log_file = new PrintWriter(new BufferedWriter(new FileWriter("system.log", true)));
+            log_file = new PrintWriter(new BufferedWriter(new FileWriter("log/system.log", true)));
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -177,7 +186,7 @@ public class Config {
     }
     public void cleanLog(){
         try {
-            log_file = new PrintWriter("system.log","UTF-8");
+            log_file = new PrintWriter("log/system.log","UTF-8");
         } catch (FileNotFoundException | UnsupportedEncodingException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
         }

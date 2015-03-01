@@ -1,0 +1,29 @@
+#!/bin/sh
+
+ACTUALCONF=/etc/resolv.conf
+
+PPPCONF=/etc/ppp/resolv.conf
+
+cp $PPPCONF $PPPCONF.$1
+
+rm $PPPCONF
+
+tail $PPPCONF.ppp* | grep nameserver > $PPPCONF
+
+if [ -f $PPPCONF ] ; then
+
+        if [ -f $ACTUALCONF ] ; then
+
+                if [ ! -h $ACTUALCONF -o ! "`readlink $ACTUALCONF 2>&1`" = "$PPPCONF" ] ; then
+
+                        mv $ACTUALCONF $ACTUALCONF.ppporig
+
+                fi
+
+        fi
+
+
+
+        ln -sf $PPPCONF $ACTUALCONF
+
+fi

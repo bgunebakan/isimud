@@ -1,0 +1,38 @@
+#!/bin/bash
+# Start Thuraya module
+#
+#
+echo "starting" > /root/Thuraya.log
+
+THURAYA_ON="/sys/class/gpio/gpio17/value"
+THURAYA_RESET="/sys/class/gpio/gpio27/value"
+#SAT ON
+echo "17" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio17/direction
+#SAT RESET
+echo "27" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio27/direction
+#SAT LED
+echo "22" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio22/direction
+#GPS LED
+echo "23" > /sys/class/gpio/export
+echo "out" > /sys/class/gpio/gpio23/direction
+
+
+echo "Thuraya module is starting..."
+
+echo "1" > $THURAYA_ON
+sleep 2
+echo "1" > $THURAYA_RESET
+sleep 120
+
+#echo "0" > $THURAYA_RESET
+#echo "1" > $THURAYA_ON
+
+#echo "run isimud -w" > /root/Thuraya.log
+sudo isimud -w 1 &
+
+sleep 2
+
+sudo pppd call Thuraya &
