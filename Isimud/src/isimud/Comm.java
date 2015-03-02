@@ -62,6 +62,8 @@ public class Comm {
     
     OutputStream outToServer;
     
+    byte[] TCP_HEADER = new byte[4];
+    
     /////////////////////////////////////TCP/////////////////////////////////
      
     public void initTcp(){
@@ -195,10 +197,9 @@ public class Comm {
     
         String data = "";
         int i =0;
+        Comm comm = new Comm();
         
         public void serialEvent(SerialPortEvent event) {
-            
-            
             
             if(event.isRXCHAR()){//If data is available               
                      
@@ -208,7 +209,11 @@ public class Comm {
                        
                             if(modbus_mode){
                                 
+                                out.write(comm.RTU_TO_TCP(readSerialData));
+                                System.out.println("s"+Arrays.toString(comm.RTU_TO_TCP(readSerialData)));
+                                
                             }else{
+                                
                                 System.out.println("s"+Arrays.toString(readSerialData));
                                 out.write(readSerialData);
                                 
@@ -232,7 +237,7 @@ public class Comm {
         
     public void sendPost(String url,String urlParameters) throws Exception {
 
-            
+        System.out.println(url + urlParameters);    
         URL obj = new URL(url);
             
         String USER_AGENT = "Mozilla/5.0";
@@ -278,6 +283,156 @@ public class Comm {
        }
        
     }
+//////////////
+     public byte[] RTU_TO_TCP(byte[] RTU){
+
+
+        byte[] TCP = new byte[RTU.length - 2];
+
+        float BOL;
+
+        int UZUNLUK,MOD;
+
+        for(int i = 0; i < RTU.length-3 ; i++){
+
+            TCP[i] = RTU[i]; 
+        }
+
+        UZUNLUK = TCP.length;
+
+        BOL = TCP.length / 256;
+
+        MOD = Integer.valueOf(String.valueOf(BOL).substring(0,1));
+
+        byte bytesUZUN = (byte) UZUNLUK;
+
+        byte bytesMOD =(byte ) MOD;
+
+        byte[] TCPSON = new byte[TCP.length + 6];
+        
+
+             
+
+        TCPSON[0] = TCP_HEADER[0];
+
+        TCPSON[1] = TCP_HEADER[1];
+
+        TCPSON[2] = TCP_HEADER[2];
+
+        TCPSON[3] = TCP_HEADER[3];
+
+        TCPSON[4] = bytesMOD;
+
+        TCPSON[5] = bytesUZUN;
+
+        //TCP.CopyTo(TCPSON, 6);
+        System.arraycopy( TCP, 6, TCPSON, 0, TCP.length );
+            
+        return TCPSON;
+    }
+
+        
+    public byte[] TCP_TO_RTU(byte[] TCP){
+
+            
+        byte[] RTU_PAKET = new byte[8] ;
+
+        byte[] crc_ekle = new byte[2];
+
+        byte[] SONALTI = new byte[6];
+
+           
+
+        int SAY = TCP.length ;
+
+        SONALTI[0] = TCP[TCP.length - 6];
+
+        SONALTI[1] = TCP[TCP.length - 5];
+
+        SONALTI[2] = TCP[TCP.length - 4];
+
+        SONALTI[3] = TCP[TCP.length - 3];
+
+        SONALTI[4] = TCP[TCP.length - 2];
+
+        SONALTI[5] = TCP[TCP.length - 1];
+
+        TCP_HEADER[0] = TCP[0];
+
+        TCP_HEADER[1] = TCP[1];
+
+        TCP_HEADER[2] = TCP[2];
+
+        TCP_HEADER[3] = TCP[3];
+
+ 
+        
+        
+        crc_ekle = GetCRC(SONALTI);
+        
+        System.out.println(Arrays.toString(TCP) +"**" +Arrays.toString(SONALTI));
+        
+        System.arraycopy( SONALTI, 0, RTU_PAKET, 0, SONALTI.length );
+        //SONALTI.CopyTo(RTU_PAKET, 0);
+
+          
+
+ 
+
+        RTU_PAKET [6]= crc_ekle[0];
+
+        RTU_PAKET[7] = crc_ekle[1];
+
+        return RTU_PAKET;
+    
+    }
+
+ 
+
+    public byte[] GetCRC(byte[] message){
+
+        byte[] CRC_data = new byte[2];
+
+ 
+
+        int CRCFull = 0xFFFF;
+
+        int CRCHigh = 0xFF;
+        int CRCLow = 0xFF;
+
+        char CRCLSB;
+
+ 
+
+        for (int i = 0; i < (message.length); i++){
+
+            CRCFull = (int)(CRCFull ^ message[i]);
+
+            for (int j = 0; j < 8; j++){
+    
+                CRCLSB = (char)(CRCFull & 0x0001);
+
+                CRCFull = (int)((CRCFull >> 1) & 0x7FFF);
+
+ 
+
+                if (CRCLSB == 1)
+                    CRCFull = (int)(CRCFull ^ 0xA001);
+    
+            }
+
+        }
+
+
+        CRC_data[1] = (byte)((CRCFull >> 8) & 0xFF);
+
+        CRC_data[0] = (byte)(CRCFull & 0xFF);
+
+        return CRC_data;
+
+    }
+    //////////////////777
+    
 
 }//end Comm class
 
@@ -314,7 +469,9 @@ class tcpThread implements Runnable {
                   
                     try {
                         if(config.modbus_mode){
-                            
+                            serialPort.writeBytes(comm.TCP_TO_RTU(buff));
+                            System.out.println("w"+Arrays.toString(comm.TCP_TO_RTU(buff)));
+                            comm.cleanBuff(buff);
                         }else{
                             serialPort.writeBytes(buff);
                             System.out.println("w"+Arrays.toString(buff));
@@ -352,3 +509,35 @@ class tcpThread implements Runnable {
 
 }
 
+
+    
+class sendPostThread extends Thread{
+
+    String address;
+    
+    Config config = new Config();
+    Comm comm = new Comm();
+    
+    Gpio gpio = new Gpio();
+    
+    public sendPostThread(String server) {
+        
+        address = server;
+        config.writeLog("Port values sending to " + address);
+        gpio.init();
+    }
+    public void run() {
+        while(true){
+            try {
+            
+                comm.sendPost(address, "ports=" + gpio.getPorts());
+                Thread.sleep(2000);
+            
+            } catch (Exception ex) {
+                Logger.getLogger(sendPostThread.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+        }
+        
+        
+    }
+}

@@ -171,7 +171,7 @@ def sendPortValues():
 
         ServerIP = request.form["Serveripaddress"]
 
-        args = "isimud -p " + ServerIP + " &"
+        args = "isimud -p -S " + ServerIP + " &"
 
 
         print args

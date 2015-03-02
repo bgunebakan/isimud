@@ -20,9 +20,7 @@ package isimud;
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
 import com.pi4j.io.gpio.GpioPinDigitalInput;
-import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.PinPullResistance;
-import com.pi4j.io.gpio.PinState;
 import com.pi4j.io.gpio.RaspiPin;
 
 /**
@@ -34,19 +32,23 @@ public class Gpio {
     Config config = new Config();
     public final GpioController gpio = GpioFactory.getInstance();
 
-    GpioPinDigitalInput D0 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_01,"D0",PinPullResistance.PULL_DOWN);
-    GpioPinDigitalInput D1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05,"D1",PinPullResistance.PULL_DOWN);
-    GpioPinDigitalInput D2 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06,"D2",PinPullResistance.PULL_DOWN);
-    GpioPinDigitalInput D3 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07,"D3",PinPullResistance.PULL_DOWN);
+    GpioPinDigitalInput D0;
+    GpioPinDigitalInput D1;
+    GpioPinDigitalInput D2;
+    GpioPinDigitalInput D3;
     
 
     public void portSending(String optionValue) {
         
     }
 
-    public void initGpio(){
+    public void init(){
         
-        
+        D0 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_01,"D0",PinPullResistance.PULL_DOWN);
+        D1 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_05,"D1",PinPullResistance.PULL_DOWN);
+        D2 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_06,"D2",PinPullResistance.PULL_DOWN);
+        D3 = gpio.provisionDigitalInputPin(RaspiPin.GPIO_07,"D3",PinPullResistance.PULL_DOWN);
+    
         
     }
     public String getPorts() {
