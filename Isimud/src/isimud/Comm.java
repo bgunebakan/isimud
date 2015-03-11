@@ -524,6 +524,9 @@ class sendPostThread extends Thread{
         
         address = server;
         config.writeLog("Port values sending to " + address);
+        config.postserver_add = address;
+        config.Update();
+        
         gpio.init();
     }
     public void run() {

@@ -1,4 +1,4 @@
-/*
+   /*
  * Copyright (C) 2014 Bilal Tonga
  *
  * This program is free software: you can redistribute it and/or modify
@@ -47,10 +47,14 @@ public class Config {
     
     String local_ip = "";
     String sat_ip = "";
+    String client_ip = ""; // connected device ip
+    
+    String postserver_add = "";
     
     boolean transmit_mode;
     boolean modbus_mode;
     boolean server_mode;
+    String working_mode = "";
     
     String port_values;
     
@@ -60,6 +64,7 @@ public class Config {
     Properties prop = new Properties();
     
     public Config(){
+        
         try {
             prop.load(new FileInputStream("system.conf"));
             
@@ -76,12 +81,17 @@ public class Config {
         server_port = Integer.valueOf(prop.getProperty("server_port"));
         
         local_ip = prop.getProperty("local_ip");
+        client_ip = prop.getProperty("client_ip");
+        
+        postserver_add = prop.getProperty("postserver_add");
+
         sat_ip = prop.getProperty("sat_ip");
         
         port_values = prop.getProperty("port_values");
         
         modbus_mode = Boolean.valueOf(prop.getProperty("modbus_mode"));
         server_mode = Boolean.valueOf(prop.getProperty("server_mode"));
+        working_mode = prop.getProperty("working_mode");
         transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
     }
     public void Update(){
@@ -97,12 +107,16 @@ public class Config {
                 prop.setProperty("server_port",String.valueOf(server_port));
                 
                 prop.setProperty("local_ip",local_ip);
+                prop.setProperty("client_ip",client_ip);
                 prop.setProperty("sat_ip",sat_ip);
+                
+                prop.setProperty("postserver_add",postserver_add);
                 
                 prop.setProperty("port_values",port_values);
                 
                 prop.setProperty("modbus_mode",String.valueOf(modbus_mode));
                 prop.setProperty("server_mode",String.valueOf(server_mode));
+                prop.setProperty("working_mode",String.valueOf(working_mode));
     		prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
                 //save properties to project root folder
     		prop.store(new FileOutputStream("system.conf"), null);
@@ -145,21 +159,26 @@ public class Config {
     }
     
     
-    public void changeIp(String new_ip,String old_ip){
+    public void changeIp(String new_localip,String new_clientip){
         
         //String old_ip = getIp();
         
-        
+        String old_localip = local_ip;
+        String old_clientip = client_ip;
         
         String file = "/etc/network/interfaces";
-
+        
+        String clientfile = "/etc/dnsmasq.conf";
       
                                       //find,replace_with,file
-        String command = "sed -i s/" + old_ip + "/" + new_ip + "/g "+ file;
-
+        String command = "sed -i s/" + local_ip + "/" + new_localip + "/g "+ file + ";"+
+        "sed -i s/" + client_ip + "/" + new_clientip + "/g "+ clientfile;
+        
         System.out.println(command);
         
-        local_ip = new_ip;
+        
+        local_ip = new_localip;
+        client_ip = new_clientip;
         Update();
         
         try {

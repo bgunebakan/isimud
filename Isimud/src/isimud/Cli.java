@@ -61,7 +61,7 @@ public class Cli {
         options.addOption("S", "server-ip", true, "Server Address");
         options.addOption("P", "server-port", true, "Server port");
         
-        options.addOption("O", "old-ip", true, "<ip-address> Old ip address");
+        options.addOption("O", "client-ip", true, "<ip-address> client ip address");
         
         options.addOption("h", "help", false, "show help.");
 
@@ -91,8 +91,10 @@ public class Cli {
     
             }else if (cmd.hasOption("c")){
                 if(cmd.hasOption("O")){
-                    System.out.println("IP changing with " + cmd.getOptionValue("c") +" old:"+cmd.getOptionValue("O"));
-                    config.writeLog("IP changing with " + cmd.getOptionValue("c") +"old:"+cmd.getOptionValue("O"));
+                    System.out.println("Local IP changing with " + cmd.getOptionValue("c") +" old:"+config.local_ip);
+                    System.out.println("Client IP changing with " + cmd.getOptionValue("O") +" old:"+config.client_ip);
+                    config.writeLog("IP changing with " + cmd.getOptionValue("c") +"old:"+config.local_ip);
+                    config.writeLog("IP changing with " + cmd.getOptionValue("O") +"old:"+config.client_ip);
                     config.changeIp(cmd.getOptionValue("c"),cmd.getOptionValue("O"));
             
                 }else{
@@ -146,6 +148,7 @@ public class Cli {
                     config.writeLog("Server mode @ port: "+ serverPort);
                     config.server_port = serverPort;
                     config.server_mode = true;
+                    config.working_mode = "Server";
                     config.Update();
                     
                     tcpThread clientThread = new tcpThread();
@@ -161,6 +164,7 @@ public class Cli {
                     config.server_add = serverAdd;
                     config.server_port = serverPort;
                     config.server_mode = false;
+                    config.working_mode = "Client";
                     config.Update();
                     
                     

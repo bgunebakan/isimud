@@ -83,10 +83,11 @@
                                 <h3 class="panel-title"><i class="fa fa-bar-chart-o fa-fw"></i>Specs</h3>
                             </div>
                             <div class="panel-body">
-                                <p><b>
-                                  Sattellite IP address: </b>{{satipaddress}}
-
-                                </p>
+                              <p>
+				<b>Sattellite IP address:</b>{{sat_ip}}<br>
+				<b>Working mode:</b> {{working_mode}}<br>
+				<b>ModBus mode:</b> {{modbus_mode}}
+                              </p>
                             </div>
                         </div>
                     </div>
@@ -108,8 +109,8 @@
                                   <input type="radio" name="workingmode" value="Client">Client<br>
 
 				  <dl>
-                                    <dt>IP address:<dd><input type=text name=Serveripaddress>
-                                    <dt>Port:<dd><input type=text name=Serverport>
+                                    <dt>IP address:<dd><input type=text name=server_add value={{server_add}}>
+                                    <dt>Port:<dd><input type=text name=server_port value={{server_port}}>
                                     <dd><input type=submit value="Server Connect">
                                   </dl>
                                 </form>
@@ -132,7 +133,10 @@
                               <form action="/saveSettings" method=post>
                                 <dl>
                                     <dt>Local IP address:
-                                      <dd><input type=text name=Localipaddress value={{ localip }}>
+                                      <dd><input type=text name=local_ip value={{ local_ip }}>
+					<br>
+					<dt>Connected device IP address:</dt>
+					<input type=text name=client_ip value={{ client_ip }}>
                                         <dd><input type=submit value="save Settings">
                                         </dl>
                                 </form>
@@ -142,7 +146,7 @@
                               <form action="/saveSerial" method=post>
                                 <dl>
                                     <dt>Serial baud:
-                                      <dd><input type=text name=serialbaud value={{ serialbaud }}>
+                                      <dd><input type=text name=serial_baud value={{ serial_baud }}>
                                         <dd><input type=submit value="save Settings">
                                         </dl>
                                 </form>
@@ -163,8 +167,8 @@
 				 <form action="/sendPortValues" method=post>
                                    <dl>
 
-                                  	<dt>Server Address:<dd><input type=text name=Serveripaddress>
-                                        	<dd><input type=submit value="Send Data">
+                                     <dt>Server Address:<dd><input type=text name=postserver_add value={{postserver_add}}>
+                                       <dd><input type=submit value="Save">
                                    </dl>
                                  </form>
 				 <p>Port data will be send every 2 seconds</p>
