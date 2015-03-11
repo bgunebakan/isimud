@@ -16,6 +16,9 @@ import StringIO
 
 config_file = '/opt/isimud/system.conf'
 log_file = '/opt/isimud/log/system.log'
+command_file = '/opt/isimud/command.sh'
+
+
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
 logs = ""
 sat_ip = ""
@@ -91,6 +94,10 @@ def cutConnections():
     print args
     os.system(args)
 
+    fo = open(command_file,"w")
+    fo.write('')
+    fo.close()
+
     readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -105,25 +112,38 @@ def serverConnect():
         print "client"
         serverIP = request.form["server_add"]
         serverPort = request.form["server_port"]
-        os.system("killall java")
+        #os.system("killall java")
 
-        #args = "isimud -T 0 -S " + serverIP + " -P " + serverPort + " &"
-        #print args
+        args = "isimud -T 0 -S " + serverIP + " -P " + serverPort + ' &'
+        print args
         #os.system(args)
-        args = ['isimud', '-T',0,'-S',serverIP,'-P',serverPort]
-        subprocess.call(args)
+
+        fo = open(command_file,"ab")
+        fo.write('\n')
+        fo.write(args)
+        fo.write('\nsleep 10 &&\n')
+        fo.close()
+        
+        #args = ['isimud', '-T',0,'-S',serverIP,'-P',serverPort]
+        #subprocess.call(args)
 
     else:
         print "server"
         os.system("killall java")
         clientPort = request.form["server_port"]
         
-        #args = "isimud -T 1 -P " + clientPort + " &"
+        args = "isimud -T 1 -P " + clientPort + " &"
         #print args
         #os.system(args)
-        args = ['isimud', '-T',1,'-P',clientPort]
-        subprocess.call(args)
+        #args = ['isimud', '-T',1,'-P',clientPort]
+        #subprocess.call(args)
 
+        fo = open(command_file,"ab")
+        fo.write('\n')
+        fo.write(args)
+        fo.write('\nsleep 10 &&\n')
+        fo.close()
+        
     readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -192,10 +212,13 @@ def sendPortValues():
         ServerIP = request.form["postserver_add"]
 
         args = "isimud -p -S " + ServerIP + " &"
-
-
         print args
-        os.system(args)
+        #os.system(args)
+        fo = open(command_file,"ab")
+        fo.write('\n')
+        fo.write(args)
+        fo.write('\nsleep 10 &&\n')
+        fo.close()
 
     readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,

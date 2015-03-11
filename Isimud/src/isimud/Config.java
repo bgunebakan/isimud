@@ -171,10 +171,10 @@ public class Config {
         String clientfile = "/etc/dnsmasq.conf";
       
                                       //find,replace_with,file
-        String command = "sed -i s/" + local_ip + "/" + new_localip + "/g "+ file + ";"+
-        "sed -i s/" + client_ip + "/" + new_clientip + "/g "+ clientfile;
+        String command =  "sed -i s/" + local_ip + "/" + new_localip + "/g "+ file;
+        String command2 = "sed -i s/" + client_ip + "/" + new_clientip + "/g "+ clientfile;
         
-        System.out.println(command);
+        System.out.println(command +"\n"+ command2);
         
         
         local_ip = new_localip;
@@ -183,6 +183,7 @@ public class Config {
         
         try {
             Process p = Runtime.getRuntime().exec(command);
+            Process p1 = Runtime.getRuntime().exec(command2);
             //Process p1 = Runtime.getRuntime().exec("reboot");
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);

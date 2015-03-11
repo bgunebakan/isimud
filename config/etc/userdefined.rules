@@ -1,0 +1,37 @@
+#iptables -t nat -F PREROUTING
+#iptables -t nat -F POSTROUTING
+#iptables -F INPUT
+#iptables -F OUTPUT
+#iptables -F FORWARD
+#iptables -P INPUT DROP
+#iptables -P OUTPUT DROP
+#iptables -P FORWARD DROP
+#iptables -A INPUT -p tcp -i ppp0 --dport 80 -j DROP
+
+#iptables -A INPUT   -j ACCEPT -p all -s 0/0 -i eth0
+#iptables -A OUTPUT  -j ACCEPT -p all -o eth0
+#iptables -A FORWARD -j ACCEPT -p all -s 0/0 -i eth0
+#iptables -A FORWARD -j ACCEPT -p all -s 0/0 -i ppp0 -o eth0
+
+#iptables -A INPUT -p udp -i ppp0 --sport 53 --dport 0:65535 -j ACCEPT
+#iptables -A OUTPUT -p udp -o ppp0 --dport 53 --sport 0:65535 -j ACCEPT
+
+#iptables -A OUTPUT -p icmp --icmp-type echo-request -o ppp0 -j ACCEPT
+#iptables -A INPUT  -p icmp --icmp-type echo-reply -i ppp0 -j ACCEPT
+#iptables -A INPUT -p icmp --icmp-type echo-request -i ppp0 -j ACCEPT
+#iptables -A OUTPUT -p icmp --icmp-type echo-reply -o ppp0 -j ACCEPT
+
+iptables -F --table mangle
+iptables -F --table nat
+iptables -F --table filter
+iptables -P FORWARD ACCEPT
+
+
+
+iptables -t nat -A PREROUTING -i ppp0 -p tcp --dport 23 -j DNAT --to-destination 192.168.128.101
+
+iptables -t nat -A POSTROUTING -o ppp0 -j MASQUERADE
+
+sysctl net.ipv4.ip_forward=1
+
+ip route

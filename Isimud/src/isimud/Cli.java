@@ -35,7 +35,7 @@ public class Cli {
     private Options options = new Options();
     
     Config config = new Config();
-    Gpio gpio = new Gpio();
+    //Gpio gpio = new Gpio();
     //Comm comm = new Comm();
     //public final GpioController gpio = GpioFactory.getInstance();
 
@@ -110,8 +110,8 @@ public class Cli {
                 
             }else if (cmd.hasOption("g")){
         
-                gpio.init();
-                System.out.println(gpio.getPorts());
+                //gpio.init();
+                //System.out.println(gpio.getPorts());
     
             }else if (cmd.hasOption("w")){
     

@@ -1,0 +1,183 @@
+------------------------------------------------------------
+/usr/bin/pip run on Wed Jan  7 15:08:23 2015
+Downloading/unpacking netifaces
+
+  Getting page http://pypi.python.org/simple/netifaces
+  URLs to search for versions for netifaces:
+  * http://pypi.python.org/simple/netifaces/
+  Getting page http://pypi.python.org/simple/netifaces/
+  Analyzing links from page https://pypi.python.org/simple/netifaces/
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.1-cp26-none-win32.whl#md5=7965d5a882eaebf74ffcd043e697dc2f (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.1-py2.6-win32.egg#md5=c8c5f7e4a403dd416b435ad8eddefed1 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.1.win32-py2.6.exe#md5=bf229517b6b3d40ad0991fc6b504043d (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.2-cp26-none-win32.whl#md5=65bd395ec03961a37cff14d54df22f10 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.2-py2.6-win32.egg#md5=07fb22d2408bf2969c18cfa1711bd5d6 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.2.win32-py2.6.exe#md5=e55e5fd188e4e6fda21942b665a2fca3 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.3-cp26-none-win32.whl#md5=1343657ab8cd29bafd643da20f3aefd5 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.3-py2.6-win32.egg#md5=1b0c3b5a76bd543d45ec4d6fa50f29f4 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.3.win32-py2.6.exe#md5=da9e984985970d7ced4dd69314ac0e14 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.4-cp26-none-win32.whl#md5=c1e5b4b7e0525893402ccd5192187601 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.4-cp26-none-win_amd64.whl#md5=f567414520b40fb7e931b5efb6a27b5a (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.4-py2.6-win32.egg#md5=9ae37cabc4574c874a3053678b857aa1 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.6/n/netifaces/netifaces-0.10.4.win32-py2.6.exe#md5=4b92944c24aa25567a056245df0ced5d (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.0-py2.7-linux-x86_64.egg#md5=4bf3f4a83c84d7c7fab7f50958948c2f (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.0-py2.7-macosx-10.9-intel.egg#md5=c1f80786a62a088a0d882a7291fc0003 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.0-py2.7-win32.egg#md5=5dc7c3e416371423ac966fcb152272ff (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.1-cp27-none-win32.whl#md5=b42a29695f575f2893be1daed2b2dca3 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.1-py2.7-win32.egg#md5=0295b17dc388d2cb5ac73a50dbd2e6e4 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.1.win32-py2.7.exe#md5=b1584b3a9db0c763c94511f4e508f4fe (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.2-cp27-none-win32.whl#md5=1392d3cebd37be760c9db8bbf8a1f3cf (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.2-py2.7-win32.egg#md5=cd06faf5faccc13f71bad4bde03de3c1 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.2.win32-py2.7.exe#md5=9b2e1fb6a8c4a4325e33884fafeb7882 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.3-cp27-none-win32.whl#md5=131b62392622c64c2ae2c7ad0a2522f7 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.3-py2.7-win32.egg#md5=aacaa28c603070e4347630d76e5a5df9 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.3.win32-py2.7.exe#md5=78647c9bade6880b99c7462a46648bc5 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.4-cp27-none-win32.whl#md5=ac3b5700ce8fe0448758cd32e6a23df9 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.4-cp27-none-win_amd64.whl#md5=fa59bf552090a106a0818c4390abbc77 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.4-py2.7-win32.egg#md5=69c36401814f5f3cfd190ea203edc0be (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/2.7/n/netifaces/netifaces-0.10.4.win32-py2.7.exe#md5=5cddb5bb1938948585d15f90f5e22b9d (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.1-cp33-none-win32.whl#md5=bc6f84a67ece48d829f51e95afbf6fb7 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.1-py3.3-win32.egg#md5=f10939775f4ec4806e0d43582f090925 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.1.win32-py3.3.exe#md5=11b6f9f84eb42f53d574dfd9f1326164 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.2-cp33-none-win32.whl#md5=8d7c654aa1860ddd82c1fcba45504f19 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.2-py3.3-win32.egg#md5=1a0b71b320246eaed195bd61c4dce4e1 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.2.win32-py3.3.exe#md5=d2738c8bf7401f860a813a9e20ab168d (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.3-cp33-none-win32.whl#md5=0e46cbfc3480903e95c3b4ae8da1130f (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.3-py3.3-win32.egg#md5=95a1732bd403d7afb1ab02ca230cc40c (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.3.win32-py3.3.exe#md5=68f654fe15512642a708e40f5dc0b5b0 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.4-cp33-none-win32.whl#md5=f4a0d94330bd9368643dfbadd2cfeccd (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.4-cp33-none-win_amd64.whl#md5=a627c4923b53a5bcc408130d99aeaf1d (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.4-py3.3-win32.egg#md5=1d04bd53a60e4c7c8bdb857dc0716789 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.3/n/netifaces/netifaces-0.10.4.win32-py3.3.exe#md5=58b03cb0fef45382a7085855aeb3cad6 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.0-py3.4-linux-x86_64.egg#md5=a0653891e193ab87e33f6688c229e2e8 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.0-py3.4-macosx-10.6-intel.egg#md5=12fe125c18eb1103efa1b5b24d8eafb6 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.0-py3.4-win32.egg#md5=1c96ff8e56893e2a87292481c9a1e385 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.1-cp34-none-win32.whl#md5=0affb7fa40d190e1d250e0b5ef4ba032 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.1-py3.4-win32.egg#md5=7ccc760d873a547d967876e180094f31 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.1.win32-py3.4.exe#md5=c191ecd57dd0d5d479a7d5b3607bd889 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.2-cp34-none-win32.whl#md5=adaf9e1b49e153fa1a0da9ade883f674 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.2-py3.4-win32.egg#md5=d2aa751f68d96c3f81a1065527a7bccf (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.2.win32-py3.4.exe#md5=911b9bd3621b6beee6c7547051ecdf6f (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.3-cp34-none-win32.whl#md5=1507d8639c9731472fa5162a103e1fcf (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.3-py3.4-win32.egg#md5=dcc30c3564308115b86046bb45659ccb (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.3.win32-py3.4.exe#md5=d62ab19a1cc07bfafcfb1a9f7660231b (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.4-cp34-none-win32.whl#md5=e5da587a36cd07326b9fcadb73b660b9 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.4-cp34-none-win_amd64.whl#md5=f8a88f70738fc774ed54b24d06d63805 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .whl
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.4-py3.4-win32.egg#md5=9c60c5490a9edd58a723220a59aa8000 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .egg
+    Skipping link https://pypi.python.org/packages/3.4/n/netifaces/netifaces-0.10.4.win32-py3.4.exe#md5=efb919134a5e9059134fc449b1e7a631 (from https://pypi.python.org/simple/netifaces/); unknown archive format: .exe
+    Found link https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.0.tar.gz#md5=bbe634bd373b3f05df5f4ac23bc92a8f (from https://pypi.python.org/simple/netifaces/), version: 0.10.0
+    Found link https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.1.tar.gz#md5=4f92ca84e8cb1ce547998e7212ac313d (from https://pypi.python.org/simple/netifaces/), version: 0.10.1
+    Found link https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.2.tar.gz#md5=acb11ba95d892519825e170d814ee296 (from https://pypi.python.org/simple/netifaces/), version: 0.10.2
+    Found link https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.3.tar.gz#md5=b96913473e1dcc3c4a7c43bc15d10e26 (from https://pypi.python.org/simple/netifaces/), version: 0.10.3
+    Found link https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.4.tar.gz#md5=36da76e2cfadd24cc7510c2c0012eb1e (from https://pypi.python.org/simple/netifaces/), version: 0.10.4
+    Found link https://pypi.python.org/packages/source/n/netifaces/netifaces-0.8.tar.gz#md5=e57e5983f4c286fac5f8068fbfc5c873 (from https://pypi.python.org/simple/netifaces/), version: 0.8
+    Found link http://alastairs-place.net/projects/netifaces/netifaces-0.8.tar.gz#md5=e57e5983f4c286fac5f8068fbfc5c873 (from https://pypi.python.org/simple/netifaces/), version: 0.8
+  Using version 0.10.4 (newest of versions: 0.10.4, 0.10.3, 0.10.2, 0.10.1, 0.10.0, 0.8, 0.8)
+  Downloading netifaces-0.10.4.tar.gz
+
+  Downloading from URL https://pypi.python.org/packages/source/n/netifaces/netifaces-0.10.4.tar.gz#md5=36da76e2cfadd24cc7510c2c0012eb1e (from https://pypi.python.org/simple/netifaces/)
+  Running setup.py egg_info for package netifaces
+
+    running egg_info
+    creating pip-egg-info/netifaces.egg-info
+    writing pip-egg-info/netifaces.egg-info/PKG-INFO
+    writing top-level names to pip-egg-info/netifaces.egg-info/top_level.txt
+    writing dependency_links to pip-egg-info/netifaces.egg-info/dependency_links.txt
+    writing pip-egg-info/netifaces.egg-info/PKG-INFO
+    writing top-level names to pip-egg-info/netifaces.egg-info/top_level.txt
+    writing dependency_links to pip-egg-info/netifaces.egg-info/dependency_links.txt
+    writing manifest file 'pip-egg-info/netifaces.egg-info/SOURCES.txt'
+    warning: manifest_maker: standard file '-c' not found
+    
+
+    reading manifest file 'pip-egg-info/netifaces.egg-info/SOURCES.txt'
+    writing manifest file 'pip-egg-info/netifaces.egg-info/SOURCES.txt'
+Installing collected packages: netifaces
+
+  Running setup.py install for netifaces
+
+    Running command /usr/bin/python -c "import setuptools;__file__='/root/web_interface/web/build/netifaces/setup.py';exec(compile(open(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --single-version-externally-managed --record /tmp/pip-G4oJdA-record/install-record.txt
+    running install
+    running build
+    running build_ext
+    checking for getifaddrs...found.
+
+    checking for getnameinfo...found.
+
+    checking for optional header files...netash/ash.h netatalk/at.h netax25/ax25.h neteconet/ec.h netipx/ipx.h netpacket/packet.h linux/irda.h linux/atm.h linux/llc.h linux/tipc.h linux/dn.h.
+
+    checking whether struct sockaddr has a length field...no.
+
+    checking which sockaddr_xxx structs are defined...at ax25 in in6 ipx un ash ec ll atmpvc atmsvc dn irda llc.
+
+    checking for routing socket support...no.
+
+    checking for sysctl(CTL_NET...) support...no.
+
+    checking for netlink support...yes.
+
+    will use netlink to read routing table
+
+    building 'netifaces' extension
+
+    gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -DNETIFACES_VERSION=0.10.4 -DHAVE_GETIFADDRS=1 -DHAVE_GETNAMEINFO=1 -DHAVE_NETASH_ASH_H=1 -DHAVE_NETATALK_AT_H=1 -DHAVE_NETAX25_AX25_H=1 -DHAVE_NETECONET_EC_H=1 -DHAVE_NETIPX_IPX_H=1 -DHAVE_NETPACKET_PACKET_H=1 -DHAVE_LINUX_IRDA_H=1 -DHAVE_LINUX_ATM_H=1 -DHAVE_LINUX_LLC_H=1 -DHAVE_LINUX_TIPC_H=1 -DHAVE_LINUX_DN_H=1 -DHAVE_SOCKADDR_AT=1 -DHAVE_SOCKADDR_AX25=1 -DHAVE_SOCKADDR_IN=1 -DHAVE_SOCKADDR_IN6=1 -DHAVE_SOCKADDR_IPX=1 -DHAVE_SOCKADDR_UN=1 -DHAVE_SOCKADDR_ASH=1 -DHAVE_SOCKADDR_EC=1 -DHAVE_SOCKADDR_LL=1 -DHAVE_SOCKADDR_ATMPVC=1 -DHAVE_SOCKADDR_ATMSVC=1 -DHAVE_SOCKADDR_DN=1 -DHAVE_SOCKADDR_IRDA=1 -DHAVE_SOCKADDR_LLC=1 -DHAVE_PF_NETLINK=1 -I/usr/include/python2.7 -c netifaces.c -o build/temp.linux-armv6l-2.7/netifaces.o
+
+    netifaces.c:1:20: fatal error: Python.h: No such file or directory
+
+    compilation terminated.
+
+    error: command 'gcc' failed with exit status 1
+
+    Complete output from command /usr/bin/python -c "import setuptools;__file__='/root/web_interface/web/build/netifaces/setup.py';exec(compile(open(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --single-version-externally-managed --record /tmp/pip-G4oJdA-record/install-record.txt:
+
+    running install
+
+running build
+
+running build_ext
+
+checking for getifaddrs...found.
+
+checking for getnameinfo...found.
+
+checking for optional header files...netash/ash.h netatalk/at.h netax25/ax25.h neteconet/ec.h netipx/ipx.h netpacket/packet.h linux/irda.h linux/atm.h linux/llc.h linux/tipc.h linux/dn.h.
+
+checking whether struct sockaddr has a length field...no.
+
+checking which sockaddr_xxx structs are defined...at ax25 in in6 ipx un ash ec ll atmpvc atmsvc dn irda llc.
+
+checking for routing socket support...no.
+
+checking for sysctl(CTL_NET...) support...no.
+
+checking for netlink support...yes.
+
+will use netlink to read routing table
+
+building 'netifaces' extension
+
+gcc -pthread -fno-strict-aliasing -DNDEBUG -g -fwrapv -O2 -Wall -Wstrict-prototypes -fPIC -DNETIFACES_VERSION=0.10.4 -DHAVE_GETIFADDRS=1 -DHAVE_GETNAMEINFO=1 -DHAVE_NETASH_ASH_H=1 -DHAVE_NETATALK_AT_H=1 -DHAVE_NETAX25_AX25_H=1 -DHAVE_NETECONET_EC_H=1 -DHAVE_NETIPX_IPX_H=1 -DHAVE_NETPACKET_PACKET_H=1 -DHAVE_LINUX_IRDA_H=1 -DHAVE_LINUX_ATM_H=1 -DHAVE_LINUX_LLC_H=1 -DHAVE_LINUX_TIPC_H=1 -DHAVE_LINUX_DN_H=1 -DHAVE_SOCKADDR_AT=1 -DHAVE_SOCKADDR_AX25=1 -DHAVE_SOCKADDR_IN=1 -DHAVE_SOCKADDR_IN6=1 -DHAVE_SOCKADDR_IPX=1 -DHAVE_SOCKADDR_UN=1 -DHAVE_SOCKADDR_ASH=1 -DHAVE_SOCKADDR_EC=1 -DHAVE_SOCKADDR_LL=1 -DHAVE_SOCKADDR_ATMPVC=1 -DHAVE_SOCKADDR_ATMSVC=1 -DHAVE_SOCKADDR_DN=1 -DHAVE_SOCKADDR_IRDA=1 -DHAVE_SOCKADDR_LLC=1 -DHAVE_PF_NETLINK=1 -I/usr/include/python2.7 -c netifaces.c -o build/temp.linux-armv6l-2.7/netifaces.o
+
+netifaces.c:1:20: fatal error: Python.h: No such file or directory
+
+compilation terminated.
+
+error: command 'gcc' failed with exit status 1
+
+----------------------------------------
+
+Command /usr/bin/python -c "import setuptools;__file__='/root/web_interface/web/build/netifaces/setup.py';exec(compile(open(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --single-version-externally-managed --record /tmp/pip-G4oJdA-record/install-record.txt failed with error code 1 in /root/web_interface/web/build/netifaces
+
+Exception information:
+Traceback (most recent call last):
+  File "/usr/lib/python2.7/dist-packages/pip/basecommand.py", line 104, in main
+    status = self.run(options, args)
+  File "/usr/lib/python2.7/dist-packages/pip/commands/install.py", line 250, in run
+    requirement_set.install(install_options, global_options)
+  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 1133, in install
+    requirement.install(install_options, global_options)
+  File "/usr/lib/python2.7/dist-packages/pip/req.py", line 577, in install
+    cwd=self.source_dir, filter_stdout=self._filter_install, show_stdout=False)
+  File "/usr/lib/python2.7/dist-packages/pip/__init__.py", line 256, in call_subprocess
+    % (command_desc, proc.returncode, cwd))
+InstallationError: Command /usr/bin/python -c "import setuptools;__file__='/root/web_interface/web/build/netifaces/setup.py';exec(compile(open(__file__).read().replace('\r\n', '\n'), __file__, 'exec'))" install --single-version-externally-managed --record /tmp/pip-G4oJdA-record/install-record.txt failed with error code 1 in /root/web_interface/web/build/netifaces

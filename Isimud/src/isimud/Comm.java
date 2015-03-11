@@ -118,6 +118,15 @@ public class Comm {
       
             }catch(IOException e){
                 Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, e);
+                //System.exit(-1);
+                this.closeTcp();
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                this.initTcp();
+                
             }    
         }
         
@@ -479,13 +488,19 @@ class tcpThread implements Runnable {
                         }
                         
                     } catch (SerialPortException ex) {              
-                        Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);                  
+                        Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex); 
+                        System.exit(-1);
                     }
               
                 }
-            
+                                
+                Thread.sleep(100);
+
             } catch (IOException ex) {
               
+                Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);
+                
+            } catch (InterruptedException ex) {
                 Logger.getLogger(tcpThread.class.getName()).log(Level.SEVERE, null, ex);
             }
       

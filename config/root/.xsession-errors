@@ -1,0 +1,109 @@
+Xsession: X session started for root at Wed Jan  7 17:40:29 UTC 2015
+Obt-Message: Xinerama extension is not present on the server
+
+(lxpanel:2385): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-can-change-accels after class was initialised
+
+(lxpanel:2385): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-menu-popup-delay after class was initialised
+
+(lxpanel:2385): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-menu-popdown-delay after class was initialised
+
+(lxpanel:2385): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-menu-images after class was initialised
+
+(lxpanel:2385): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-label-select-on-focus after class was initialised
+Openbox-Message: Unable to find a valid menu file "/usr/share/lxde/openbox/menu.xml"
+
+(pcmanfm:2386): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-can-change-accels after class was initialised
+
+(pcmanfm:2386): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-menu-popup-delay after class was initialised
+
+(pcmanfm:2386): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-menu-popdown-delay after class was initialised
+
+(pcmanfm:2386): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-label-select-on-focus after class was initialised
+
+(pcmanfm:2386): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-menu-images after class was initialised
+
+** (epiphany-browser:2426): WARNING **: Error retrieving accessibility bus address: org.freedesktop.DBus.Error.ServiceUnknown: The name org.a11y.Bus was not provided by any .service files
+
+(epiphany-browser:2426): Gtk-WARNING **: Theme parsing error: gtk-widgets.css:2:19: Theming engine 'adwaita' not found
+
+(lxpanel:2385): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-button-images after class was initialised
+** Message: Remote error from secret service: org.freedesktop.DBus.Error.ServiceUnknown: The name org.freedesktop.secrets was not provided by any .service files
+
+** (epiphany-browser:2426): WARNING **: Error caching form data: The name org.freedesktop.secrets was not provided by any .service files
+
+** (epiphany-browser:2426): WARNING **: uri_tester_compile_regexp: Error while compiling regular expression -Banner-Ad)- at char 10: ) without opening (
+** Message: console message: about:blank @0: Refused to display 'https://accounts.google.com/ServiceLogin?uilel=3&service=youtube&passive=true&continue=http%3A%2F%2Fwww.youtube.com%2Fsignin%3Faction_handle_signin%3Dtrue%26app%3Ddesktop%26feature%3Dpassive%26next%3D%252Fsignin_passive%26hl%3Dtr&hl=tr' in a frame because it set 'X-Frame-Options' to 'DENY'.
+
+** Message: console message: http://www.youtube.com/ @40: ReferenceError: Can't find variable: _gel
+
+** Message: console message: http://www.youtube.com/ @40: ReferenceError: Can't find variable: _gel
+
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 1715 was not found when attempting to remove it
+** Message: console message: http://s.ytimg.com/yts/jsbin/www-en_US-vflSkXQEv/base.js @133: TypeError: null is not a function (evaluating 'm.n("yt.player.Application.create")(a,c)')
+
+** Message: console message: http://www.youtube.com/results?search_query=g%C3%BCld%C3%BCr+g%C3%BCld%C3%BCr+17.b%C3%B6l%C3%BCm @41: ReferenceError: Can't find variable: _gel
+
+** Message: console message: http://www.youtube.com/results?search_query=g%C3%BCld%C3%BCr+g%C3%BCld%C3%BCr+17.b%C3%B6l%C3%BCm @41: ReferenceError: Can't find variable: _gel
+
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 3777 was not found when attempting to remove it
+** Message: console message: http://s.ytimg.com/yts/jsbin/www-en_US-vflSkXQEv/base.js @133: TypeError: null is not a function (evaluating 'm.n("yt.player.Application.create")(a,c)')
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 5777 was not found when attempting to remove it
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 5816 was not found when attempting to remove it
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 5817 was not found when attempting to remove it
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+** (epiphany-browser:2426): WARNING **: cannot initialized cairo image surface buffer pool because no webkit widget
+
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 4955 was not found when attempting to remove it
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 5764 was not found when attempting to remove it
+
+(epiphany-browser:2426): GLib-CRITICAL **: Source ID 5765 was not found when attempting to remove it
+
+** (lxsession-logout:2504): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.UPower was not provided by any .service files
+
+** (lxsession-logout:2504): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.UPower was not provided by any .service files
+
+** (lxsession-logout:2504): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.Hal was not provided by any .service files
+
+** (lxsession-logout:2504): WARNING **: dbus-interface.c:94: DBUS: The name org.freedesktop.Hal was not provided by any .service files
+
+(lxsession-logout:2504): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-label-select-on-focus after class was initialised
+
+(lxsession-logout:2504): GLib-GObject-WARNING **: Attempt to add property GtkSettings::gtk-button-images after class was initialised
+XIO:  fatal IO error 11 (Resource temporarily unavailable) on X server ":0"
+      after 8354 requests (8351 known processed) with 0 events remaining.
+pcmanfm: Fatal IO error 11 (Resource temporarily unavailable) on X server :0.
