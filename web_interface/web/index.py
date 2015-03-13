@@ -17,7 +17,7 @@ import StringIO
 config_file = '/opt/isimud/system.conf'
 log_file = '/opt/isimud/log/system.log'
 command_file = '/opt/isimud/command.sh'
-
+portcommand_file = '/opt/isimud/port_command.sh'
 
 # "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
 logs = ""
@@ -27,8 +27,8 @@ client_ip = ""
 serial_baud = ""
 port_values = ""
 
-server_add = ""
-server_port = ""
+server_add = 0
+server_port = 0
 postserver_add = ""
 
 modbus_mode = ""
@@ -58,7 +58,7 @@ def disconnect():
     print args
     os.system(args)
 
-    readData()
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -71,7 +71,7 @@ def connect():
     print args
     os.system(args)
 
-    readData()
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -98,7 +98,7 @@ def cutConnections():
     fo.write('')
     fo.close()
 
-    readData()
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -106,45 +106,49 @@ def cutConnections():
 
 @app.route('/serverConnect', methods=['GET', 'POST'])
 def serverConnect():
-
+    global server_add
+    global server_port
 
     if request.form["workingmode"] == 'Client':
         print "client"
-        serverIP = request.form["server_add"]
-        serverPort = request.form["server_port"]
+        server_add = request.form["server_add"]
+        server_port = request.form["server_port"]
         #os.system("killall java")
 
-        args = "isimud -T 0 -S " + serverIP + " -P " + serverPort + ' &'
-        print args
-        #os.system(args)
+        args = "isimud -T 0 -S " + server_add + " -P " + server_port + " &"
+        #print args
+        #os.spawn(os.P_NOWAIT,args)
 
-        fo = open(command_file,"ab")
+        fo = open(command_file,"w")
         fo.write('\n')
         fo.write(args)
         fo.write('\nsleep 10 &&\n')
         fo.close()
         
-        #args = ['isimud', '-T',0,'-S',serverIP,'-P',serverPort]
-        #subprocess.call(args)
+        args2 = ['isimud', '-T','0','-S',server_add,'-P',server_port]
+        print args2
+	subprocess.Popen(args2)
 
     else:
         print "server"
-        os.system("killall java")
-        clientPort = request.form["server_port"]
+        #os.system("killall java")
+        server_port = request.form["server_port"]
         
-        args = "isimud -T 1 -P " + clientPort + " &"
+        args = "isimud -T 1 -P " + server_port + " &"
         #print args
         #os.system(args)
-        #args = ['isimud', '-T',1,'-P',clientPort]
-        #subprocess.call(args)
-
-        fo = open(command_file,"ab")
+        
+        fo = open(command_file,"w")
         fo.write('\n')
         fo.write(args)
         fo.write('\nsleep 10 &&\n')
         fo.close()
         
-    readData()
+        args2 = ['isimud', '-T','1','-P',server_port]
+        print args2
+        subprocess.Popen(args2)
+
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -153,16 +157,23 @@ def serverConnect():
 @app.route('/saveSettings', methods=['GET','POST'])
 def saveSettings():
 
+    global local_ip
+    global client_ip
+
     if request.method == 'POST':
-        Localip = request.form['local_ip']
-        Clientip = request.form['client_ip']
+        local_ip = request.form['local_ip']
+        client_ip = request.form['client_ip']
         
         #print Localip
-        args = "isimud -c " + Localip + " -O " + Clientip
-        print args
-        os.system(args)
-
-    readData()
+        #args = "isimud -c " + local_ip + " -O " + client_ip
+        #print args
+        #os.system(args)
+        
+        args2 = ['isimud', '-c',local_ip,'-O',client_ip]
+        print args2
+        subprocess.Popen(args2)
+        
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -171,14 +182,20 @@ def saveSettings():
 @app.route('/saveSerial', methods=['GET','POST'])
 def saveSerial():
 
-    if request.method == 'POST':
-        serialBaud = request.form['serialbaud']
-        #print Localip
-        args = "isimud -b " + serialBaud
-        print args
-        os.system(args)
+    global serial_baud
 
-    readData()
+    if request.method == 'POST':
+        serial_baud = request.form['serial_baud']
+        #print Localip
+        #args = "isimud -b " + serial_baud
+        #print args
+        #os.system(args)
+
+        args2 = ['isimud', '-b',serial_baud]
+        print args2
+        subprocess.Popen(args2)
+
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -187,18 +204,26 @@ def saveSerial():
 @app.route('/modbusMode', methods=['GET','POST'])
 def modbusMode():
 
+    global modbus_mode
+
     if request.method == 'POST':
-        ModbusMode = request.form['modbus']
+        modbus_mode = request.form['modbus']
         #print Localip
-        if ModbusMode == 'On':
-            args = "isimud -m 1"
+        if modbus_mode == 'On':
+            #args = "isimud -m 1"
+            args2 = ['isimud', '-m','1']
+        
         else:
-            args = "isimud -m 0"
+            #args = "isimud -m 0"
+            args2 = ['isimud', '-m','0']
 
-	    print args
-        os.system(args)
+            #print args
+        #os.system(args)
 
-    readData()
+        print args2
+        subprocess.Popen(args2)
+        
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -207,20 +232,28 @@ def modbusMode():
 @app.route('/sendPortValues', methods=['GET', 'POST'])
 def sendPortValues():
 
+    global postserver_add
+
     if request.method == 'POST':
 
-        ServerIP = request.form["postserver_add"]
+        postserver_add = request.form["postserver_add"]
 
-        args = "isimud -p -S " + ServerIP + " &"
-        print args
+        args = "isimud -p -S " + postserver_add + " &"
+        #print args
         #os.system(args)
-        fo = open(command_file,"ab")
+        
+        fo = open(portcommand_file,"w")
         fo.write('\n')
         fo.write(args)
         fo.write('\nsleep 10 &&\n')
         fo.close()
 
-    readData()
+        args2 = ['isimud', '-p','-S',postserver_add]
+        print args2
+        subprocess.Popen(args2)
+
+
+    #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -260,10 +293,10 @@ def readData():
     working_mode = props.get('working_mode', None)
     modbus_mode = props.get('modbus_mode', None)
     
-    args = "isimud -g"
-    os.system(args)
+    #args = 'echo 0000' #"isimud -g"
+    #os.system(args)
 
-    port_values = props.get('port_values', None)
+    port_values = '0000'#props.get('port_values', None)
 
 
     fo = open(log_file,"r")
@@ -284,7 +317,8 @@ def read_properties_file(file_path):
 
         cp = ConfigParser.SafeConfigParser()
         cp.readfp(config)
-
+        
+        f.close()
         return dict(cp.items('dummy_section'))
 
 if __name__ == "__main__":

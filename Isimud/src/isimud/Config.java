@@ -40,10 +40,10 @@ import java.util.logging.Logger;
  */
 public class Config {
     String serial_port = "";
-    int serial_baud;
+    int serial_baud = 0;
     
     String server_add = "";
-    int server_port;
+    int server_port = 0;
     
     String local_ip = "";
     String sat_ip = "";
@@ -51,19 +51,18 @@ public class Config {
     
     String postserver_add = "";
     
-    boolean transmit_mode;
-    boolean modbus_mode;
-    boolean server_mode;
+    boolean transmit_mode = false;
+    boolean modbus_mode = false;
+    boolean server_mode = false;
     String working_mode = "";
     
     String port_values;
     
     PrintWriter log_file;
     
-
-    Properties prop = new Properties();
-    
     public Config(){
+        
+        Properties prop = new Properties();
         
         try {
             prop.load(new FileInputStream("system.conf"));
@@ -75,16 +74,16 @@ public class Config {
         }
         
         serial_port = prop.getProperty("serial_port");
-        serial_baud = Integer.valueOf(prop.getProperty("serial_baud"));
+        serial_baud = Integer.parseInt(prop.getProperty("serial_baud"));
         
         server_add = prop.getProperty("server_add");
-        server_port = Integer.valueOf(prop.getProperty("server_port"));
+        server_port = Integer.parseInt(prop.getProperty("server_port"));
         
         local_ip = prop.getProperty("local_ip");
         client_ip = prop.getProperty("client_ip");
         
         postserver_add = prop.getProperty("postserver_add");
-
+        
         sat_ip = prop.getProperty("sat_ip");
         
         port_values = prop.getProperty("port_values");
@@ -94,13 +93,16 @@ public class Config {
         working_mode = prop.getProperty("working_mode");
         transmit_mode = Boolean.valueOf(prop.getProperty("transmit_mode"));
     }
+    
     public void Update(){
         
- 
-            try {
-    		
-                //set the properties value  
-                prop.setProperty("serial_port",serial_port);
+            
+        Properties prop = new Properties();
+        
+        try {
+            
+            //set the properties value  
+            prop.setProperty("serial_port",serial_port);
                 prop.setProperty("serial_baud",String.valueOf(serial_baud));
                 
                 prop.setProperty("server_add",server_add);
@@ -120,7 +122,8 @@ public class Config {
     		prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
                 //save properties to project root folder
     		prop.store(new FileOutputStream("system.conf"), null);
- 
+                
+                
             } catch (IOException ex) {
                 System.out.println(ex);
             }

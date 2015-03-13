@@ -11,6 +11,8 @@ cp $SOURCE_DIR/Isimud/dist/Isimud.jar $BUILD_DIR
 cp -r $SOURCE_DIR/Isimud/dist/lib $BUILD_DIR
 cp $SOURCE_DIR/Isimud/system.conf $BUILD_DIR
 cp $SOURCE_DIR/Isimud/command.sh $BUILD_DIR
+cp $SOURCE_DIR/Isimud/port_command.sh $BUILD_DIR
+
 cp -r $SOURCE_DIR/log $BUILD_DIR
 
 #copy binary files

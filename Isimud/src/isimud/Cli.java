@@ -35,13 +35,6 @@ public class Cli {
     private Options options = new Options();
     
     Config config = new Config();
-    //Gpio gpio = new Gpio();
-    //Comm comm = new Comm();
-    //public final GpioController gpio = GpioFactory.getInstance();
-
-    //GpioPinDigitalOutput satReset = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_18,"satReset",PinState.LOW);
-    //public GpioPinDigitalOutput satOn = gpio.provisionDigitalOutputPin(RaspiPin.GPIO_17,"satOn",PinState.LOW);
-    
  
     public Cli(String[] args) {
 
@@ -102,16 +95,21 @@ public class Cli {
                 }
                 
             }else if (cmd.hasOption("p")){
-    
-                System.out.println("port sending...");
                 
-                (new sendPostThread(cmd.getOptionValue("S"))).start();
+                String address =  cmd.getOptionValue("S");
+                
+                System.out.println("port sending...");
+                config.writeLog("Port values sending to " + address);
+                config.postserver_add = address;
+                config.Update();
+        
+                (new sendPostThread("http://" + address)).start();
                 
                 
             }else if (cmd.hasOption("g")){
-        
-                //gpio.init();
-                //System.out.println(gpio.getPorts());
+                Gpio gpio = new Gpio();
+                gpio.init();
+                System.out.println(gpio.getPorts());
     
             }else if (cmd.hasOption("w")){
     
@@ -176,7 +174,7 @@ public class Cli {
     
             }else if (cmd.hasOption("b")){
         
-                config.serial_baud = Integer.valueOf(cmd.getOptionValue("b"));
+                config.serial_baud = Integer.parseInt(cmd.getOptionValue("b"));
                 System.out.println("Serial baud changed with " + config.serial_baud);
                 config.writeLog("Serial baud changed with " + config.serial_baud);
                 

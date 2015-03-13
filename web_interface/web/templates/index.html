@@ -105,7 +105,7 @@
 
 				<form action="/serverConnect" method=post>
 
-                  		  <input type="radio" name="workingmode" value="Server">Server<br>
+                  		  <input type="radio" name="workingmode" value="Server" checked>Server<br>
                                   <input type="radio" name="workingmode" value="Client">Client<br>
 
 				  <dl>
@@ -126,7 +126,7 @@
                             <div class="panel-body">
                               <form action="/modbusMode" method=post>
                                 <input type="radio" name="modbus" value="On">On modbus mode<br>
-                                <input type="radio" name="modbus" value="Off">Off modbus mode
+                                <input type="radio" name="modbus" value="Off" checked>Off modbus mode
                                 <input type=submit value="Change mode">
                               </form>
 			      <br>
@@ -145,10 +145,10 @@
                             <div class="panel-body">
                               <form action="/saveSerial" method=post>
                                 <dl>
-                                    <dt>Serial baud:
+                                  <dt>Serial baud:
                                       <dd><input type=text name=serial_baud value={{ serial_baud }}>
-                                        <dd><input type=submit value="Save">
-                                        </dl>
+                                      <dd><input type=submit value="Save">
+                                </dl>
                                 </form>
                                 <p>Reconnect all connection after changing Baudrate.<p>
                             </div>

@@ -48,8 +48,10 @@ public class Comm {
     //boolean bufferFull = false;
     boolean modbus_mode = config.modbus_mode; //false;
     String serial_port = config.serial_port; //"/dev/ttyACM0"; 
+    
     int serial_baud = config.serial_baud;    // 9600;
     ////
+    
     
     boolean server_mode = config.server_mode; //true;
     int server_port = config.server_port;     // 4000;
@@ -451,12 +453,13 @@ class tcpThread implements Runnable {
     private Thread t;
    
     Comm comm = new Comm();
-    Config config = new Config();
+    
+    //Config config = new Config();
     byte[] buff = new byte[32];
     
    
     tcpThread(){
-       
+        
         System.out.println("tcp connection thread starting...");
         comm.initTcp();
         comm.initSerial();
@@ -477,7 +480,7 @@ class tcpThread implements Runnable {
                 while ((comm.in.read(buff)) > 0) {
                   
                     try {
-                        if(config.modbus_mode){
+                        if(comm.config.modbus_mode){
                             serialPort.writeBytes(comm.TCP_TO_RTU(buff));
                             System.out.println("w"+Arrays.toString(comm.TCP_TO_RTU(buff)));
                             comm.cleanBuff(buff);
@@ -538,9 +541,7 @@ class sendPostThread extends Thread{
     public sendPostThread(String server) {
         
         address = server;
-        config.writeLog("Port values sending to " + address);
-        config.postserver_add = address;
-        config.Update();
+        
         
         gpio.init();
     }
@@ -552,7 +553,12 @@ class sendPostThread extends Thread{
                 Thread.sleep(2000);
             
             } catch (Exception ex) {
-                Logger.getLogger(sendPostThread.class.getName()).log(Level.SEVERE, null, ex);
+                try {
+                    Logger.getLogger(sendPostThread.class.getName()).log(Level.SEVERE, null, ex);
+                    Thread.sleep(2000);
+                } catch (InterruptedException ex1) {
+                    Logger.getLogger(sendPostThread.class.getName()).log(Level.SEVERE, null, ex1);
+                }
             }    
         }
         
