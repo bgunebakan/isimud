@@ -17,6 +17,8 @@
  */
 package isimud;
 
+import java.net.InetAddress;
+
 /**
  *
  * @author gunebakan
@@ -27,7 +29,7 @@ public class Main {
      * @param args the command line arguments
      */
     
-    Config config = new Config();
+    //Config config = new Config();
     
     
     
@@ -36,6 +38,11 @@ public class Main {
     public static void main(String[] args) throws Exception {
         
         new Cli(args).parse();
+        
+        
+     
+        
+        
          
     }
     

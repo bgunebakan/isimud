@@ -39,34 +39,35 @@ import java.util.logging.Logger;
  * @author gunebakan
  */
 public class Config {
-    String serial_port = "";
-    int serial_baud = 0;
     
-    String server_add = "";
-    int server_port = 0;
+    public String serial_port = "";
+    public int serial_baud = 0;
     
-    String local_ip = "";
-    String sat_ip = "";
-    String client_ip = ""; // connected device ip
+    public String server_add = "";
+    public int server_port = 0;
     
-    String postserver_add = "";
+    public String local_ip = "";
+    public String sat_ip = "";
+    public String client_ip = ""; // connected device ip
     
-    boolean transmit_mode = false;
-    boolean modbus_mode = false;
-    boolean server_mode = false;
-    String working_mode = "";
+    public String postserver_add = "";
     
-    String port_values;
+    public boolean transmit_mode = false;
+    public boolean modbus_mode = false;
+    public boolean server_mode = false;
+    public String working_mode = "";
     
-    PrintWriter log_file;
+    public String port_values;
+    
+    public PrintWriter log_file;
+    Properties prop = new Properties();
     
     public Config(){
         
-        Properties prop = new Properties();
+        
         
         try {
             prop.load(new FileInputStream("system.conf"));
-            
             
         } catch (IOException ex) {
             Logger.getLogger(Config.class.getName()).log(Level.SEVERE, null, ex);
@@ -97,12 +98,12 @@ public class Config {
     public void Update(){
         
             
-        Properties prop = new Properties();
+        //Properties prop = new Properties();
         
         try {
             
             //set the properties value  
-            prop.setProperty("serial_port",serial_port);
+                prop.setProperty("serial_port",serial_port);
                 prop.setProperty("serial_baud",String.valueOf(serial_baud));
                 
                 prop.setProperty("server_add",server_add);
@@ -120,6 +121,7 @@ public class Config {
                 prop.setProperty("server_mode",String.valueOf(server_mode));
                 prop.setProperty("working_mode",String.valueOf(working_mode));
     		prop.setProperty("transmit_mode",String.valueOf(transmit_mode));
+                
                 //save properties to project root folder
     		prop.store(new FileOutputStream("system.conf"), null);
                 
@@ -169,13 +171,37 @@ public class Config {
         String old_localip = local_ip;
         String old_clientip = client_ip;
         
+        ////////create ip range
+        int[] ip = new int[4];
+        String[] parts = new_clientip.split("\\.");
+        
+        for(int i=0;i<4;i++){
+            ip[i] = Integer.parseInt(parts[i]);
+        }
+        ip[3] += 10;
+        String newclientip_end = ip[0] +"."+ip[1]+"."+ip[2]+"."+ip[3];
+        ///////////7
+        int[] oldip = new int[4];
+        String[] oldparts = old_clientip.split("\\.");
+        
+        for(int i=0;i<4;i++){
+            oldip[i] = Integer.parseInt(oldparts[i]);
+        }
+        oldip[3] += 10;
+        String oldclientip_end = oldip[0] +"."+oldip[1]+"."+oldip[2]+"."+oldip[3];
+        //////////////7
+        
+        
+        
         String file = "/etc/network/interfaces";
         
         String clientfile = "/etc/dnsmasq.conf";
-      
+        String longclient_ip = client_ip + "," + oldclientip_end;
+        String longnew_clientip = new_clientip + "," + newclientip_end;
                                       //find,replace_with,file
         String command =  "sed -i s/" + local_ip + "/" + new_localip + "/g "+ file;
-        String command2 = "sed -i s/" + client_ip + "/" + new_clientip + "/g "+ clientfile;
+        String command2 = "sed -i s/" + longclient_ip + "/" + longnew_clientip + "/g "+ clientfile;
+        //String command3 = "sed -i s/" + oldclientip_end + "/" + newclientip_end + "/g "+ clientfile;
         
         System.out.println(command +"\n"+ command2);
         

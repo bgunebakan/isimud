@@ -10,16 +10,14 @@ import netifaces as ni
 import os
 import ConfigParser
 import StringIO
-
-#satInterface = "ppp0"
-#localNetworkInterface = "wlan0"
+import jprops
+import collections
 
 config_file = '/opt/isimud/system.conf'
 log_file = '/opt/isimud/log/system.log'
 command_file = '/opt/isimud/command.sh'
 portcommand_file = '/opt/isimud/port_command.sh'
 
-# "ip -f inet -o addr show ppp0|cut -d\  -f 7 | cut -d/ -f 1"
 logs = ""
 sat_ip = ""
 local_ip = ""
@@ -33,6 +31,7 @@ postserver_add = ""
 
 modbus_mode = ""
 working_mode = ""
+serial_port = ""
 
 app = Flask(__name__)
 
@@ -42,7 +41,7 @@ app = Flask(__name__)
 def index():
 
     if request.method == 'POST':
-        return request.form['name']
+        return ""
     else:
         readData()
         return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
@@ -58,6 +57,9 @@ def disconnect():
     print args
     os.system(args)
 
+    sat_ip = 'none'
+    updateConfig()
+    
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -71,6 +73,7 @@ def connect():
     print args
     os.system(args)
 
+    writeLog('Connecting to Sattellite...')        
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -97,7 +100,12 @@ def cutConnections():
     fo = open(command_file,"w")
     fo.write('')
     fo.close()
-
+    
+    fo = open(portcommand_file,"w")
+    fo.write('')
+    fo.close()
+    writeLog('All connections has closed.')
+    
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -111,43 +119,35 @@ def serverConnect():
 
     if request.form["workingmode"] == 'Client':
         print "client"
-        server_add = request.form["server_add"]
+        
+	server_add = request.form["server_add"]
         server_port = request.form["server_port"]
-        #os.system("killall java")
-
+      
         args = "isimud -T 0 -S " + server_add + " -P " + server_port + " &"
-        #print args
-        #os.spawn(os.P_NOWAIT,args)
-
+        
         fo = open(command_file,"w")
         fo.write('\n')
         fo.write(args)
         fo.write('\nsleep 10 &&\n')
         fo.close()
-        
-        args2 = ['isimud', '-T','0','-S',server_add,'-P',server_port]
-        print args2
-	subprocess.Popen(args2)
 
+	writeLog('Client connect to ' +server_add+':'+server_port)        
     else:
         print "server"
-        #os.system("killall java")
+        
         server_port = request.form["server_port"]
         
         args = "isimud -T 1 -P " + server_port + " &"
-        #print args
-        #os.system(args)
         
         fo = open(command_file,"w")
         fo.write('\n')
         fo.write(args)
         fo.write('\nsleep 10 &&\n')
         fo.close()
-        
-        args2 = ['isimud', '-T','1','-P',server_port]
-        print args2
-        subprocess.Popen(args2)
+        writeLog('TCP Server on port: ' + server_port)
 
+    updateConfig()
+        
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -164,15 +164,14 @@ def saveSettings():
         local_ip = request.form['local_ip']
         client_ip = request.form['client_ip']
         
-        #print Localip
-        #args = "isimud -c " + local_ip + " -O " + client_ip
-        #print args
-        #os.system(args)
-        
         args2 = ['isimud', '-c',local_ip,'-O',client_ip]
         print args2
         subprocess.Popen(args2)
         
+        writeLog('IP addresses changed with' + local_ip + ' - ' + client_ip)
+
+
+    #updateConfig()
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -186,15 +185,9 @@ def saveSerial():
 
     if request.method == 'POST':
         serial_baud = request.form['serial_baud']
-        #print Localip
-        #args = "isimud -b " + serial_baud
-        #print args
-        #os.system(args)
+        writeLog('Serial baud changed with ' + serial_baud)
 
-        args2 = ['isimud', '-b',serial_baud]
-        print args2
-        subprocess.Popen(args2)
-
+    updateConfig()
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -208,22 +201,15 @@ def modbusMode():
 
     if request.method == 'POST':
         modbus_mode = request.form['modbus']
-        #print Localip
+
+	writeLog('Modbus mode is now: ' + modbus_mode)
+
         if modbus_mode == 'On':
-            #args = "isimud -m 1"
-            args2 = ['isimud', '-m','1']
-        
+	    modbus_mode = 'true'
         else:
-            #args = "isimud -m 0"
-            args2 = ['isimud', '-m','0']
+	    modbus_mode = 'false'
 
-            #print args
-        #os.system(args)
-
-        print args2
-        subprocess.Popen(args2)
-        
-    #readData()
+    updateConfig()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
@@ -239,20 +225,17 @@ def sendPortValues():
         postserver_add = request.form["postserver_add"]
 
         args = "isimud -p -S " + postserver_add + " &"
-        #print args
-        #os.system(args)
-        
+           
         fo = open(portcommand_file,"w")
         fo.write('\n')
         fo.write(args)
         fo.write('\nsleep 10 &&\n')
         fo.close()
 
-        args2 = ['isimud', '-p','-S',postserver_add]
-        print args2
-        subprocess.Popen(args2)
+	writeLog('Port values will be send to ' + postserver_add)
 
 
+    updateConfig()
     #readData()
     return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
                            portvalues=port_values,serial_baud=serial_baud,
@@ -274,53 +257,87 @@ def readData():
 
     global modbus_mode
     global working_mode
-    
-    logs_raw = ""
-    logs = ""
 
-    props = read_properties_file(config_file)
+    global serial_port
+    
+    logs = ""
+    logs_raw = ""
+
+    with open(config_file) as fp:
+        config = jprops.load_properties(fp, collections.OrderedDict)
 
     # and if you deal with optional settings, use:
-    sat_ip = props.get('sat_ip', None)
-    local_ip = props.get('local_ip', None)
-    client_ip = props.get('client_ip', None)
-    serial_baud = props.get('serial_baud', None)
+    sat_ip = config['sat_ip']
+    local_ip = config['local_ip']
+    client_ip = config['client_ip']
+    serial_baud = config['serial_baud']
 
-    server_add = props.get('server_add', None)
-    server_port = props.get('server_port', None)
-    postserver_add = props.get('postserver_add', None)
+    server_add = config['server_add']
+    server_port = config['server_port']
+    postserver_add = config['postserver_add']
         
-    working_mode = props.get('working_mode', None)
-    modbus_mode = props.get('modbus_mode', None)
+    working_mode = config['working_mode']
+    modbus_mode = config['modbus_mode']
+    serial_port = config['serial_port']
     
     #args = 'echo 0000' #"isimud -g"
     #os.system(args)
 
-    port_values = '0000'#props.get('port_values', None)
-
+    port_values = '0000' #props.get('port_values', None)
 
     fo = open(log_file,"r")
     logs_raw = fo.read()
 
+    for line in logs_raw.split('\n'):
+        logs += flask.Markup.escape(line) + flask.Markup('<br />')
+
+
+def updateConfig():
+    global sat_ip
+    global local_ip
+    global client_ip
+    global serial_baud
+    global port_values
+
+    global server_add
+    global server_port
+    global postserver_add
+    global logs
+
+    global modbus_mode
+    global working_mode
+    global serial_port
+    
+    with open(config_file,'w') as fp:
+        jprops.write_property(fp, 'sat_ip', sat_ip)
+        jprops.write_property(fp, 'local_ip', local_ip)
+        jprops.write_property(fp, 'client_ip',client_ip )
+        jprops.write_property(fp, 'serial_baud',serial_baud )
+        jprops.write_property(fp, 'server_add',server_add )
+        jprops.write_property(fp, 'server_port',server_port )
+        jprops.write_property(fp, 'postserver_add',postserver_add )
+        jprops.write_property(fp, 'working_mode',working_mode )
+        jprops.write_property(fp, 'modbus_mode',modbus_mode )
+        jprops.write_property(fp, 'port_values',port_values )
+        jprops.write_property(fp, 'serial_port',serial_port )
+        
+def writeLog(log):
+    global logs
+ 
+    logs = ""
+    logs_raw = ""	
+    fo = open(log_file,"a")
+    fo.write('- ' + log + '\n')
+    fo.close()
+
+    fo = open(log_file,"r")
+    logs_raw = fo.read()
 
     for line in logs_raw.split('\n'):
         logs += flask.Markup.escape(line) + flask.Markup('<br />')
 
-## read config file
-
-def read_properties_file(file_path):
-    with open(file_path) as f:
-        config = StringIO.StringIO()
-        config.write('[dummy_section]\n')
-        config.write(f.read())
-        config.seek(0, os.SEEK_SET)
-
-        cp = ConfigParser.SafeConfigParser()
-        cp.readfp(config)
+	        
         
-        f.close()
-        return dict(cp.items('dummy_section'))
-
 if __name__ == "__main__":
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(80)
