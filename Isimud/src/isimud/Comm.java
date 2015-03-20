@@ -216,7 +216,7 @@ public class Comm {
                      
                     try {
                         readSerialData = null;
-                        readSerialData = serialPort.readBytes(32);
+                        readSerialData = serialPort.readBytes();
                        
                             if(modbus_mode){
                                 
@@ -224,10 +224,11 @@ public class Comm {
                                 System.out.println("s"+Arrays.toString(comm.RTU_TO_TCP(readSerialData)));
                                 
                             }else{
-                                
-                                System.out.println("s"+Arrays.toString(readSerialData));
+                                String s2 = new String(readSerialData);
+                                System.out.println("S -" + s2+"-");
+                                System.out.println("S " + Arrays.toString(readSerialData));
+                                //out.writeUTF(s2);
                                 out.write(readSerialData);
-                                
                             }
                           
                     }
@@ -485,8 +486,14 @@ class tcpThread implements Runnable {
                             System.out.println("w"+Arrays.toString(comm.TCP_TO_RTU(buff)));
                             comm.cleanBuff(buff);
                         }else{
+                            //serialPort.writeBytes(buff);
+                            String s2 = new String(buff);
+                            //s2 = s2.replace("\n", "").replace("\r", "");
+                            //serialPort.writeString(s2);
+                            //buff[2] = 0;
                             serialPort.writeBytes(buff);
-                            System.out.println("w"+Arrays.toString(buff));
+                            System.out.println("w-" + s2+"-");
+                            System.out.println("w" + Arrays.toString(buff));
                             comm.cleanBuff(buff);
                         }
                         

@@ -116,9 +116,11 @@ def cutConnections():
 def serverConnect():
     global server_add
     global server_port
+    global  working_mode
 
     if request.form["workingmode"] == 'Client':
-        print "client"
+        working_mode = "Client" 
+        print working_mode
         
 	server_add = request.form["server_add"]
         server_port = request.form["server_port"]
@@ -133,7 +135,8 @@ def serverConnect():
 
 	writeLog('Client connect to ' +server_add+':'+server_port)        
     else:
-        print "server"
+        working_mode = "Server" 
+        print working_mode
         
         server_port = request.form["server_port"]
         

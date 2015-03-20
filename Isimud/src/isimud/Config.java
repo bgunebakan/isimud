@@ -29,6 +29,7 @@ import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
+import java.sql.*;
 import java.util.Enumeration;
 import java.util.Properties;
 import java.util.logging.Level;
@@ -131,7 +132,50 @@ public class Config {
             }
     
     }
+    ///////////SQL LITE
+      public void connectDb(){
+          
+    Connection c = null;
+    try {
+      Class.forName("org.sqlite.JDBC");
+      c = DriverManager.getConnection("jdbc:sqlite:test.db");
+    } catch ( Exception e ) {
+      System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+      System.exit(0);
+    }
+    System.out.println("Opened database successfully");
+  }
+      
+      
+    public void createTable(){
     
+    
+        Connection c = null;
+        Statement stmt = null;
+    
+        try {
+            Class.forName("org.sqlite.JDBC");
+            c = DriverManager.getConnection("jdbc:sqlite:test.db");
+            System.out.println("Opened database successfully");
+
+            stmt = c.createStatement();
+            String sql = "CREATE TABLE CONFIG " +
+                       "(CONFIG_NAME NOT NULL," +
+                       " VALUE NOT NULL);"; 
+                        
+        
+            stmt.executeUpdate(sql);
+            stmt.close();
+            c.close();
+        } catch ( Exception e ) {
+            System.err.println( e.getClass().getName() + ": " + e.getMessage() );
+            System.exit(0);
+        }
+    
+        System.out.println("Table created successfully");
+  }
+
+    ///////////777
     
     public String getIp(){
         

@@ -29,7 +29,7 @@ public class Main {
      * @param args the command line arguments
      */
     
-    //Config config = new Config();
+    
     
     
     
@@ -38,9 +38,9 @@ public class Main {
     public static void main(String[] args) throws Exception {
         
         new Cli(args).parse();
-        
-        
-     
+        //Config config = new Config();
+        //config.connectDb();
+        //config.createTable();
         
         
          
