@@ -1,0 +1,26 @@
+# If ppp negotiation stalls, try restarting the phone.
+
+'ECHO'        ON
+'ABORT'            'BUSY'
+'ABORT'            'NO ANSWER'
+'ABORT'            'NO CARRIER'
+'ABORT'            'NO DIALTONE'
+'ABORT'            'RINGING\r\n\r\nRINGING'
+'SAY'              "\nGPRS modem init: press <ctrl>-C to disconnect\n"
+
+'' '+++ATH0'
+'' 'ATZ'
+TIMEOUT    10
+'OK'       'ATE0V1&D2&C1S0=0'
+'OK'       'AT+CGDCONT=1,"IP","get",,0,0'
+'OK'       'AT+CGQMIN=1,0,0,0,0,0'
+SAY        "\n + defining QoS requirements"
+'OK'       'AT+CGQREQ=1,0,0,0,0,0'
+
+# Enter data state
+# OK        'AT+CGDATA="PPP",1'
+'OK'          'ATD*99#'
+'SAY'         "\n + requesting data connection"
+'CONNECT'     ''
+'SAY'         "\n + connected"
+

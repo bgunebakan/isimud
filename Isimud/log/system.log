@@ -30,3 +30,8 @@
 - Server mode @ port: 4000
 - Server mode @ port: 4000
 - Server mode @ port: 4000
+- Client mode @ add: ufakisler.net:4000
+- Client mode @ add: ufakisler.net:4000
+- Client mode @ add: ufakisler.net:4000
+- Client mode @ add: ufakisler.net:5677
+- Client mode @ add: 192.168.0.15:4000

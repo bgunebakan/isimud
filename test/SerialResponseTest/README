@@ -1,0 +1,2 @@
+This is very simple Arduino program to test Serial communication over TCP.
+Program has 4 commands to response.
