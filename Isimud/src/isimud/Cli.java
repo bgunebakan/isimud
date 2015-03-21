@@ -152,6 +152,7 @@ public class Cli {
                     tcpThread clientThread = new tcpThread();
                     clientThread.start();
                     
+                    
                 }else{
                     System.out.println("client mode...");
                     serverAdd = cmd.getOptionValue("S");

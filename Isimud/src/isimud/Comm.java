@@ -98,7 +98,7 @@ public class Comm {
                 System.out.println("Client_mode: Connecting to " + server_add + " on port " + server_port);
          
                 client = new Socket(server_add, server_port);
-         
+                
                 System.out.println("Just connected to " + client.getRemoteSocketAddress());
          
                 outToServer = client.getOutputStream();
@@ -227,13 +227,25 @@ public class Comm {
                                 String s2 = new String(readSerialData);
                                 System.out.println("S -" + s2+"-");
                                 System.out.println("S " + Arrays.toString(readSerialData));
-                                //out.writeUTF(s2);
-                                out.write(readSerialData);
+                                out.writeUTF(s2);
+                                //out.write(readSerialData);
                             }
                           
                     }
                     catch (SerialPortException | IOException ex) {
                         Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, ex);
+                        String command =  "sh /opt/isimud/command.sh";
+                        
+                        try {
+                            Process p = Runtime.getRuntime().exec(command);
+                            
+                        } catch (IOException ex1) {
+                            Logger.getLogger(Comm.class.getName()).log(Level.SEVERE, null, ex1);
+                        }
+                        System.exit(0);
+                        
+                        
+                        
                     }
                 
             }
@@ -323,23 +335,6 @@ public class Comm {
         byte[] TCPSON = new byte[TCP.length + 6];
         
 
-             
-
-        TCPSON[0] = TCP_HEADER[0];
-
-        TCPSON[1] = TCP_HEADER[1];
-
-        TCPSON[2] = TCP_HEADER[2];
-
-        TCPSON[3] = TCP_HEADER[3];
-
-        TCPSON[4] = bytesMOD;
-
-        TCPSON[5] = bytesUZUN;
-
-        //TCP.CopyTo(TCPSON, 6);
-        System.arraycopy( TCP, 6, TCPSON, 0, TCP.length );
-            
         return TCPSON;
     }
 
@@ -489,9 +484,9 @@ class tcpThread implements Runnable {
                             //serialPort.writeBytes(buff);
                             String s2 = new String(buff);
                             //s2 = s2.replace("\n", "").replace("\r", "");
-                            //serialPort.writeString(s2);
+                            serialPort.writeString(s2);
                             //buff[2] = 0;
-                            serialPort.writeBytes(buff);
+                            //serialPort.writeBytes(buff);
                             System.out.println("w-" + s2+"-");
                             System.out.println("w" + Arrays.toString(buff));
                             comm.cleanBuff(buff);
@@ -522,7 +517,6 @@ class tcpThread implements Runnable {
    
     public void start (){
         
-      
         System.out.println("Starting tcp connection.");
       
         if (t == null){

@@ -65,3 +65,6 @@ echo "1" > /sys/class/gpio/gpio23/value
 satip=$(ip addr | awk '/inet/ && /ppp0/{sub(/\/.*$/,"",$2); print $2}')
 
 sed -i s/sat_ip=*.*/sat_ip=$satip/g /opt/isimud/system.conf
+
+sh /opt/isimud/command.sh
+sh /opt/isimud/port_command.sh

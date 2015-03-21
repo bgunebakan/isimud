@@ -90,6 +90,16 @@ def restart():
 
     return "System going to restart now.Please refresh your page after device has started."
 
+@app.route('/poweroff', methods=['GET', 'POST'])
+def poweroff():
+
+    p = subprocess.Popen(['sudo', 'poweroff'], stdout=subprocess.PIPE,
+                         stderr=subprocess.PIPE)
+
+    out, err = p.communicate()
+
+    return "System going to power off now."
+
 @app.route('/cutConnections', methods=['GET', 'POST'])
 def cutConnections():
 
@@ -111,6 +121,24 @@ def cutConnections():
                            portvalues=port_values,serial_baud=serial_baud,
                            logs=logs,server_add=server_add,server_port=server_port,
                            postserver_add=postserver_add,working_mode=working_mode,modbus_mode=modbus_mode)
+@app.route('/cutPortConnection', methods=['GET', 'POST'])
+def cutPortConnection():
+
+    args = "killall java"
+    print args
+    os.system(args)
+    
+    fo = open(portcommand_file,"w")
+    fo.write('')
+    fo.close()
+    writeLog('Port sending closed.')
+    
+    #readData()
+    return render_template('index.html',local_ip=local_ip,client_ip=client_ip,sat_ip=sat_ip,
+                           portvalues=port_values,serial_baud=serial_baud,
+                           logs=logs,server_add=server_add,server_port=server_port,
+                           postserver_add=postserver_add,working_mode=working_mode,modbus_mode=modbus_mode)
+
 
 @app.route('/serverConnect', methods=['GET', 'POST'])
 def serverConnect():

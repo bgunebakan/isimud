@@ -50,6 +50,10 @@ fi
 run-parts /etc/ppp/ip-down.d \
   --arg="$1" --arg="$2" --arg="$3" --arg="$4" --arg="$5" --arg="$6"
 
+killall java
+echo "0" > /sys/class/gpio/gpio22/value
+echo "0" > /sys/class/gpio/gpio23/value
+
 # low sat and gps leds
 echo "0" > /sys/class/gpio/gpio22/value
 echo "0" > /sys/class/gpio/gpio23/value

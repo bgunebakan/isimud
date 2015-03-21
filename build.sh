@@ -2,7 +2,7 @@ BUILD_DIR='/opt/isimud'
 SOURCE_DIR='/root/isimud'
 
 
-sh $SOURCE_DIR/install.sh
+#sh $SOURCE_DIR/install.sh
 
 #delete build directory if exist
 rm -r $BUILD_DIR
