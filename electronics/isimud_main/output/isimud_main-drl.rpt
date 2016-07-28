@@ -1,0 +1,33 @@
+Drill report for /home/bilal/ZBT/isimud/electronics/isimud_main/isimud_main.kicad_pcb
+Created on Thu 28 Jul 2016 11:49:36 AM EEST
+
+Copper Layer Stackup:
+    =============================================================
+    L1 :  F.Cu                      front
+    L2 :  B.Cu                      back
+
+
+Drill file 'isimud_main.drl' contains
+    plated through holes:
+    =============================================================
+    T1  0.70mm  0.028"  (12 holes)
+    T2  0.80mm  0.031"  (107 holes)
+    T3  0.80mm  0.032"  (2 holes)
+    T4  0.89mm  0.035"  (12 holes)
+    T5  1.00mm  0.039"  (11 holes)  (with 3 slots)
+    T6  1.02mm  0.040"  (33 holes)
+    T7  1.10mm  0.043"  (10 holes)
+    T8  1.27mm  0.050"  (2 holes)
+    T9  1.52mm  0.060"  (8 holes)
+    T10  1.57mm  0.062"  (2 holes)
+    T11  3.05mm  0.120"  (6 holes)
+    T12  3.30mm  0.130"  (2 holes)
+
+    Total plated holes count 207
+
+
+Drill file 'isimud_main-NPTH.drl' contains
+    unplated through holes:
+    =============================================================
+
+    Total unplated holes count 0
