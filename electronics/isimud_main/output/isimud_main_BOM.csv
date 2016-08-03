@@ -1,0 +1,43 @@
+Id,Eleman,Paket,Adet,,Designator
+1,CONN_02X50,BB-2X50-SMD,1,,P1
+2,DB9,DB9 konnektör,2,,"J3,J1"
+3,33uF 16V,Tantal SizeD 7343 kapasitör,1,,C3
+4,1uF 16V,6.3x5.8 kapasitör,1,,C4
+5,47uF 16V,6.3x5.8 kapasitör,5,,"C7,C10,C12,C14,C11"
+6,1uF,6.3x5.8 kapasitör,2,,"C8,C9"
+7,1uF,SMD-1206 kutuplu kapasitör,2,,"C16,C17"
+8,10uF,Tantal SizeD 7343 kapasitör,2,,"C18,C37"
+9,22uF 6.3v,Tantal SizeD 7343 kapasitör,1,,C19
+10,220uF 16V,6.3x5.8 kapasitör,2,,"C21,C23"
+11,1000uF 16V,Tantal SizeB 3528 kapasitör,1,,C22
+12,100nF,0805 kapasitör,8,,"C30,C33,C34,C35,C36,C39,C6,C13"
+13,18pF,0805 kapasitör,2,,"C31,C32"
+14,10nF,0805 kapasitör,1,,C38
+15,12V DC konnektör,BARREL JACK,1,,CON1
+16,1N5822,SMD diyot,2,,"D1,D2"
+17,yeşil led,LED-5MM,4,,D3
+18,ENC28J60-I/SO entegre,SOIC-28_7.5x17.9mm_Pitch 1.27mm,1,,IC1
+19,100uH,Smd indüktör,5,,"L1,L2,L3,L4,L5"
+20,ferrite bead,Neosid_Air-Coil_SML_2turn_HAM0231A,1,,L6
+21,10k,0805 paketi,2,,"R3,R23"
+22,2k2,0805 paketi,2,,"R4,R5"
+23,330R,0805 paketi,2,,"R6,R7"
+24,0R,0805 paketi,5,,"R8,R9,R31,R1,R2"
+25,2k,0805 paketi,1,,R10
+26,1k,0805 paketi,3,,"R11,R12,R15"
+27,1k2,0805 paketi,2,,"R13,R14"
+28,220R,0805 paketi,4,,"R18,R19,R20,R21"
+29,100k,0805 paketi,1,,R22
+30,2k2 %1,0805 paketi,1,,R24
+31,49.9 %1,0805 paketi,4,,"R25,R26,R27,R29"
+32,180R,0805 paketi,2,,"R28,R30"
+33,MAX232 entegre,SOIC-16_3.9x9.9mm_Pitch1.27mm,1,,U3
+34,LM2576,TO220-5-T05A,2,,"U4,U5"
+35,25 mhz CRYSTAL,SMD paket,1,,X1
+36,1000uF 16V,C_Radial_D10_L13_P5,1,,C20
+37,RJ45 konnektör,RJHSE538X,1,,J2
+38,33pF,0805 paketi,3,,"C1,C2,C5"
+39,SMA konnektör,pcb bağlantı ,1,,P3
+40,SMA konnektör,pcb bağlantı ,1,,P9
+41,2x20 (40 pin) 1.27mm header,smd paketi,12,,U1
+42,SIMCARD_HOLDER,smd simkart yuvası,1,,U2
