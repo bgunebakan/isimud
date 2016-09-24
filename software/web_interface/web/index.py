@@ -19,6 +19,17 @@ localNetworkInterface = "eth0"
 
 app = Flask(__name__)
 
+	#"s", "start", false, "start communication");
+        #"k", "kill", false, "stop communication");
+        #"c", "change-ip", true, "<ip-address>  change local ip number with following");
+        #"p", "send-port", true, "<ip-address>  send port with bit value");
+        #"m", "modbus", true, "<1/0> change serial mode");
+        #"g", "get-ports", false, "get analog and digital ports");
+        #"w", "web", false, "start web server");
+        #"T", "transmit-mode", true, "<1 Server/0 Client> transmitter mode Server or Client");
+        #"S", "server-ip", true, "Server Address");
+        #"P", "server-port", true, "Server port");
+        #"h", "help", false, "show help.");
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -31,7 +42,7 @@ def index():
         ni.ifaddresses(networkInterface)
         satip = ni.ifaddresses(networkInterface)[2][0]['addr']
         localip = ni.ifaddresses(localNetworkInterface)[2][0]['addr']
-
+	#get digital port status
         p1 = subprocess.Popen(['isimud', '-g'], stdout=subprocess.PIPE,
                                                             stderr=subprocess.PIPE)
         portvalues, err = p1.communicate()
@@ -42,16 +53,19 @@ def index():
 @app.route('/disconnect', methods=['GET', 'POST'])
 def disconnect():
 
-    return format( call(["isimud", "-k"]) )
+    return format( call(["ifdown", "ppp0"]) ) #return format( call(["isimud", "-k"]) )
 
 
 @app.route('/connect', methods=['GET', 'POST'])
 def connect():
 
-    p = subprocess.Popen(['isimud', '-s'], stdout=subprocess.PIPE,
-                                       stderr=subprocess.PIPE)
+    
+    #p = subprocess.Popen(['isimud', '-s'], stdout=subprocess.PIPE,
+    #                                   stderr=subprocess.PIPE)
 
-    out, err = p.communicate()
+    #out, err = p.communicate()
+    subprocess_cmd('echo '1' > /sys/class/gpio/gpio0/value; echo '0' > /sys/class/gpio/gpio2/value; echo '1' > /sys/class/gpio/gpio15/value; ifup ppp0')
+	
     return out
 
 @app.route('/restart', methods=['GET', 'POST'])
@@ -138,5 +152,18 @@ if __name__ == "__main__":
     http_server = HTTPServer(WSGIContainer(app))
     http_server.listen(80)
     IOLoop.instance().start()
+
+
+
+def subprocess_cmd(command):
+    process = subprocess.Popen(command,stdout=subprocess.PIPE, shell=True)
+    proc_stdout = process.communicate()[0].strip()
+    print proc_stdout
+
+def setIpAddr(iface, ip):
+    bin_ip = socket.inet_aton(ip)
+    ifreq = struct.pack('16sH2s4s8s', iface, socket.AF_INET, '\x00'*2, bin_ip, '\x00'*8)
+    fcntl.ioctl(sock, SIOCSIFADDR, ifreq)
+
 
 #    app.run(host="localhost",debug=True)
