@@ -465,6 +465,11 @@ D point
 K point tp
 $ENDCMP
 #
+$CMP TM211Q01FM22
+D RJ45 with transformer + leds WURTH
+K RJ45
+$ENDCMP
+#
 $CMP USB_A
 D A connector
 K USB USB_A
