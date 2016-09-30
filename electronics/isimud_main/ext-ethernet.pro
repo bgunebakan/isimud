@@ -1,6 +1,10 @@
-update=Fri 30 Sep 2016 01:24:19 PM EEST
+update=Fri 30 Sep 2016 01:26:07 PM EEST
 version=1
-last_client=kicad
+last_client=eeschema
+[general]
+version=1
+RootSch=
+BoardNm=
 [pcbnew]
 version=1
 LastNetListRead=
@@ -23,8 +27,6 @@ ModuleOutlineThickness=0.150000000000
 [cvpcb]
 version=1
 NetIExt=net
-[general]
-version=1
 [eeschema]
 version=1
 LibDir=
@@ -58,8 +60,5 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=/home/bilal/ZBT/isimud/electronics/libraries/A20/A20-SOM/KiCAD connector library/SOM-A20_C
-LibName31=/home/bilal/ZBT/isimud/electronics/libraries/pam8403
-LibName32=/home/bilal/ZBT/isimud/electronics/libraries/connectors
-LibName33=/home/bilal/ZBT/isimud/electronics/libraries/regulators
-LibName34=/home/bilal/ZBT/isimud/electronics/libraries/realtek
+LibName30=/home/bilal/ZBT/isimud/electronics/libraries/realtek
+LibName31=/home/bilal/ZBT/isimud/electronics/libraries/connectors
