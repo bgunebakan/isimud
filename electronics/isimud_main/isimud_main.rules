@@ -11,25 +11,25 @@
     (via_costs 50)
     (plane_via_costs 5)
     (start_ripup_costs 100)
-    (start_pass_no 1)
+    (start_pass_no 7031)
     (layer_rule F.Cu
       (active on)
       (preferred_direction horizontal)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 2.5)
+      (against_preferred_direction_trace_costs 2.6)
     )
     (layer_rule B.Cu
       (active on)
       (preferred_direction vertical)
       (preferred_direction_trace_costs 1.0)
-      (against_preferred_direction_trace_costs 1.7)
+      (against_preferred_direction_trace_costs 1.6)
     )
   )
   (rule
-    (width 500.0)
-    (clear 200.2)
-    (clear 250.0 (type smd_to_turn_gap))
-    (clear 50.0 (type smd_smd))
+    (width 400.0)
+    (clear 10.2)
+    (clear 200.0 (type smd_to_turn_gap))
+    (clear 2.6 (type smd_smd))
   )
   (padstack "Via[0-1]_1200:800_um"
     (shape
@@ -62,68 +62,38 @@
     (clearance_class default)
     (via_rule default)
     (rule
-      (width 500.0)
+      (width 400.0)
     )
     (circuit 
       (use_layer F.Cu B.Cu)
     )
   )
   (class "kicad_default"
-    "Net-(C8-Pad1)" "Net-(C8-Pad2)" "Net-(C9-Pad1)" "Net-(C9-Pad2)" "Net-(C16-Pad1)" "Net-(C17-Pad2)" "Net-(C20-Pad1)" "Net-(C22-Pad1)"
-    "Net-(C31-Pad1)" "Net-(C32-Pad1)" "Net-(C37-Pad1)" "Net-(C38-Pad1)" "Net-(C39-Pad2)" "Net-(D1-Pad1)" "Net-(D2-Pad1)" "Net-(D3-Pad2)"
-    "Net-(D4-Pad2)" "Net-(D5-Pad2)" "Net-(D6-Pad2)" "Net-(IC1-Pad3)" "TWI1_SCK" "UART7_RX" "SPI1_MISO" "SPI1_MOSI"
-    "SPI1_CLK" "SPI1_CSO" "TWI1_SDA" "ETH_TPIN-" "ETH_TPIN+" "Net-(IC1-Pad14)" "ETH_TPOUT-" "ETH_TPOUT+"
-    "ETH_LEDB" "ETH_LEDA" "Net-(J1-Pad1)" "Net-(J1-Pad2)" "Net-(J1-Pad3)" "Net-(J1-Pad4)" "Net-(J1-Pad6)" "Net-(J1-Pad7)"
-    "Net-(J1-Pad8)" "Net-(J1-Pad9)" "Net-(J2-Pad8)" "Net-(J2-Pad5)" PG6 PG8 PG9 PG10
-    PG11 "Net-(J3-Pad7)" "Net-(J3-Pad8)" "Net-(J3-Pad9)" "Net-(P1-Pad84)" "Net-(P1-Pad80)" "Net-(P1-Pad78)" "Net-(P1-Pad74)"
-    "Net-(P1-Pad72)" "Net-(P1-Pad71)" "Net-(P1-Pad66)" "Net-(P1-Pad64)" "Net-(P1-Pad63)" "Net-(P1-Pad61)" "SAT_OFF" "SAT_ON"
-    "Net-(P1-Pad56)" "Net-(P1-Pad55)" "Net-(P1-Pad54)" "Net-(P1-Pad53)" "Net-(P1-Pad52)" "SAT_RST" "Net-(P1-Pad1)" "Net-(P1-Pad2)"
-    "Net-(P1-Pad3)" "Net-(P1-Pad4)" "Net-(P1-Pad5)" "Net-(P1-Pad6)" "Net-(P1-Pad7)" "Net-(P1-Pad8)" "Net-(P1-Pad9)" "Net-(P1-Pad10)"
-    "Net-(P1-Pad11)" "Net-(P1-Pad12)" "Net-(P1-Pad13)" "Net-(P1-Pad14)" "Net-(P1-Pad15)" "Net-(P1-Pad16)" "Net-(P1-Pad17)" "Net-(P1-Pad18)"
-    "Net-(P1-Pad19)" "Net-(P1-Pad20)" "Net-(P1-Pad21)" "/THURAYA_TX" "Net-(P1-Pad23)" "/THURAYA_RX" "Net-(P1-Pad25)" "Net-(P1-Pad26)"
-    "Net-(P1-Pad27)" "Net-(P1-Pad29)" "Net-(P1-Pad30)" "Net-(P1-Pad31)" "Net-(P1-Pad32)" "Net-(P1-Pad33)" "Net-(P1-Pad34)" "Net-(P1-Pad36)"
-    "Net-(P1-Pad37)" "Net-(P1-Pad38)" "Net-(P1-Pad39)" "Net-(P1-Pad40)" "Net-(P1-Pad41)" "Net-(P1-Pad42)" "Net-(P1-Pad43)" "Net-(P1-Pad44)"
-    "Net-(P1-Pad45)" "Net-(P1-Pad46)" "Net-(P1-Pad47)" "Net-(P1-Pad48)" "Net-(P1-Pad49)" "UART0_TX" "UART0_RX" "UART4_TX"
-    "UART4_RX" "Net-(P7-Pad1)" "Net-(P7-Pad2)" "UART3_RX" "UART3_TX" "Net-(P8-Pad1)" "Net-(P8-Pad2)" "Net-(R4-Pad1)"
-    "Net-(R5-Pad1)" "UART6_RX" "UART6_TX" "Net-(R8-Pad1)" "Net-(R9-Pad1)" "Net-(R10-Pad1)" "Net-(R11-Pad2)" "Net-(R13-Pad1)"
-    "Net-(R14-Pad2)" "Net-(J2-PadGK)" "Net-(J2-PadYK)" "UART7_TX" "Net-(U1-Pad1-5)" "Net-(U1-Pad1-6)" "Net-(U1-Pad1-7)" "Net-(U1-Pad1-8)"
-    "Net-(U1-Pad1-10)" "Net-(U1-Pad1-12)" "Net-(U1-Pad1-13)" "Net-(U1-Pad1-14)" "Net-(U1-Pad1-15)" "Net-(U1-Pad1-16)" "Net-(U1-Pad1-17)" "Net-(U1-Pad1-18)"
-    "Net-(U1-Pad1-19)" "Net-(U1-Pad1-20)" "Net-(U1-Pad1-21)" "Net-(U1-Pad1-22)" "Net-(U1-Pad1-23)" "Net-(U1-Pad1-24)" "Net-(U1-Pad1-25)" "Net-(U1-Pad1-26)"
-    "Net-(U1-Pad1-27)" "Net-(U1-Pad1-28)" "Net-(U1-Pad1-29)" "Net-(U1-Pad1-30)" "Net-(U1-Pad1-31)" "Net-(U1-Pad1-32)" "Net-(U1-Pad1-33)" "Net-(U1-Pad1-34)"
-    "Net-(U1-Pad1-35)" "Net-(U1-Pad1-36)" "Net-(U1-Pad1-37)" "Net-(U1-Pad1-38)" "Net-(U1-Pad1-39)" "Net-(U1-Pad1-40)" "Net-(U1-Pad2-5)" "Net-(U1-Pad2-6)"
-    "Net-(U1-Pad2-7)" "Net-(U1-Pad2-8)" "Net-(U1-Pad2-9)" "Net-(U1-Pad2-10)" "Net-(U1-Pad2-11)" "Net-(U1-Pad2-12)" "Net-(U1-Pad2-13)" "Net-(U1-Pad2-14)"
-    "Net-(U1-Pad2-15)" "Net-(U1-Pad2-16)" "Net-(U1-Pad2-17)" "Net-(U1-Pad2-18)" "Net-(U1-Pad2-19)" "Net-(U1-Pad2-20)" "Net-(U1-Pad2-24)" "Net-(U1-Pad2-26)"
-    "Net-(U1-Pad2-28)" "Net-(U1-Pad2-30)" "Net-(U1-Pad2-31)" "Net-(U1-Pad2-32)" "Net-(U1-Pad2-33)" "Net-(U1-Pad2-34)" "Net-(U1-Pad2-35)" "Net-(U1-Pad2-36)"
-    "Net-(U1-Pad2-37)" "Net-(U1-Pad2-38)" "Net-(U1-Pad2-39)" "Net-(U1-Pad2-40)" "Net-(U1-Pad3-2)" "Net-(U1-Pad3-4)" "Net-(U1-Pad3-6)" "Net-(U1-Pad3-7)"
-    "Net-(U1-Pad3-8)" "Net-(U1-Pad3-9)" "Net-(U1-Pad3-10)" "Net-(U1-Pad3-11)" "Net-(U1-Pad3-12)" "Net-(U1-Pad3-13)" "Net-(U1-Pad3-14)" "Net-(U1-Pad3-15)"
-    "Net-(U1-Pad3-16)" "Net-(U1-Pad3-17)" "Net-(U1-Pad3-18)" "Net-(U1-Pad3-19)" "Net-(U1-Pad3-20)" "Net-(U1-Pad3-21)" "Net-(U1-Pad3-22)" "Net-(U1-Pad3-23)"
-    "Net-(U1-Pad3-24)" "Net-(U1-Pad3-25)" "Net-(U1-Pad3-26)" "Net-(U1-Pad3-27)" "Net-(U1-Pad3-28)" "Net-(U1-Pad3-29)" "Net-(U1-Pad3-30)" "Net-(U1-Pad3-31)"
-    "Net-(U1-Pad3-32)" "Net-(U1-Pad3-33)" "Net-(U1-Pad3-34)" "Net-(U1-Pad3-35)" "Net-(U1-Pad3-36)" "Net-(U1-Pad3-37)" "Net-(U1-Pad3-38)" "Net-(U1-Pad3-39)"
-    "Net-(U1-Pad3-40)" "Net-(U1-Pad4-4)" "Net-(U1-Pad4-5)" "Net-(U1-Pad4-6)" "Net-(U1-Pad4-7)" "Net-(U1-Pad4-8)" "Net-(U1-Pad4-9)" "Net-(U1-Pad4-10)"
-    "Net-(U1-Pad4-11)" "Net-(U1-Pad4-12)" "Net-(U1-Pad4-13)" "Net-(U1-Pad4-14)" "Net-(U1-Pad4-15)" "Net-(U1-Pad4-16)" "Net-(U1-Pad4-17)" "Net-(U1-Pad4-18)"
-    "Net-(U1-Pad4-23)" "Net-(U1-Pad4-24)" "Net-(U1-Pad4-25)" "Net-(U1-Pad4-26)" "Net-(U1-Pad4-29)" "Net-(U1-Pad4-30)" "Net-(U1-Pad4-31)" "Net-(U1-Pad4-32)"
-    "Net-(U1-Pad4-33)" "Net-(U1-Pad4-34)" "Net-(U1-Pad4-35)" "Net-(U1-Pad4-36)" "Net-(U1-Pad4-37)" "Net-(U1-Pad4-38)" "Net-(U1-Pad4-39)" "Net-(U1-Pad4-40)"
-    "Net-(U1-Pad5-4)" "Net-(U1-Pad5-6)" "SAT_LED" "Net-(U1-Pad5-8)" "GPS_LED" "Net-(U1-Pad5-10)" "STATUS_LED" "Net-(U1-Pad5-12)"
-    "Net-(U1-Pad5-14)" "Net-(U1-Pad5-16)" "Net-(U1-Pad5-18)" "Net-(U1-Pad5-20)" "Net-(U1-Pad5-22)" "Net-(U1-Pad5-24)" "Net-(U1-Pad5-25)" "Net-(U1-Pad5-26)"
-    "Net-(U1-Pad5-27)" "Net-(U1-Pad5-28)" "Net-(U1-Pad5-29)" "Net-(U1-Pad5-30)" "Net-(U1-Pad5-31)" "Net-(U1-Pad5-32)" "Net-(U1-Pad5-33)" "Net-(U1-Pad5-34)"
-    "Net-(U1-Pad5-35)" "Net-(U1-Pad5-36)" "Net-(U1-Pad5-37)" "Net-(U1-Pad5-38)" "Net-(U1-Pad5-39)" "Net-(U1-Pad5-40)" "Net-(U1-Pad6-5)" "Net-(U1-Pad6-6)"
-    "Net-(U1-Pad6-7)" "Net-(U1-Pad6-8)" "Net-(U1-Pad6-9)" "Net-(U1-Pad6-10)" "Net-(U1-Pad6-11)" "Net-(U1-Pad6-12)" "Net-(U1-Pad6-13)" "Net-(U1-Pad6-14)"
-    "Net-(U1-Pad6-15)" "Net-(U1-Pad6-16)" "Net-(U1-Pad6-17)" "Net-(U1-Pad6-18)" "Net-(U1-Pad6-19)" "Net-(U1-Pad6-20)" "Net-(U1-Pad6-21)" "Net-(U1-Pad6-22)"
-    "Net-(U1-Pad6-23)" "Net-(U1-Pad6-24)" "Net-(U1-Pad6-25)" "Net-(U1-Pad6-26)" "Net-(U1-Pad6-27)" "Net-(U1-Pad6-28)" "Net-(U1-Pad6-29)" "Net-(U1-Pad6-30)"
-    "Net-(U1-Pad6-31)" "Net-(U1-Pad6-32)" "Net-(U1-Pad6-33)" "Net-(U1-Pad6-34)" "Net-(U1-Pad6-35)" "Net-(U1-Pad6-36)" "Net-(U1-Pad6-37)" "Net-(U1-Pad6-38)"
-    "Net-(U1-Pad6-39)" "Net-(U1-Pad6-40)" "PWR_LED" PG5 "Net-(C1-Pad1)" "Net-(C2-Pad1)" "Net-(C5-Pad1)" "Net-(U2-Pad5)"
-    "Net-(C11-Pad2)" "Net-(C11-Pad1)" "Net-(C13-Pad1)" "Net-(C13-Pad2)"
+    "Net-(C8-Pad1)" "Net-(C8-Pad2)" "Net-(C9-Pad1)" "Net-(C9-Pad2)" "Net-(C16-Pad1)" "Net-(C17-Pad2)" "Net-(D1-Pad1)" "Net-(D2-Pad1)"
+    "Net-(D3-Pad2)" "Net-(D4-Pad2)" "Net-(D5-Pad2)" "Net-(D6-Pad2)" "Net-(J1-Pad2)" "Net-(J1-Pad3)" "Net-(J2-Pad8)" PG6
+    PG8 PG9 PG10 PG11 "Net-(P1-Pad64)" "SAT_OFF" "SAT_ON" "SAT_RST"
+    "/THURAYA_TX" "/THURAYA_RX" "UART0_TX" "UART0_RX" "UART4_TX" "UART4_RX" "UART3_RX" "UART3_TX"
+    "Net-(P8-Pad1)" "Net-(P8-Pad2)" "Net-(R4-Pad1)" "Net-(R5-Pad1)" "UART6_RX" "UART6_TX" "Net-(R8-Pad1)" "Net-(R9-Pad1)"
+    "Net-(R11-Pad2)" "Net-(R13-Pad1)" "Net-(R14-Pad2)" "Net-(U1-Pad1-5)" "SAT_LED" "GPS_LED" "STATUS_LED" "PWR_LED"
+    "Net-(C1-Pad1)" "Net-(C2-Pad1)" "Net-(C5-Pad1)" "Net-(C11-Pad2)" "Net-(C11-Pad1)" "Net-(C13-Pad1)" "Net-(C13-Pad2)" +5VD
+    "Net-(C33-Pad2)" "Net-(C37-Pad2)" "Net-(C42-Pad2)" "Net-(C48-Pad2)" "Net-(C52-Pad2)" "Net-(C59-Pad1)" "Net-(C61-Pad1)" "Net-(C62-Pad2)"
+    "Net-(C64-Pad2)" "Net-(C65-Pad2)" "Net-(C71-Pad2)" "Net-(D7-Pad1)" "Net-(J2-Pad13)" "Net-(J2-Pad4)" "Net-(J2-Pad2)" "Net-(J2-Pad3)"
+    "Net-(J2-Pad7)" "Net-(J2-Pad1)" "Net-(L14-Pad1)" "Net-(P7-Pad3)" "Net-(P7-Pad4)" ETXCK "Net-(R10-Pad2)" "Net-(R40-Pad1)"
+    ERXDV ERXCK "Net-(R43-Pad1)" "Net-(R43-Pad2)" "Net-(J2-Pad14)" EMDIO "Net-(R52-Pad2)" "Net-(J2-Pad11)"
+    "Net-(R60-Pad1)" "Net-(J2-Pad12)" "RESET_N" "EPHY-RST#" "Net-(R65-Pad1)" "Net-(R66-Pad1)" CLK125 "Net-(RM4G1-Pad1)"
+    "Net-(RM4G2-Pad1)" ERXD3 ERXD2 ERXD1 "Net-(RM5G4-Pad1)" ERXD0 ETXD0 ETXD1
+    ETXD2 ETXD3 ETXEN "Net-(J2-Pad9)"
     (clearance_class "kicad_default")
     (via_rule kicad_default)
     (rule
-      (width 500.0)
+      (width 400.0)
     )
     (circuit 
       (use_layer F.Cu B.Cu)
     )
   )
   (class POWER
-    GND +6V +5V +BATT +3V3 +12V +3.3VADC GNDA
+    GND +6V +5V +BATT +3V3 +12V GNDA
     (clearance_class POWER)
     (via_rule POWER)
     (rule
